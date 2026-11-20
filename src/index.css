@@ -1,0 +1,336 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400..600&family=Instrument+Serif&display=swap");
+@import "tailwindcss";
+@import "./styles/animations.css";
+@import "./styles/masks.css";
+
+@theme {
+  --breakpoint-lg: 55rem;
+}
+
+/* webild:theme-ai */
+:root {
+  --primary-cta: #e5e5e5;
+  --primary-cta-text: #020202;
+  --secondary-cta: #1f1f1f;
+  --secondary-cta-text: #e5e5e5;
+  --background-accent: #e5e5e5;
+
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: #0f0f0f;
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: var(--primary-cta);
+  --primary-foreground: var(--primary-cta-text);
+  --secondary: var(--secondary-cta);
+  --secondary-foreground: var(--secondary-cta-text);
+  --muted: #0f0f0f;
+  --muted-foreground: #7d7d7d;
+  --accent: var(--background-accent);
+  --accent-foreground: #020202;
+  --deep: #000000;
+  --deep-foreground: #959595;
+  --destructive: #b3261e;
+  --destructive-foreground: #ffffff;
+  --border: #222222;
+  --input: #222222;
+  --ring: var(--primary-cta);
+  --tint-1: #5f5f5f;
+  --tint-2: #424242;
+  --tint-3: #282828;
+  --backdrop-shade: 0 0 0;
+  --backdrop-light:
+    radial-gradient(ellipse 55% 95% at 100% 0%, rgb(var(--backdrop-shade) / calc(0.3 * var(--backdrop-strength, 1))) 0%, rgb(var(--backdrop-shade) / calc(0.08 * var(--backdrop-strength, 1))) 60%, transparent 100%),
+    linear-gradient(125deg, transparent 8%, rgb(var(--backdrop-shade) / calc(0.14 * var(--backdrop-strength, 1))) 28%, transparent 48%);
+  --backdrop-deep-shade: 255 255 255;
+  --backdrop-deep:
+    radial-gradient(ellipse 55% 95% at 100% 0%, rgb(var(--backdrop-deep-shade) / 0.12) 0%, rgb(var(--backdrop-deep-shade) / 0.03) 60%, transparent 100%),
+    linear-gradient(125deg, transparent 8%, rgb(var(--backdrop-deep-shade) / 0.06) 28%, transparent 48%);
+
+  --font-heading: "Instrument Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-label: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --heading-weight: 300;
+  --heading-tracking: 0.01em;
+  --heading-leading: 0.82;
+  --mask-pad-t: 0.15em;
+  --mask-pad-b: 0.15em;
+  --text-display: clamp(4rem, 0.9rem + 12.4vw, 12rem);
+  --text-h1: clamp(2.5rem, 1.9rem + 2.6vw, 4rem);
+  --text-h2: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+  --text-h3: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-body-lg: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --text-body: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --text-small: 0.8125rem;
+  --text-label: 0.6875rem;
+  --label-tracking: 0.06em;
+  --label-case: uppercase;
+
+  --gutter: clamp(1rem, 0.2rem + 3.3vw, 3rem);
+  --max-w: 1280px;
+  --container: min(100% - 2 * var(--gutter), var(--max-w));
+  --section-space: clamp(5rem, 4rem + 4vw, 8rem);
+  --gap: clamp(1rem, 0.85rem + 0.6vw, 1.5rem);
+  --grid-columns: 12;
+
+  --radius: 0;
+  --radius-card: 0;
+  --radius-button: 999px;
+  --radius-image: 0;
+
+  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.4s;
+  --dur-base: 0.8s;
+  --dur-slow: 1.2s;
+  --reveal-distance: 1.5rem;
+
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-deep: var(--deep);
+  --color-deep-foreground: var(--deep-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-label);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+    outline-color: color-mix(in srgb, var(--color-ring) 30%, transparent);
+  }
+
+  ::selection {
+    background: var(--foreground);
+    color: var(--background);
+  }
+
+  body {
+    margin: 0;
+    background: var(--backdrop-light) fixed, var(--background);
+    color: var(--foreground);
+    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Instrument Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: var(--heading-weight);
+    letter-spacing: var(--heading-tracking);
+    line-height: var(--heading-leading);
+  }
+
+  h1,
+  h2 {
+    text-transform: uppercase;
+  }
+}
+
+@layer components {
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.375rem 1.25rem 0.375rem 0.375rem;
+    border-radius: var(--radius-button);
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+
+  .btn-primary::before,
+  .btn-secondary::before,
+  .btn-link::before {
+    content: "";
+    flex: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+    background:
+      linear-gradient(currentColor, currentColor) center / 0.625rem 1px no-repeat,
+      linear-gradient(currentColor, currentColor) center / 1px 0.625rem no-repeat;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .btn-primary:hover::before,
+  .btn-secondary:hover::before,
+  .btn-link:hover::before,
+  .btn-primary:focus-visible::before,
+  .btn-secondary:focus-visible::before,
+  .btn-link:focus-visible::before {
+    transform: rotate(90deg);
+  }
+
+  .btn-label {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .btn-primary:hover,
+  .btn-primary:focus-visible {
+    background: color-mix(in srgb, var(--primary) 82%, var(--background));
+  }
+
+  .btn-secondary {
+    background: color-mix(in srgb, var(--foreground) 8%, transparent);
+    color: var(--foreground);
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus-visible {
+    background: color-mix(in srgb, var(--foreground) 14%, transparent);
+  }
+
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--foreground);
+    cursor: pointer;
+  }
+
+  .btn-link::before {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  [data-button="solid"] .btn-primary,
+  [data-button="solid"] .btn-secondary {
+    padding: 0.5rem 1.5rem;
+  }
+
+  [data-button="solid"] .btn-primary::before,
+  [data-button="solid"] .btn-secondary::before {
+    display: none;
+  }
+
+  [data-button="outline"] .btn-primary,
+  [data-button="outline"] .btn-secondary {
+    background: transparent;
+    color: var(--foreground);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 25%, transparent);
+  }
+
+  [data-button="outline"] .btn-primary:hover,
+  [data-button="outline"] .btn-secondary:hover,
+  [data-button="outline"] .btn-primary:focus-visible,
+  [data-button="outline"] .btn-secondary:focus-visible {
+    background: color-mix(in srgb, var(--foreground) 6%, transparent);
+  }
+
+  .kit-card {
+    background: var(--card);
+    color: var(--card-foreground);
+    border-radius: var(--radius-card);
+  }
+
+  [data-card="hairline"] .kit-card {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 16%, transparent);
+  }
+
+  [data-card="deep"] .kit-card {
+    background: var(--deep);
+    color: var(--deep-foreground);
+  }
+
+  .kit-pattern {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  main:has(> .kit-pattern) {
+    position: relative;
+    isolation: isolate;
+  }
+
+  main:has([data-model-stage])::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--backdrop-light);
+  }
+
+  [data-pattern="crosshair"] .kit-pattern {
+    display: block;
+    background:
+      linear-gradient(color-mix(in srgb, var(--foreground) 9%, transparent), color-mix(in srgb, var(--foreground) 9%, transparent)) center / 1px 100% no-repeat,
+      linear-gradient(color-mix(in srgb, var(--foreground) 9%, transparent), color-mix(in srgb, var(--foreground) 9%, transparent)) center / 100% 1px no-repeat,
+      linear-gradient(to top right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--foreground) 6%, transparent) 50%, transparent calc(50% + 0.5px)),
+      linear-gradient(to bottom right, transparent calc(50% - 0.5px), color-mix(in srgb, var(--foreground) 6%, transparent) 50%, transparent calc(50% + 0.5px));
+  }
+
+  [data-pattern="grid"] .kit-pattern {
+    display: block;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px);
+    background-size: 7.5rem 7.5rem;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary,
+  .btn-primary::before,
+  .btn-secondary::before,
+  .btn-link::before,
+  .kit-card {
+    transition: none;
+  }
+}

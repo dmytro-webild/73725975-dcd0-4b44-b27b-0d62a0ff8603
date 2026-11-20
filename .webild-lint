@@ -1,0 +1,10 @@
+src/components/Layout.tsx
+src/components/sections/contact/ContactAnchorDetails.tsx
+src/components/sections/faq/FaqTrackedRows.tsx
+src/components/sections/features/FeaturesVerticalWordmark.tsx
+src/components/sections/footer/FooterWordmark.tsx
+src/components/sections/gallery/GallerySinglePart.tsx
+src/components/sections/hero/HeroWordmarkDial.tsx
+src/components/sections/pricing/PricingAxisColumns.tsx
+src/components/sections/testimonial/TestimonialAxisCounter.tsx
+src/pages/HomePage.tsx
