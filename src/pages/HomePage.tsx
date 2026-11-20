@@ -7,7 +7,6 @@ import PortfolioSection from "@/components/sections/portfolio/PortfolioSection";
 import DetailsSection from "@/components/sections/details/DetailsSection";
 import AboutSection from "@/components/sections/about/AboutSection";
 import HowItWorksSection from "@/components/sections/about/HowItWorksSection";
-import PricingAxisColumns from "@/components/sections/pricing/PricingAxisColumns";
 import TestimonialAxisCounter from "@/components/sections/testimonial/TestimonialAxisCounter";
 import FaqTrackedRows from "@/components/sections/faq/FaqTrackedRows";
 import ContactInquirySection from "@/components/sections/contact/ContactInquirySection";
@@ -28,14 +27,6 @@ export default function HomePage() {
   const handleApplySpec = (spec: { colorName: string; finish: string; hex: string }) => {
     setAppliedSpec(spec);
   };
-
-  const pricingItems = t.pricing.items.map((p) => ({
-    ...p,
-    button: {
-      text: t.pricing.inquireBtn,
-      href: "#contact",
-    },
-  }));
 
   return (
     <>
@@ -83,17 +74,6 @@ export default function HomePage() {
       {/* How It Works (4-Step Customer Journey) */}
       <div id="how-it-works" data-webild-section="HowItWorksSection" data-webild-section-id="HowItWorksSection-1" data-section="how-it-works">
         <HowItWorksSection />
-      </div>
-
-      {/* Atelier Pricing Packages */}
-      <div id="pricing" data-webild-section="PricingAxisColumns" data-webild-section-id="PricingAxisColumns-1" data-section="pricing">
-        <PricingAxisColumns
-          counter={t.pricing.counter}
-          title={t.pricing.title}
-          description={t.pricing.description}
-          items={pricingItems}
-          media="image"
-        />
       </div>
 
       {/* Owner Testimonials */}
