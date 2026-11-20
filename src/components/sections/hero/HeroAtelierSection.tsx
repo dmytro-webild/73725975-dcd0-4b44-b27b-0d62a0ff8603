@@ -138,12 +138,172 @@ export default function HeroAtelierSection({
         {/* Right Column (35-40% width): Photorealistic luxury vehicle contained strictly within its own space */}
         <div className="lg:col-span-5 relative z-10 w-full flex items-center justify-center">
           <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] max-w-[540px] max-h-[360px] lg:max-h-[460px] rounded-2xl border border-border/40 bg-gradient-to-b from-muted/30 via-background/40 to-background/80 backdrop-blur-md p-3 overflow-hidden shadow-2xl group flex items-center justify-center">
-            {/* Photorealistic vehicle backdrop image */}
-            <img
-              src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200"
-              alt="JD Car Wrapping Atelier Luxury Vehicle"
-              className="absolute inset-0 w-full h-full object-cover object-center rounded-xl opacity-85 transition-opacity duration-500 group-hover:opacity-95"
-            />
+            {/* Elegant JD Car Wrapping Luxury Atelier Emblem Logo */}
+            <div className="absolute inset-0 size-full flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-zinc-950 via-neutral-900 to-black rounded-xl overflow-hidden group-hover:border-primary/50 transition-all duration-500 shadow-inner">
+              {/* Radial backdrop glow */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(212,175,55,0.12),transparent_70%)] pointer-events-none" />
+              <div className="absolute inset-0 opacity-15 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
+
+              <svg
+                viewBox="0 0 500 500"
+                className="w-full h-full max-w-[320px] max-h-[320px] sm:max-w-[360px] sm:max-h-[360px] relative z-10 filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.85)] transition-transform duration-500 group-hover:scale-105"
+                aria-label="JD Car Wrapping Atelier Logo"
+              >
+                <defs>
+                  <linearGradient id="jdGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#fef08a" />
+                    <stop offset="35%" stopColor="#eab308" />
+                    <stop offset="70%" stopColor="#ca8a04" />
+                    <stop offset="100%" stopColor="#854d0e" />
+                  </linearGradient>
+
+                  <linearGradient id="jdChromeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="50%" stopColor="#cbd5e1" />
+                    <stop offset="100%" stopColor="#64748b" />
+                  </linearGradient>
+
+                  <linearGradient id="jdWrapFoilGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.9" />
+                    <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.95" />
+                    <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.9" />
+                  </linearGradient>
+
+                  <radialGradient id="jdCenterGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#eab308" stopOpacity="0.2" />
+                    <stop offset="60%" stopColor="#3b82f6" stopOpacity="0.1" />
+                    <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+                  </radialGradient>
+
+                  <filter id="jdGlowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="5" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
+
+                {/* Central Soft Glow */}
+                <circle cx="250" cy="250" r="210" fill="url(#jdCenterGlow)" />
+
+                {/* Outer Concentric Precision Emblem Rings */}
+                <circle cx="250" cy="250" r="225" fill="none" stroke="url(#jdChromeGrad)" strokeWidth="1.5" strokeOpacity="0.3" />
+                <circle cx="250" cy="250" r="215" fill="none" stroke="url(#jdGoldGrad)" strokeWidth="2.5" strokeDasharray="8 6" strokeOpacity="0.75" />
+                <circle cx="250" cy="250" r="202" fill="none" stroke="url(#jdChromeGrad)" strokeWidth="1" strokeOpacity="0.4" />
+                <circle cx="250" cy="250" r="192" fill="none" stroke="url(#jdGoldGrad)" strokeWidth="0.75" strokeOpacity="0.3" />
+
+                {/* Precision Dial Ticks */}
+                <line x1="250" y1="26" x2="250" y2="40" stroke="url(#jdGoldGrad)" strokeWidth="3" strokeLinecap="round" />
+                <line x1="250" y1="460" x2="250" y2="474" stroke="url(#jdGoldGrad)" strokeWidth="3" strokeLinecap="round" />
+                <line x1="26" y1="250" x2="40" y2="250" stroke="url(#jdGoldGrad)" strokeWidth="3" strokeLinecap="round" />
+                <line x1="460" y1="250" x2="474" y2="250" stroke="url(#jdGoldGrad)" strokeWidth="3" strokeLinecap="round" />
+
+                {/* Diagonal Corner Marks */}
+                <line x1="92" y1="92" x2="102" y2="102" stroke="url(#jdGoldGrad)" strokeWidth="2" strokeOpacity="0.6" />
+                <line x1="408" y1="92" x2="398" y2="102" stroke="url(#jdGoldGrad)" strokeWidth="2" strokeOpacity="0.6" />
+                <line x1="92" y1="408" x2="102" y2="398" stroke="url(#jdGoldGrad)" strokeWidth="2" strokeOpacity="0.6" />
+                <line x1="408" y1="408" x2="398" y2="398" stroke="url(#jdGoldGrad)" strokeWidth="2" strokeOpacity="0.6" />
+
+                {/* --- CAR SILHOUETTE & WRAP EMBLEM GROUP --- */}
+                <g transform="translate(0, -18)">
+                  {/* Dynamic Vinyl Wrap Foil Arc (Wrapping Wave over the car) */}
+                  <path
+                    d="M 85 275 C 150 195, 260 200, 340 220 C 380 230, 415 242, 435 255"
+                    fill="none"
+                    stroke="url(#jdWrapFoilGrad)"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    filter="url(#jdGlowFilter)"
+                  />
+                  <path
+                    d="M 70 290 C 140 205, 255 210, 345 232 C 385 242, 420 255, 445 270"
+                    fill="none"
+                    stroke="url(#jdGoldGrad)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeOpacity="0.85"
+                  />
+
+                  {/* Supercar Profile Outline */}
+                  <path
+                    d="M 105 268 C 125 263, 145 252, 168 232 C 195 208, 235 178, 292 178 C 342 178, 368 198, 398 234 C 418 248, 438 255, 448 259 C 455 262, 458 270, 450 274 C 442 277, 422 279, 402 279 C 388 279, 378 268, 362 268 C 346 268, 336 279, 306 279 C 276 279, 266 268, 246 268 C 226 268, 216 279, 180 279 C 148 279, 128 276, 105 268 Z"
+                    fill="url(#jdChromeGrad)"
+                    fillOpacity="0.12"
+                    stroke="url(#jdChromeGrad)"
+                    strokeWidth="3"
+                    strokeLinejoin="round"
+                  />
+
+                  {/* Windshield & Side Window Contour */}
+                  <path
+                    d="M 178 234 C 210 196, 275 186, 330 206 L 362 234 Z"
+                    fill="url(#jdWrapFoilGrad)"
+                    fillOpacity="0.25"
+                    stroke="url(#jdGoldGrad)"
+                    strokeWidth="1.5"
+                  />
+
+                  {/* Headlight & Taillight Glow Features */}
+                  <path d="M 412 249 L 445 260" stroke="#06b6d4" strokeWidth="4" strokeLinecap="round" filter="url(#jdGlowFilter)" />
+                  <path d="M 110 266 L 132 262" stroke="#f43f5e" strokeWidth="4" strokeLinecap="round" filter="url(#jdGlowFilter)" />
+
+                  {/* Alloy Wheels & Brake Discs */}
+                  <g>
+                    <circle cx="372" cy="274" r="21" fill="#09090b" stroke="url(#jdGoldGrad)" strokeWidth="2.5" />
+                    <circle cx="372" cy="274" r="13" fill="none" stroke="url(#jdChromeGrad)" strokeWidth="1.5" strokeDasharray="4 3" />
+                    <circle cx="372" cy="274" r="5" fill="url(#jdGoldGrad)" />
+                  </g>
+                  <g>
+                    <circle cx="196" cy="274" r="21" fill="#09090b" stroke="url(#jdGoldGrad)" strokeWidth="2.5" />
+                    <circle cx="196" cy="274" r="13" fill="none" stroke="url(#jdChromeGrad)" strokeWidth="1.5" strokeDasharray="4 3" />
+                    <circle cx="196" cy="274" r="5" fill="url(#jdGoldGrad)" />
+                  </g>
+                </g>
+
+                {/* --- CENTRAL MONOGRAM & TYPOGRAPHY --- */}
+                <g transform="translate(250, 342)" textAnchor="middle">
+                  <text
+                    x="0"
+                    y="0"
+                    fill="url(#jdGoldGrad)"
+                    fontSize="60"
+                    fontWeight="900"
+                    fontFamily="serif, system-ui"
+                    letterSpacing="8"
+                    filter="drop-shadow(0px 4px 12px rgba(0,0,0,0.95))"
+                  >
+                    JD
+                  </text>
+
+                  <line x1="-90" y1="16" x2="90" y2="16" stroke="url(#jdGoldGrad)" strokeWidth="1" strokeOpacity="0.6" />
+                  <polygon points="0,13 4,16 0,19 -4,16" fill="url(#jdGoldGrad)" />
+
+                  <text
+                    x="0"
+                    y="36"
+                    fill="#ffffff"
+                    fillOpacity="0.95"
+                    fontSize="15"
+                    fontWeight="800"
+                    fontFamily="monospace"
+                    letterSpacing="7"
+                  >
+                    CAR WRAPPING
+                  </text>
+
+                  <text
+                    x="0"
+                    y="52"
+                    fill="url(#jdGoldGrad)"
+                    fontSize="9.5"
+                    fontWeight="600"
+                    fontFamily="monospace"
+                    letterSpacing="4"
+                    opacity="0.85"
+                  >
+                    ZÜRICH • LUXURY ATELIER
+                  </text>
+                </g>
+              </svg>
+            </div>
 
             {/* Subtle dark gradient overlay to guarantee contrast & aesthetic fit */}
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-background/30 rounded-xl pointer-events-none" />
