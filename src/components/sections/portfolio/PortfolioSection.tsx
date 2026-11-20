@@ -1,9 +1,10 @@
-import { useState, useRef, useCallback, useLayoutEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Eye, X, ArrowRight, MapPin, Sparkles, Sliders, Check, ShieldCheck } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useLanguage } from "@/context/useLanguage";
+import Media from "@/components/kit/Media";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -16,9 +17,10 @@ export interface CarVariationItem {
   finish: string;
   turnaround: string;
   location: string;
+  image: string;
   beforeImage: string;
   afterImage: string;
-  beforeLabel: string;
+  beforeLabel?: string;
   afterLabel: string;
   description: string;
   specs: string[];
@@ -27,7 +29,7 @@ export interface CarVariationItem {
 }
 
 export interface BeforeAfterPhotoSliderProps {
-  beforeImage: string;
+  beforeImage?: string;
   afterImage: string;
   beforeLabel?: string;
   afterLabel?: string;
@@ -36,140 +38,28 @@ export interface BeforeAfterPhotoSliderProps {
 }
 
 export function BeforeAfterPhotoSlider({
-  beforeImage,
   afterImage,
-  beforeLabel = "ДО: Без плёнки",
-  afterLabel = "ПОСЛЕ: С плёнкой",
-  isTintService = false,
+  afterLabel = "ПОСЛЕ: ГОТОВЫЙ РЕЗУЛЬТАТ",
   className = "",
 }: BeforeAfterPhotoSliderProps) {
-  const [sliderPos, setSliderPos] = useState<number>(50);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState<number>(0);
-  const isDragging = useRef<boolean>(false);
-
-  useLayoutEffect(() => {
-    if (!containerRef.current) return;
-    const el = containerRef.current;
-    const updateWidth = () => {
-      setContainerWidth(el.offsetWidth);
-    };
-    updateWidth();
-    const observer = new ResizeObserver(updateWidth);
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  const updatePosition = useCallback((clientX: number) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    setSliderPos(percentage);
-  }, []);
-
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    isDragging.current = true;
-    try {
-      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    } catch {}
-    updatePosition(e.clientX);
-  };
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging.current) return;
-    updatePosition(e.clientX);
-  };
-
-  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (isDragging.current) {
-      isDragging.current = false;
-      try {
-        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-      } catch {}
-    }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowLeft") {
-      setSliderPos((prev) => Math.max(0, prev - 5));
-    } else if (e.key === "ArrowRight") {
-      setSliderPos((prev) => Math.min(100, prev + 5));
-    } else if (e.key === "Home") {
-      setSliderPos(0);
-    } else if (e.key === "End") {
-      setSliderPos(100);
-    }
-  };
-
   return (
     <div
-      ref={containerRef}
-      tabIndex={0}
-      onKeyDown={handleKeyDown}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onPointerCancel={handlePointerUp}
       className={cn(
-        "relative overflow-hidden select-none cursor-ew-resize group border border-border/80 bg-card outline-none touch-none",
+        "relative overflow-hidden select-none group border border-border/80 bg-card outline-none",
         className
       )}
     >
-      {/* AFTER IMAGE (Bottom Layer - Film Tint / Wrap Finish) */}
-      <div className="absolute inset-0 size-full overflow-hidden">
-        <img
-          src={afterImage}
-          alt="After film treatment"
-          className="size-full object-cover object-center filter brightness-95 contrast-105"
-        />
-        {/* Nano-ceramic dark glass / film protection sheen overlay */}
-        {isTintService ? (
-          <div className="absolute inset-0 bg-slate-950/30 mix-blend-multiply pointer-events-none" />
-        ) : (
-          <div className="absolute inset-0 bg-zinc-950/20 mix-blend-multiply pointer-events-none" />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
-      </div>
+      <Media
+        src={afterImage}
+        alt="Finished film treatment"
+        className="size-full object-cover object-center filter brightness-95 contrast-105 transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
 
-      {/* BEFORE IMAGE (Top Layer - Clipped by sliderPos - Factory Stock) */}
-      <div
-        className="absolute inset-y-0 left-0 overflow-hidden z-10 border-r-2 border-foreground/90 shadow-2xl pointer-events-none"
-        style={{ width: `${sliderPos}%` }}
-      >
-        <div
-          className="absolute inset-y-0 left-0 h-full"
-          style={{ width: containerWidth ? `${containerWidth}px` : "100%" }}
-        >
-          <img
-            src={beforeImage}
-            alt="Before factory stock"
-            className="size-full object-cover object-center filter brightness-110 contrast-95 saturate-90"
-          />
-          {/* Clear Untinted Glass Reflective Sheen Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-sky-200/25 via-blue-100/20 to-transparent mix-blend-screen pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent pointer-events-none" />
-        </div>
-      </div>
-
-      {/* BEFORE / AFTER BADGES */}
-      <div className="absolute top-3 left-3 z-20 px-2.5 py-1 bg-background/90 backdrop-blur-md border border-border/80 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-foreground shadow-md flex items-center gap-1.5 pointer-events-none">
-        <span className="size-2 rounded-full bg-amber-400" />
-        <span>{beforeLabel}</span>
-      </div>
+      {/* FINISHED RESULT BADGE */}
       <div className="absolute top-3 right-3 z-20 px-2.5 py-1 bg-foreground text-background font-mono text-[10px] sm:text-xs uppercase tracking-widest font-bold shadow-md flex items-center gap-1.5 pointer-events-none">
-        <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+        <span className="size-2 rounded-full bg-emerald-400" />
         <span>{afterLabel}</span>
-      </div>
-
-      {/* DRAGGABLE HANDLE DIVIDER */}
-      <div
-        className="absolute top-0 bottom-0 z-30 w-0.5 bg-foreground shadow-[0_0_15px_rgba(255,255,255,0.9)] pointer-events-none"
-        style={{ left: `${sliderPos}%` }}
-      >
-        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 size-9 rounded-full bg-foreground text-background flex items-center justify-center shadow-2xl border-2 border-background transform group-hover:scale-110 transition-transform">
-          <span className="text-[11px] font-black tracking-tighter">‹›</span>
-        </div>
       </div>
     </div>
   );
@@ -178,77 +68,81 @@ export function BeforeAfterPhotoSlider({
 // Export BeforeAfterSlider alias for backwards compatibility
 export const BeforeAfterSlider = BeforeAfterPhotoSlider;
 
-// 4 Variations of Cars - Before & After Film Processing
+// 4 Variations of Cars - Static Photos Showing Completed Film Finishing
 const CAR_VARIATIONS: CarVariationItem[] = [
   {
-    id: "porsche-911-full-wrap",
+    id: "aston-martin-full-wrap",
     title: "Satin Obsidian Anthrazit Vollfolierung",
-    vehicle: "Porsche 911 Carrera S (992)",
+    vehicle: "Aston Martin DBS Superleggera",
     categoryKey: "fullWraps",
     categoryLabel: "Vollfolierung",
     finish: "Satin Obsidian Metallic Film Wrap",
     turnaround: "4 Tage",
     location: "Zürich Atelier",
-    beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    beforeLabel: "ДО: Werkslack Weiss",
-    afterLabel: "ПОСЛЕ: Satin Obsidian Folie",
-    description: "Vollständige Farbtransformation von Carrara-Weiss-Werkslack zu seidenmattem Obsidian-Schwarz inkl. Türeinstiegen und Knifeless-Kantenverlegung.",
+    image: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977859-s2ylivcm.webp",
+    beforeImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977859-s2ylivcm.webp",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977859-s2ylivcm.webp",
+    beforeLabel: "ПОСЛЕ: SATIN OBSIDIAN FOLIE",
+    afterLabel: "ПОСЛЕ: SATIN OBSIDIAN FOLIE",
+    description: "Vollständige Farbtransformation in seidenmattes Obsidian-Schwarz inkl. präziser Kantenverlegung und selbstheilender Oberflächenversiegelung.",
     specs: ["Vollfolierung Satin Obsidian", "Präzisions-Türeinstiege", "Knifeless Tape Technologie", "Selbstheilende Schutzschicht"],
     gridSpan: "lg:col-span-6",
     isTintService: false,
   },
   {
-    id: "bmw-m4-forged-roof",
-    title: "Forged Carbon Dach & Akzent-Folierung",
-    vehicle: "BMW M4 Competition",
-    categoryKey: "partialWraps",
-    categoryLabel: "Teilfolierung / Dach",
-    finish: "Forged Carbon Roof & Piano Black Trim",
+    id: "amg-g63-shadowline",
+    title: "Piano Black Shadowline & Tönung",
+    vehicle: "Mercedes-AMG G 63",
+    categoryKey: "chromeDelete",
+    categoryLabel: "Chrome Delete / Tönung",
+    finish: "Piano Gloss Black Delete & Ceramic Glass Tint",
     turnaround: "2 Tage",
     location: "Zürich Atelier",
-    beforeImage: "https://images.pexels.com/photos/16284837/pexels-photo-16284837.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/16284837/pexels-photo-16284837.jpeg?auto=compress&w=1200",
-    beforeLabel: "ДО: Werkszustand",
-    afterLabel: "ПОСЛЕ: Forged Carbon Dach",
-    description: "Teilfolierung mit echtem Forged-Carbon-Muster auf dem Fahrzeugdach, ergänzt durch hochglänzende Piano Black Seitenschweller.",
-    specs: ["Forged Carbon Dachfolie", "Piano Black Seitenschweller", "Spiegelkappen Folierung", "Frontsplitter Blackout"],
+    image: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977860-g4g4nso2.png",
+    beforeImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977860-g4g4nso2.png",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977860-g4g4nso2.png",
+    beforeLabel: "ПОСЛЕ: PIANO BLACK & TÖNUNG",
+    afterLabel: "ПОСЛЕ: PIANO BLACK & TÖNUNG",
+    description: "Vollständiges Anti-Chrom Paket in hochglänzendem Piano Black in Kombination mit nano-keramischer Scheibentönung.",
+    specs: ["Fensterleisten Blackout", "Panamericana Grill Rahmen", "Keramik Scheibentönung", "Spiegelkappen Folierung"],
     gridSpan: "lg:col-span-6",
-    isTintService: false,
+    isTintService: true,
   },
   {
-    id: "amg-gt-shadowline",
-    title: "Piano Black Shadowline Anti-Chrom",
-    vehicle: "Mercedes-AMG GT 63 S",
-    categoryKey: "chromeDelete",
-    categoryLabel: "Chrome Delete",
-    finish: "Piano Gloss Black Shadowline Delete",
-    turnaround: "1 Tag",
+    id: "amg-cla-velvet-wrap",
+    title: "Satin Midnight Purple Vollfolierung",
+    vehicle: "Mercedes-AMG CLA / GT",
+    categoryKey: "fullWraps",
+    categoryLabel: "Vollfolierung",
+    finish: "Satin Midnight Purple Flip Wrap",
+    turnaround: "4 Tage",
     location: "Zürich Studio",
-    beforeImage: "https://images.pexels.com/photos/18370669/pexels-photo-18370669.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/18370669/pexels-photo-18370669.jpeg?auto=compress&w=1200",
-    beforeLabel: "ДО: Werks-Chrom",
-    afterLabel: "ПОСЛЕ: Piano Shadowline",
-    description: "Vollständige Entchromung aller Fensterleisten, des Panamericana-Grillrahmens und der Heckembleme in tiefglänzendem Piano Black.",
-    specs: ["Fensterleisten Blackout", "Panamericana Grill Rahmen", "Modellschriftzug Schwarz", "Spiegelfuss Folierung"],
+    image: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977861-bfn83avt.png",
+    beforeImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977861-bfn83avt.png",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977861-bfn83avt.png",
+    beforeLabel: "ПОСЛЕ: MIDNIGHT PURPLE FOLIE",
+    afterLabel: "ПОСЛЕ: MIDNIGHT PURPLE FOLIE",
+    description: "Exklusive Vollfolierung in seidenmattem Midnight Purple mit edlem Farbspiel und nahtloser Kantenumbiegung.",
+    specs: ["Satin Purple Vollfolierung", "360° Kantenumbiegung", "Keramische Versiegelung", "Piano Black Akzente"],
     gridSpan: "lg:col-span-6",
     isTintService: false,
   },
   {
-    id: "bmw-5-stealth-ppf",
-    title: "200μm Stealth Matte PPF Lackschutz",
-    vehicle: "BMW 5er Limousine",
+    id: "amg-edition1-stealth",
+    title: "Satin Black & Edition 1 Akzente",
+    vehicle: "Mercedes-AMG CLA 45 Edition 1",
     categoryKey: "ppf",
-    categoryLabel: "Stealth PPF",
-    finish: "200μm Stealth Matte Paint Protection Film",
-    turnaround: "5 Tage",
+    categoryLabel: "Stealth PPF & Akzente",
+    finish: "Satin Black Film Wrap & Yellow Striping",
+    turnaround: "3 Tage",
     location: "Zürich Studio",
-    beforeImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
-    beforeLabel: "ДО: Glanz-Werkslack",
-    afterLabel: "ПОСЛЕ: 200μm Stealth PPF",
-    description: "Transformation des Werkslacks in ein samtiges Matt-Finish mit 200-Mikron dichter selbstheilender Steinschlagschutzfolie.",
-    specs: ["200μm Selbstheilende Folie", "Hydrophober Topcoat", "Steinschlagschutz Front", "10 Jahre Schweizer Garantie"],
+    image: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977862-bxds4tv1.png",
+    beforeImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977862-bxds4tv1.png",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795183977862-bxds4tv1.png",
+    beforeLabel: "ПОСЛЕ: SATIN BLACK & GELB AKZENTE",
+    afterLabel: "ПОСЛЕ: SATIN BLACK & GELB AKZENTE",
+    description: "Seidenmatte Karosserie-Vollfolierung mit gelben Edition 1 Rennsport-Akzenten an Frontsplitter, Schweller und Felgen.",
+    specs: ["Satin Black Vollfolierung", "Edition 1 Gelb Akzente", "Frontsplitter Striping", "Hydrophober Oberflächenschutz"],
     gridSpan: "lg:col-span-6",
     isTintService: false,
   },
@@ -261,11 +155,9 @@ export default function PortfolioSection() {
 
   const categories = [
     { key: "all", label: "Alle 4 Fahrzeug-Variationen" },
-    { key: "windowTinting", label: "Keramik-Tönung" },
     { key: "fullWraps", label: "Vollfolierung" },
-    { key: "partialWraps", label: "Teilfolierung / Dach" },
-    { key: "chromeDelete", label: "Chrome Delete" },
-    { key: "ppf", label: "Stealth PPF" },
+    { key: "chromeDelete", label: "Chrome Delete & Tönung" },
+    { key: "ppf", label: "Stealth PPF & Akzente" },
   ];
 
   const filteredVariations = CAR_VARIATIONS.filter((car) =>
@@ -283,12 +175,12 @@ export default function PortfolioSection() {
               <span>{t.portfolio.badge} — 4 Fahrzeug-Variationen</span>
             </div>
             <h2 className="text-[length:var(--text-h1)] font-light uppercase tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] leading-[0.9]">
-              Vorher & Nachher <br />
-              <span className="text-foreground/50">Folien- & Tönungskollage</span>
+              Atelier Galerie <br />
+              <span className="text-foreground/50">Exklusive Folien-Ergebnisse</span>
             </h2>
           </div>
           <p className="text-[length:var(--text-body)] text-foreground/60 max-w-md">
-            Symphonie aus 4 verschiedenen Fahrzeugmodellen im direkten Vorher/Nachher-Vergleich vor und nach der Folien- & Tönungsbehandlung. Identisches Modell, identischer Blickwinkel.
+            Entdecken Sie unsere fertiggestellten Fahrzeug-Transformationen in höchster Präzision — edle Matt- & Satin-Folierungen, Gloss-Behandlungen und Akzente.
           </p>
         </div>
 
@@ -313,7 +205,7 @@ export default function PortfolioSection() {
         </div>
 
         {/* ============================================================ */}
-        {/* PHOTO COLLAGE GRID (6 VARIATIONS OF CARS BEFORE & AFTER) */}
+        {/* PHOTO COLLAGE GRID (4 VARIATIONS OF CARS AFTER FILM) */}
         {/* ============================================================ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 mb-16">
           {filteredVariations.map((car) => (
@@ -329,12 +221,10 @@ export default function PortfolioSection() {
                 activeFilter === "all" ? car.gridSpan : "lg:col-span-6"
               )}
             >
-              {/* Interactive Before & After Photo Slider */}
+              {/* Static Photo View Showing Completed Film Wrap */}
               <div className="relative w-full">
                 <BeforeAfterPhotoSlider
-                  beforeImage={car.beforeImage}
                   afterImage={car.afterImage}
-                  beforeLabel={car.beforeLabel}
                   afterLabel={car.afterLabel}
                   isTintService={car.isTintService}
                   className="h-[280px] sm:h-[340px] lg:h-[380px] w-full"
@@ -391,7 +281,7 @@ export default function PortfolioSection() {
                     onClick={() => setSelectedCar(car)}
                     className="inline-flex items-center gap-1.5 text-foreground hover:text-primary transition-colors cursor-pointer font-semibold"
                   >
-                    <span>Details & Vorher/Nachher</span>
+                    <span>Details & Spezifikation</span>
                     <ArrowRight className="size-4" />
                   </button>
                 </div>
@@ -446,18 +336,16 @@ export default function PortfolioSection() {
               </button>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Left: Large Interactive Before/After Photo Slider */}
+                {/* Left: Static Photo Spec View */}
                 <div className="lg:col-span-7">
                   <BeforeAfterPhotoSlider
-                    beforeImage={selectedCar.beforeImage}
                     afterImage={selectedCar.afterImage}
-                    beforeLabel={selectedCar.beforeLabel}
                     afterLabel={selectedCar.afterLabel}
                     isTintService={selectedCar.isTintService}
                     className="h-[320px] sm:h-[420px] w-full"
                   />
                   <p className="text-[11px] font-mono text-foreground/50 mt-2 text-center">
-                    Regler ziehen zum Vergleichen (Identisches Fahrzeug {selectedCar.vehicle})
+                    Fertiggestellte Folierung: {selectedCar.vehicle}
                   </p>
                 </div>
 
