@@ -100,7 +100,7 @@ const TestimonialAxisCounter = ({
           </div>
         )}
 
-        <div className={cn("flex min-w-0 flex-col items-center text-center", isModel && "lg:items-start lg:pl-[clamp(1rem,4vw,4rem)] lg:text-left")}>
+        <div className={cn("relative z-20 flex min-w-0 flex-col items-center text-center", isModel && "lg:items-start lg:pl-[clamp(1rem,4vw,4rem)] lg:text-left")}>
           {!isModel && <motion.div aria-hidden="true" {...draw("y", 0)} className="mb-[clamp(1.5rem,2.6vw,2.5rem)] h-[clamp(4rem,8vw,7rem)] w-px origin-top bg-foreground/15" />}
           {script && (
             <motion.p {...fade(0)} className="mb-[clamp(1rem,1.6vw,1.5rem)] text-[length:var(--text-script)] leading-[0.9] text-accent [font-family:var(--font-accent)]">

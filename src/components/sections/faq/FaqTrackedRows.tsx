@@ -123,7 +123,7 @@ const FaqTrackedRows = ({
           <div data-model-anchor className="absolute inset-[6%]" />
         </div>
         )}
-        <div className={cn("flex min-w-0 flex-col", media === "model" && "lg:max-w-[30rem]")}>
+        <div className={cn("relative z-20 flex min-w-0 flex-col", media === "model" && "lg:max-w-[30rem]")}>
         <motion.div {...fade(0)} className="flex items-center">
           <svg aria-hidden="true" width="9" height="9" viewBox="0 0 8 8" fill="none" className="text-foreground">
             <path fill="currentColor" d="M3.5 0h1v8h-1z" />

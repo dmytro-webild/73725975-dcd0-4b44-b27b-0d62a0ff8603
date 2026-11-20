@@ -106,10 +106,11 @@ export default function HomePage() {
           model={{
             rx: -27,
             ry: 360,
-            radius: 7,
-            scale: 0.85,
+            radius: 8.5,
+            scale: 0.65,
             sm: {
-              radius: 9
+              radius: 10,
+              scale: 0.7
             }
           }}
           media="model"
