@@ -217,7 +217,7 @@ export const translations = {
         {
           id: 'full-wraps',
           title: 'Vollfolierung (Full Wrap)',
-          subtitle: 'Referenzmodell: Porsche 911 Carrera S',
+          subtitle: '',
           category: 'Vollkarosserie Veredelung',
           vehicleModel: 'Porsche 911 Carrera S',
           description: 'Verwandeln Sie die Ästhetik Ihres Porsche 911 Carrera S mit einer nahtlosen Vollfolierung. Jede Karosseriefläche, Türgriff und Kante wird akribisch vorbereitet und ohne sichtbare Originallack-Kanten foliert.',
@@ -234,7 +234,7 @@ export const translations = {
         {
           id: 'partial-wraps',
           title: 'Teilfolierung & Akzente',
-          subtitle: 'Referenzmodell: BMW M4 Competition',
+          subtitle: '',
           category: 'Kombinations-Styling',
           vehicleModel: 'BMW M4 Competition',
           description: 'Setzen Sie markante Akzente an Schlüsselstellen Ihres BMW M4 Competition. Von Forged-Carbon-Dachfolierungen über Motorhauben-Akzente bis hin zu individuellen M-Zierstreifen.',
@@ -251,7 +251,7 @@ export const translations = {
         {
           id: 'chrome-delete',
           title: 'Chrome Delete',
-          subtitle: 'Referenzmodell: Mercedes-AMG GT 63 S',
+          subtitle: '',
           category: 'Detail-Styling',
           vehicleModel: 'Mercedes-AMG GT 63 S',
           description: 'Ersetzen Sie glänzende Chromleisten am Mercedes-AMG GT 63 S durch einen edlen Stealth-Look. Wir folieren Fenstereinfassungen, Panamericana-Kühlergrill, Seitenauslässe und Embleme.',
@@ -268,7 +268,7 @@ export const translations = {
         {
           id: 'ppf',
           title: 'Lackschutzfolie (PPF)',
-          subtitle: 'Referenzmodell: Audi RS6 Avant',
+          subtitle: '',
           category: 'Lackschutz',
           vehicleModel: 'Audi RS6 Avant',
           description: 'Schützen Sie den werkseitigen Lack Ihres Audi RS6 Avant vor Steinschlägen, Split und Parkkratzern mit einer glasklaren oder seidenmatten 200-Mikron-Lackschutzfolie.',
@@ -285,7 +285,7 @@ export const translations = {
         {
           id: 'window-tinting',
           title: 'Scheibentönung',
-          subtitle: 'Referenzmodell: Porsche Cayenne Turbo GT',
+          subtitle: '',
           category: 'Glasschutz',
           vehicleModel: 'Porsche Cayenne Turbo GT',
           description: 'Erreicht hervorragenden Wärmeschutz und Blendschutz am Porsche Cayenne Turbo GT mit Nano-Keramik-Tönungsfolien. 100% konform mit den Schweizer ASTRA-Vorschriften.',
