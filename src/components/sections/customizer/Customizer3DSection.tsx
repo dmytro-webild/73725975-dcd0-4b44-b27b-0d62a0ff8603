@@ -1,8 +1,8 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, Suspense, Component, type ReactNode } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera, ContactShadows, useGLTF } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera, ContactShadows, useGLTF, Environment, useProgress } from "@react-three/drei";
 import * as THREE from "three";
-import { Sparkles, ArrowRight, RotateCcw, Palette, Layers, Check, Shield } from "lucide-react";
+import { Sparkles, ArrowRight, RotateCcw, Palette, Layers, Check, Shield, AlertTriangle } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useLanguage } from "@/context/useLanguage";
@@ -11,8 +11,12 @@ const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
 const PORSCHE_MODEL_URL = "https://storage.googleapis.com/webild/default/models/sports-car/model.fd149a09dc4d.glb";
 
-// Preload Porsche 911 model
-useGLTF.preload(PORSCHE_MODEL_URL);
+// Preload Porsche 911 model safely
+try {
+  useGLTF.preload(PORSCHE_MODEL_URL);
+} catch (e) {
+  console.warn("Preload 3D model notice:", e);
+}
 
 export interface ColorOption {
   id: string;
@@ -35,47 +39,103 @@ const COLOR_PRESETS: ColorOption[] = [
   { id: "pearl-white", name: "Pearl Satin White", hex: "#e2e8f0", finishType: "Special", roughness: 0.3, metalness: 0.7, clearcoat: 0.6 },
 ];
 
+interface ErrorBoundaryProps {
+  fallback: ReactNode;
+  onError?: () => void;
+  children: ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+class ModelErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(): ErrorBoundaryState {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: unknown) {
+    console.error("3D Model Error Boundary caught failure:", error);
+    if (this.props.onError) {
+      this.props.onError();
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
+
+function ProgressWatcher({ onError }: { onError: () => void }) {
+  const { errors } = useProgress();
+  useEffect(() => {
+    if (errors && errors.length > 0) {
+      onError();
+    }
+  }, [errors, onError]);
+  return null;
+}
+
 function Porsche911Car({ colorHex, finishType }: { colorHex: string; finishType: string }) {
   const { scene } = useGLTF(PORSCHE_MODEL_URL);
 
-  const clonedScene = useMemo(() => scene.clone(true), [scene]);
+  const clonedScene = useMemo(() => {
+    if (!scene) return null;
+    return scene.clone(true);
+  }, [scene]);
 
   useEffect(() => {
+    if (!clonedScene) return;
+
     let roughness = 0.35;
-    let metalness = 0.4;
+    let metalness = 0.5;
     let clearcoat = 0.3;
-    let clearcoatRoughness = 0.2;
+    let clearcoatRoughness = 0.25;
+    let envMapIntensity = 1.6;
 
     switch (finishType) {
       case "Gloss":
-        roughness = 0.06;
-        metalness = 0.15;
+        roughness = 0.08;
+        metalness = 0.2;
         clearcoat = 1.0;
         clearcoatRoughness = 0.03;
+        envMapIntensity = 2.0;
         break;
       case "Satin":
         roughness = 0.36;
         metalness = 0.5;
-        clearcoat = 0.25;
-        clearcoatRoughness = 0.3;
+        clearcoat = 0.3;
+        clearcoatRoughness = 0.25;
+        envMapIntensity = 1.6;
         break;
       case "Matte":
         roughness = 0.78;
         metalness = 0.05;
         clearcoat = 0.0;
         clearcoatRoughness = 0.8;
+        envMapIntensity = 1.0;
         break;
       case "Metallic":
-        roughness = 0.2;
-        metalness = 0.9;
+        roughness = 0.22;
+        metalness = 0.85;
         clearcoat = 0.8;
         clearcoatRoughness = 0.1;
+        envMapIntensity = 2.2;
         break;
       case "Special":
         roughness = 0.28;
-        metalness = 0.8;
+        metalness = 0.75;
         clearcoat = 0.6;
         clearcoatRoughness = 0.15;
+        envMapIntensity = 1.8;
         break;
       default:
         break;
@@ -87,35 +147,75 @@ function Porsche911Car({ colorHex, finishType }: { colorHex: string; finishType:
       if ((child as THREE.Mesh).isMesh) {
         const mesh = child as THREE.Mesh;
         if (mesh.material) {
-          const matName = (mesh.material as THREE.Material).name.toLowerCase();
-          // Check if mesh material is part of body paint
-          if (
-            matName.includes("paint") ||
-            matName.includes("body") ||
-            matName.includes("car") ||
-            matName.includes("main") ||
-            matName === "" ||
-            (!matName.includes("glass") &&
-             !matName.includes("wheel") &&
-             !matName.includes("tire") &&
-             !matName.includes("rubber") &&
-             !matName.includes("light") &&
-             !matName.includes("chrome") &&
-             !matName.includes("brake"))
-          ) {
-            const pMat = new THREE.MeshPhysicalMaterial({
-              color: targetColor,
-              roughness,
-              metalness,
-              clearcoat,
-              clearcoatRoughness,
-            });
-            mesh.material = pMat;
-          }
+          const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+
+          materials.forEach((mat, idx) => {
+            const matName = (mat.name || "").toLowerCase();
+            const meshName = (mesh.name || "").toLowerCase();
+
+            const isBodyPaint =
+              matName.includes("paint") ||
+              matName.includes("body") ||
+              matName.includes("car") ||
+              matName.includes("main") ||
+              meshName.includes("body") ||
+              meshName.includes("paint") ||
+              (matName === "" &&
+                !matName.includes("glass") &&
+                !matName.includes("wheel") &&
+                !matName.includes("tire") &&
+                !matName.includes("rubber") &&
+                !matName.includes("light") &&
+                !matName.includes("chrome") &&
+                !matName.includes("interior") &&
+                !matName.includes("brake"));
+
+            if (isBodyPaint) {
+              const pMat = new THREE.MeshPhysicalMaterial({
+                color: targetColor,
+                roughness,
+                metalness,
+                clearcoat,
+                clearcoatRoughness,
+                envMapIntensity,
+              });
+              pMat.needsUpdate = true;
+              if (Array.isArray(mesh.material)) {
+                mesh.material[idx] = pMat;
+              } else {
+                mesh.material = pMat;
+              }
+            } else {
+              if (mat instanceof THREE.MeshStandardMaterial || mat instanceof THREE.MeshPhysicalMaterial) {
+                mat.envMapIntensity = 1.2;
+                if (matName.includes("glass") || meshName.includes("glass") || meshName.includes("window")) {
+                  mat.transparent = true;
+                  mat.opacity = 0.45;
+                  mat.roughness = 0.1;
+                  mat.metalness = 0.1;
+                } else if (
+                  matName.includes("wheel") ||
+                  matName.includes("rim") ||
+                  matName.includes("chrome") ||
+                  meshName.includes("wheel") ||
+                  meshName.includes("rim")
+                ) {
+                  mat.metalness = 0.85;
+                  mat.roughness = 0.2;
+                } else if (matName.includes("tire") || matName.includes("rubber")) {
+                  mat.roughness = 0.85;
+                  mat.metalness = 0.05;
+                }
+                mat.needsUpdate = true;
+              }
+            }
+          });
         }
       }
     });
   }, [clonedScene, colorHex, finishType]);
+
+  if (!clonedScene) return null;
 
   return (
     <primitive
@@ -137,6 +237,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
   const [selectedColor, setSelectedColor] = useState<ColorOption>(COLOR_PRESETS[1]);
   const [activeFinish, setActiveFinish] = useState<string>(selectedColor.finishType);
   const [appliedNotification, setAppliedNotification] = useState<boolean>(false);
+  const [has3DError, setHas3DError] = useState<boolean>(false);
 
   const finishes = [
     { id: "Satin", label: t.customizer.finishes.satin },
@@ -167,6 +268,26 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
     }
   };
 
+  const fallbackView = (
+    <div className="relative w-full h-full min-h-[440px] sm:min-h-[520px] lg:min-h-[600px] flex items-center justify-center overflow-hidden bg-muted/20">
+      <img
+        src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200"
+        alt="Porsche 911 Customizer Fallback Preview"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <div
+        className="absolute inset-0 transition-colors duration-500 opacity-35 mix-blend-color pointer-events-none"
+        style={{ backgroundColor: selectedColor.hex }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
+
+      <div className="absolute top-4 left-4 z-20 px-3.5 py-2 bg-background/90 border border-amber-500/40 backdrop-blur-md text-amber-300 text-xs font-mono rounded flex items-center gap-2 shadow-lg">
+        <AlertTriangle className="size-4 text-amber-400 shrink-0" />
+        <span>HD Fotorealistisches Fallback-Bild (Auto-Switch)</span>
+      </div>
+    </div>
+  );
+
   return (
     <section id="customizer" className={cn("relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40 overflow-hidden", className)}>
       <div className="mx-auto w-[var(--container)]">
@@ -189,48 +310,65 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
 
         {/* Main 3D Workspace Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* 3D Canvas Container */}
+          {/* 3D Canvas / Preview Container */}
           <div className="lg:col-span-8 relative min-h-[440px] sm:min-h-[520px] lg:min-h-[600px] bg-card border border-border/60 overflow-hidden flex flex-col justify-between">
             {/* Background Studio Lights / Grid overlay */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)] pointer-events-none" />
 
-            {/* 3D Canvas */}
+            {/* 3D Canvas or Fallback View */}
             <div className="absolute inset-0">
-              <Canvas shadows gl={{ antialias: true, alpha: true }}>
-                <PerspectiveCamera makeDefault position={[4.2, 1.5, 4.2]} fov={36} />
-                <ambientLight intensity={1.2} />
-                <directionalLight position={[10, 15, 10]} intensity={2.2} castShadow />
-                <directionalLight position={[-10, 8, -5]} intensity={0.9} color="#a0c0f0" />
-                <directionalLight position={[0, -5, 10]} intensity={0.4} />
+              {has3DError ? (
+                fallbackView
+              ) : (
+                <ModelErrorBoundary onError={() => setHas3DError(true)} fallback={fallbackView}>
+                  <Canvas shadows gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}>
+                    <PerspectiveCamera makeDefault position={[4.2, 1.5, 4.2]} fov={36} />
+                    
+                    {/* Predefined Studio Environment map to eliminate black silhouette issue */}
+                    <Environment preset="city" />
 
-                {/* Porsche 911 3D Model */}
-                <Porsche911Car colorHex={selectedColor.hex} finishType={activeFinish} />
+                    <ambientLight intensity={1.2} />
+                    <directionalLight position={[10, 15, 10]} intensity={2.2} castShadow />
+                    <directionalLight position={[-10, 8, -5]} intensity={1.0} color="#a0c0f0" />
+                    <directionalLight position={[0, -5, 10]} intensity={0.5} />
+                    <directionalLight position={[0, 8, 0]} intensity={0.8} />
 
-                <ContactShadows position={[0, -0.61, 0]} opacity={0.7} scale={12} blur={2.0} far={5} />
+                    <ProgressWatcher onError={() => setHas3DError(true)} />
 
-                <OrbitControls
-                  enablePan={false}
-                  enableZoom={true}
-                  minDistance={3.0}
-                  maxDistance={7.5}
-                  maxPolarAngle={Math.PI / 2 - 0.05}
-                  autoRotate
-                  autoRotateSpeed={0.6}
-                />
-              </Canvas>
+                    {/* Porsche 911 3D Model with robust loading */}
+                    <Suspense fallback={null}>
+                      <Porsche911Car colorHex={selectedColor.hex} finishType={activeFinish} />
+                    </Suspense>
+
+                    <ContactShadows position={[0, -0.61, 0]} opacity={0.75} scale={12} blur={2.0} far={5} />
+
+                    <OrbitControls
+                      enablePan={false}
+                      enableZoom={true}
+                      minDistance={3.0}
+                      maxDistance={7.5}
+                      maxPolarAngle={Math.PI / 2 - 0.05}
+                      autoRotate
+                      autoRotateSpeed={0.6}
+                    />
+                  </Canvas>
+                </ModelErrorBoundary>
+              )}
             </div>
 
             {/* Canvas Controls Overlay */}
             <div className="relative z-10 p-4 sm:p-6 flex items-center justify-between pointer-events-none">
               <div className="px-3 py-1.5 bg-background/85 backdrop-blur-md border border-border/60 text-[11px] font-mono uppercase tracking-widest text-foreground pointer-events-auto flex items-center gap-2">
-                <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>3D Porsche 911 Studio Engine</span>
+                <span className={cn("size-2 rounded-full animate-pulse", has3DError ? "bg-amber-400" : "bg-emerald-500")} />
+                <span>{has3DError ? "HD Car Visualizer (Fallback)" : "3D Porsche 911 Studio Engine"}</span>
               </div>
 
-              <div className="px-3 py-1.5 bg-background/85 backdrop-blur-md border border-border/60 text-[11px] font-mono text-foreground/70 pointer-events-auto flex items-center gap-2">
-                <RotateCcw className="size-3" />
-                <span>Drag to rotate 360°</span>
-              </div>
+              {!has3DError && (
+                <div className="px-3 py-1.5 bg-background/85 backdrop-blur-md border border-border/60 text-[11px] font-mono text-foreground/70 pointer-events-auto flex items-center gap-2">
+                  <RotateCcw className="size-3" />
+                  <span>Drag to rotate 360°</span>
+                </div>
+              )}
             </div>
 
             {/* Live Spec Bar Overlay (Bottom) */}
