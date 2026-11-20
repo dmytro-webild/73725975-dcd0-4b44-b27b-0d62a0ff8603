@@ -3,7 +3,7 @@ export type Language = 'de' | 'en';
 export const translations = {
   de: {
     nav: {
-      brandSub: 'Atelier Zürich • Nur nach Termin',
+      brandSub: 'Atelier Zürich',
       services: 'Dienstleistungen',
       customizer: '3D Visualisierer',
       finishes: 'Oberflächen',
