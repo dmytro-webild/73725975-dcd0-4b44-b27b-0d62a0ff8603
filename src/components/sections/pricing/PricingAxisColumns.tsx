@@ -143,7 +143,7 @@ const PricingAxisColumns = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "0px 0px 0px 0px" }}
                 transition={{ duration: kit.slow, ease: EASE, delay: 0.1 + index * 0.06 }}
-                className={cn("flex min-w-0 flex-col items-start border-t border-foreground/15 py-[clamp(1.75rem,6vw,2.25rem)] lg:border-t-0 lg:py-[clamp(0.75rem,1.5vw,1.5rem)]", slot)}
+                className={cn("relative z-20 flex min-w-0 flex-col items-start border-t border-foreground/15 py-[clamp(1.75rem,6vw,2.25rem)] lg:border-t-0 lg:py-[clamp(0.75rem,1.5vw,1.5rem)]", slot)}
               >
                 <div className={cn("flex items-center gap-[clamp(0.75rem,1vw,1rem)]", left && "lg:flex-row-reverse")}>
                   {isModel && <div aria-hidden="true" className="hidden h-px w-[clamp(2rem,5vw,5rem)] bg-foreground/25 lg:block" />}

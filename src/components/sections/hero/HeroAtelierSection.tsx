@@ -58,7 +58,7 @@ export default function HeroAtelierSection({
       {/* Main Center Content Grid */}
       <div className="mx-auto w-[var(--container)] relative z-10 my-auto py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Left Column: Headlines */}
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-7 relative z-20">
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
