@@ -241,7 +241,7 @@ function ServiceCar3D({
     const bmwColor = mode === "before" ? "#5b6572" : "#121316";
     return (
       <group ref={groupRef} rotation={[0, Math.PI / 4, 0]} position={[0, -0.4, 0]}>
-        <BmwM3Model color={bmwColor} />
+        <BmwM3Model color={bmwColor} isBeforeMode={mode === "before"} />
       </group>
     );
   }
@@ -378,16 +378,31 @@ export interface BeforeAfterSliderProps {
 
 export function BeforeAfterSlider({
   serviceKey = "fullWraps",
+  beforeImage,
+  afterImage,
   beforeLabel = "Factory Stock",
   afterLabel = "JD Wrapped Finish",
   className
 }: BeforeAfterSliderProps) {
   const [sliderPos, setSliderPos] = useState<number>(50);
   const [containerWidth, setContainerWidth] = useState<number>(0);
-  const [viewMode, setViewMode] = useState<"3d" | "hd">("3d");
+  const [viewMode, setViewMode] = useState<"3d" | "photo" | "hd">("3d");
   const isDragging = useRef<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const sharedRotationRef = useRef<number>(Math.PI / 4);
+
+  const defaultPhoto = serviceKey === "windowTinting"
+    ? "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200"
+    : serviceKey === "fullWraps"
+    ? "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200"
+    : serviceKey === "partialWraps"
+    ? "https://images.pexels.com/photos/16284837/pexels-photo-16284837.jpeg?auto=compress&w=1200"
+    : serviceKey === "chromeDelete"
+    ? "https://images.pexels.com/photos/18370669/pexels-photo-18370669.jpeg?auto=compress&w=1200"
+    : "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200";
+
+  const photoBefore = beforeImage || defaultPhoto;
+  const photoAfter = afterImage || defaultPhoto;
 
   useEffect(() => {
     let animationFrameId: number;
@@ -472,8 +487,42 @@ export function BeforeAfterSlider({
         className
       )}
     >
-      {/* 3D Model comparison dual view */}
-      {viewMode === "3d" ? (
+      {/* Side Profile Photo / 3D Model / Studio HD comparison view */}
+      {viewMode === "photo" ? (
+        <div className="absolute inset-0 size-full bg-[#0a0b0e] overflow-hidden">
+          {/* AFTER Image (Bottom Layer) */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <img
+              src={photoAfter}
+              alt="After Veredelung"
+              className="size-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent pointer-events-none" />
+          </div>
+
+          {/* BEFORE Image (Top Clipped Layer) */}
+          <div
+            className="absolute inset-y-0 left-0 overflow-hidden z-10 border-r border-foreground/40 shadow-2xl pointer-events-none"
+            style={{ width: `${sliderPos}%` }}
+          >
+            <div
+              className="absolute inset-y-0 left-0 h-full"
+              style={{ width: containerWidth ? `${containerWidth}px` : "100%" }}
+            >
+              <img
+                src={photoBefore}
+                alt="Before Factory Stock"
+                className="size-full object-cover object-center filter brightness-110 contrast-95"
+              />
+              {/* Untinted Clear Glass Overlay for Window Tinting before state */}
+              {serviceKey === "windowTinting" && (
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-200/20 via-slate-200/20 to-transparent mix-blend-overlay pointer-events-none" />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent pointer-events-none" />
+            </div>
+          </div>
+        </div>
+      ) : viewMode === "3d" ? (
         <div className="absolute inset-0 size-full bg-[#0a0b0e]">
           {/* Studio Lights backdrop */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)] pointer-events-none z-0" />
@@ -539,13 +588,24 @@ export function BeforeAfterSlider({
         </button>
         <button
           type="button"
+          onClick={(e) => { e.stopPropagation(); setViewMode("photo"); }}
+          className={cn(
+            "px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all flex items-center gap-1",
+            viewMode === "photo" ? "bg-foreground text-background font-bold" : "text-foreground/70 hover:text-foreground"
+          )}
+        >
+          <Camera className="size-3" />
+          <span>Side Photo</span>
+        </button>
+        <button
+          type="button"
           onClick={(e) => { e.stopPropagation(); setViewMode("hd"); }}
           className={cn(
             "px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all flex items-center gap-1",
             viewMode === "hd" ? "bg-foreground text-background font-bold" : "text-foreground/70 hover:text-foreground"
           )}
         >
-          <Camera className="size-3" />
+          <Layers className="size-3" />
           <span>Studio HD</span>
         </button>
       </div>
@@ -758,6 +818,8 @@ export default function PortfolioSection() {
           <div className="relative mb-6">
             <BeforeAfterSlider
               serviceKey={activeServiceKey}
+              beforeImage={projects.find((p) => p.categoryKey === activeServiceKey)?.beforeImage}
+              afterImage={projects.find((p) => p.categoryKey === activeServiceKey)?.afterImage}
               beforeLabel={activeServiceInfo.beforeLabel}
               afterLabel={activeServiceInfo.afterLabel}
               className="h-[360px] sm:h-[460px] lg:h-[540px] w-full"
@@ -907,6 +969,8 @@ export default function PortfolioSection() {
                 <div className="lg:col-span-7">
                   <BeforeAfterSlider
                     serviceKey={selectedProject.categoryKey as ServicePairKey}
+                    beforeImage={selectedProject.beforeImage}
+                    afterImage={selectedProject.afterImage}
                     beforeLabel={t.portfolio.modalBefore}
                     afterLabel={t.portfolio.modalAfter}
                     className="h-[300px] sm:h-[400px] w-full"
