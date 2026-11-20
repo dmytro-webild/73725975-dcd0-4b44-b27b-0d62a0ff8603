@@ -41,7 +41,7 @@ const INSTAGRAM_POSTS: InstagramPost[] = [
   },
   {
     id: "ig-4",
-    imageSrc: "https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg",
+    imageSrc: "https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg?_wi=1",
     imageAlt: "Atelier Technician Applying Knifeless Tape Detail",
     vehicle: "Precision Execution",
     finish: "Door Jamb Precision",
