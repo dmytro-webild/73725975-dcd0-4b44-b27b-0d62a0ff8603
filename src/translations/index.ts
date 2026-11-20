@@ -315,6 +315,10 @@ export const translations = {
       sliderTitle: 'Exklusive Transformation — Regler ziehen',
       sliderBefore: 'Original Werkslack',
       sliderAfter: 'Atelier Satin Obsidian Black',
+      transformationSubtitle: 'Vergleichen Sie den Vorher/Nachher-Effekt unserer 5 Hauptleistungen an ein und demselben Fahrzeug (Porsche 911 Carrera S)',
+      dragHint: 'Regler ziehen zum Vergleichen',
+      mode3D: '3D Studio Ansicht',
+      mode2D: 'Studio HD Ansicht',
       categories: {
         all: 'Alle',
         fullWraps: 'Vollfolierung',
@@ -322,6 +326,53 @@ export const translations = {
         chromeDelete: 'Chrome Delete',
         ppf: 'Lackschutz (PPF)',
         windowTinting: 'Scheibentönung',
+      },
+      services: {
+        fullWraps: {
+          name: 'Vollfolierung',
+          title: 'Vollfolierung: Werkslack vs. Satin Obsidian Black',
+          beforeLabel: 'Werkslack: Carrara Weiss Glanz',
+          afterLabel: 'Atelier Satin Obsidian Black',
+          desc: 'Komplette Farbtransformation inkl. unsichtbarer Türeinstiege & Knifeless-Kantenverlegung.',
+          turnaround: '4 Tage',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        },
+        partialWraps: {
+          name: 'Teilfolierung',
+          title: 'Teilfolierung: Monoton vs. Forged Carbon & Satin Dach',
+          beforeLabel: 'Monotoner Werkslack',
+          afterLabel: 'Forged Carbon Dach & Akzente',
+          desc: 'Kontrastreiche Veredelung von Fahrzeugdach, Spiegelkappen und Frontspoiler ohne Karosserielackierung.',
+          turnaround: '2 Tage',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        },
+        chromeDelete: {
+          name: 'Chrome Delete',
+          title: 'Chrome Delete: Werks-Chrom vs. Gloss Piano Shadowline',
+          beforeLabel: 'Werks-Chromleisten & Badges',
+          afterLabel: 'Piano Black Gloss Shadowline',
+          desc: 'Vollständiges Blackout-Package für Fensterrahmen, Kühlergrill-Einfassungen und Schriftzüge.',
+          turnaround: '1 Tag',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        },
+        ppf: {
+          name: 'Lackschutz (PPF)',
+          title: 'Lackschutz (PPF): Ungeschützt vs. 200μm Stealth PPF Shield',
+          beforeLabel: 'Ungeschützter Werkslack',
+          afterLabel: '200μm Stealth Matte PPF',
+          desc: '200-Mikron selbstreinigende und selbstheilende Lackschutzfolie schützt effektiv vor Steinschlag.',
+          turnaround: '5 Tage',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        },
+        windowTinting: {
+          name: 'Scheibentönung',
+          title: 'Scheibentönung: Klare Werksscheiben vs. 15% Keramik-Tönung',
+          beforeLabel: 'Klare Werksscheiben',
+          afterLabel: '15% Nano-Keramik Hitzeschutz',
+          desc: 'ASTRA-konforme Scheibentönung mit 99% UV-Blockierung und 92% IR-Wärmereduktion.',
+          turnaround: '1 Tag',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        }
       },
       inspectBtn: 'Details ansehen',
       modalClose: 'Schliessen',
@@ -881,6 +932,10 @@ export const translations = {
       sliderTitle: 'Featured Transformation — Drag Slider',
       sliderBefore: 'Factory White Paint',
       sliderAfter: 'Atelier Satin Obsidian Black',
+      transformationSubtitle: 'Compare before and after transformations on the identical vehicle (Porsche 911 Carrera S) across all 5 key services',
+      dragHint: 'Drag handle to compare',
+      mode3D: '3D Studio View',
+      mode2D: 'Studio HD View',
       categories: {
         all: 'All',
         fullWraps: 'Full Wraps',
@@ -888,6 +943,53 @@ export const translations = {
         chromeDelete: 'Chrome Delete',
         ppf: 'PPF',
         windowTinting: 'Window Tinting',
+      },
+      services: {
+        fullWraps: {
+          name: 'Full Body Wrap',
+          title: 'Full Wrap: Factory Paint vs. Satin Obsidian Black',
+          beforeLabel: 'Factory Paint: Carrara White Gloss',
+          afterLabel: 'Wrap Finish: Satin Obsidian Black',
+          desc: 'Complete color transformation including seamless door jamb execution and knifeless edge tucking.',
+          turnaround: '4 Days',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        },
+        partialWraps: {
+          name: 'Partial Wrap',
+          title: 'Partial Wrap: Monotone vs. Forged Carbon Roof & Accents',
+          beforeLabel: 'Monotone Factory Paint',
+          afterLabel: 'Forged Carbon Roof & Accents',
+          desc: 'High-contrast accenting of vehicle roof, mirror caps, and front splitter accents.',
+          turnaround: '2 Days',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        },
+        chromeDelete: {
+          name: 'Chrome Delete',
+          title: 'Chrome Delete: OEM Chrome vs. Gloss Piano Shadowline',
+          beforeLabel: 'Factory Trim: Chrome Moldings & Badging',
+          afterLabel: 'Piano Black Gloss Shadowline',
+          desc: 'Total blackout treatment for window surrounds, grille frames, and model designations.',
+          turnaround: '1 Day',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        },
+        ppf: {
+          name: 'Paint Protection (PPF)',
+          title: 'PPF Armor: Unprotected Paint vs. 200μm Stealth PPF',
+          beforeLabel: 'Unprotected Factory Gloss Paint',
+          afterLabel: '200μm Stealth Matte PPF',
+          desc: '200-micron self-healing hydrophobic paint protection film shielding against gravel impact.',
+          turnaround: '5 Days',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        },
+        windowTinting: {
+          name: 'Window Tinting',
+          title: 'Window Tint: Clear Factory Glass vs. 15% Ceramic Shield',
+          beforeLabel: 'Factory Glass: Clear Untinted',
+          afterLabel: '15% Nano-Ceramic Thermal Tint',
+          desc: 'ASTRA-compliant ceramic tinting delivering 99% UV rejection and 92% IR thermal shielding.',
+          turnaround: '1 Day',
+          vehicle: 'Porsche 911 Carrera S (992)'
+        }
       },
       inspectBtn: 'Inspect Specs',
       modalClose: 'Close',
