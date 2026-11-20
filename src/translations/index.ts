@@ -65,16 +65,16 @@ export const translations = {
         {
           id: 'matte',
           name: 'Strukturfreies Stealth Matt',
-          vehicleLabel: 'Mercedes-AMG GT 63 S',
+          vehicleLabel: 'Porsche 911 Carrera S',
           specCode: 'JD-MATTE-STEALTH-03',
           swatchHex: '#121214',
           sheenLevel: '5% Reflexion / Stealth Optics',
           image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200',
-          description: 'Aggressiver, kompromissloser Stealth-Look für den Mercedes-AMG GT 63 S. Licht wird schattenfrei absorbiert für ein pures, monolithisches Erscheinungsbild.',
+          description: 'Aggressiver, kompromissloser Stealth-Look für den Porsche 911 Carrera S. Licht wird schattenfrei absorbiert für ein pures, monolithisches Erscheinungsbild.',
           durability: '5 – 7 Jahre Garantie',
           maintenance: 'Spezielle Matt-Folienpflege',
           features: [
-            '0% störende Lichtreflexionen an der AMG-GT Silhouette',
+            '0% störende Lichtreflexionen an der Porsche 911 Silhouette',
             'Verleiht der Karosserie eine muskulöse Präsenz',
             'Perfekt für Chrome Delete & Gesamtfahrzeug'
           ]
@@ -82,16 +82,16 @@ export const translations = {
         {
           id: 'metallic',
           name: 'Metallic & Perleffekt',
-          vehicleLabel: 'Audi RS6 Avant',
+          vehicleLabel: 'BMW 5er Sedan',
           specCode: 'JD-METALLIC-QUARTZ-04',
           swatchHex: '#b45309',
           sheenLevel: 'High-Sparkle Flake Optik',
           image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200',
-          description: 'Angereichert mit feinsten Pigment- und Metallic-Flakes am Audi RS6 Avant. Erzeugt bei Sonneneinstrahlung faszinierende Farb- und Glanzeffekte.',
+          description: 'Angereichert mit feinsten Pigment- und Metallic-Flakes am BMW 5er Sedan. Erzeugt bei Sonneneinstrahlung faszinierende Farb- und Glanzeffekte.',
           durability: '5 – 7 Jahre Garantie',
           maintenance: 'Einfache Standardpflege',
           features: [
-            'Hochverdichtete Metallic-Pigmentierung am RS6 Power-Kombi',
+            'Hochverdichtete Metallic-Pigmentierung am BMW 5er Sedan',
             'Dreidimensionale Tiefe unter direktem Sonnenlicht',
             'Verfügbar in Satin-Metallic & Glanz-Metallic'
           ]
@@ -322,7 +322,7 @@ export const translations = {
       badge: 'Atelier Portfolio',
       titleLine1: 'Fahrzeug-Transformationen',
       titleLine2: 'Galerie Kanton Zürich',
-      description: 'Entdecken Sie unser Portfolio aus exklusiven Autofolierungen für Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne und BMW M3.',
+      description: 'Entdecken Sie unser Portfolio aus exklusiven Autofolierungen für Porsche 911, BMW M4, Mercedes-AMG GT, BMW 5er, Porsche Cayenne und BMW M3.',
       sliderTitle: 'Exklusive Transformation — Regler ziehen',
       sliderBefore: 'Original Werkslack',
       sliderAfter: 'Atelier Veredelung',
@@ -335,7 +335,7 @@ export const translations = {
         fullWraps: 'Porsche 911',
         partialWraps: 'BMW M4',
         chromeDelete: 'Mercedes-AMG GT',
-        ppf: 'Audi RS6',
+        ppf: 'BMW 5er',
         cayenne: 'Porsche Cayenne',
         windowTinting: 'BMW M3',
       },
@@ -368,13 +368,13 @@ export const translations = {
           vehicle: 'Mercedes-AMG GT 63 S'
         },
         ppf: {
-          name: 'PPF Shield: Audi RS6',
-          title: 'Audi RS6 Avant: Ungeschützt vs. 200μm Stealth PPF Shield',
+          name: 'PPF Shield: BMW 5er',
+          title: 'BMW 5er Sedan: Ungeschützt vs. 200μm Stealth PPF Shield',
           beforeLabel: 'Ungeschützter Werkslack',
           afterLabel: '200μm Stealth Matte PPF',
-          desc: '200-Mikron selbstreinigende und selbstheilende Lackschutzfolie am Audi RS6 Avant schützt effektiv vor Steinschlag.',
+          desc: '200-Mikron selbstreinigende und selbstheilende Lackschutzfolie am BMW 5er Sedan schützt effektiv vor Steinschlag.',
           turnaround: '5 Tage',
-          vehicle: 'Audi RS6 Avant'
+          vehicle: 'BMW 5er Sedan'
         },
         cayenne: {
           name: 'Full Spec: Porsche Cayenne',
@@ -713,16 +713,16 @@ export const translations = {
         {
           id: 'matte',
           name: 'Stealth Matte',
-          vehicleLabel: 'Mercedes-AMG GT 63 S',
+          vehicleLabel: 'Porsche 911 Carrera S',
           specCode: 'JD-MATTE-STEALTH-03',
           swatchHex: '#121214',
           sheenLevel: '5% Reflection / Stealth Optics',
           image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200',
-          description: 'Uncompromising stealth aesthetic for the Mercedes-AMG GT 63 S. Absorbs light without reflection for a pure, monolithic silhouette.',
+          description: 'Uncompromising stealth aesthetic for the Porsche 911 Carrera S. Absorbs light without reflection for a pure, monolithic silhouette.',
           durability: '5 - 7 Year Warranty',
           maintenance: 'Dedicated Matte Film Cleaner',
           features: [
-            '0% harsh glare or mirror reflections on AMG GT',
+            '0% harsh glare or mirror reflections on Porsche 911',
             'Accentuates muscular vehicle proportions',
             'Ideal for full wraps and chrome delete packages'
           ]
@@ -730,16 +730,16 @@ export const translations = {
         {
           id: 'metallic',
           name: 'Metallic & Pearl Effect',
-          vehicleLabel: 'Audi RS6 Avant',
+          vehicleLabel: 'BMW 5 Series Sedan',
           specCode: 'JD-METALLIC-QUARTZ-04',
           swatchHex: '#b45309',
           sheenLevel: 'High-Sparkle Flake Optics',
           image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200',
-          description: 'Infused with fine metallic pigments on the Audi RS6 Avant. Creates captivating light play and color depth under sunlight.',
+          description: 'Infused with fine metallic pigments on the BMW 5 Series Sedan. Creates captivating light play and color depth under sunlight.',
           durability: '5 - 7 Year Warranty',
           maintenance: 'Standard Vehicle Wash',
           features: [
-            'High-density metallic flake pigmentation on Audi RS6',
+            'High-density metallic flake pigmentation on BMW 5 Series',
             'Three-dimensional depth under direct light',
             'Available in Satin Metallic and Gloss Metallic'
           ]
@@ -970,7 +970,7 @@ export const translations = {
       badge: 'Atelier Portfolio',
       titleLine1: 'Vehicle Transformations',
       titleLine2: 'Canton of Zurich Gallery',
-      description: 'Explore our portfolio of luxury automotive wraps executed for Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne, and BMW M3 vehicles.',
+      description: 'Explore our portfolio of luxury automotive wraps executed for Porsche 911, BMW M4, Mercedes-AMG GT, BMW 5 Series, Porsche Cayenne, and BMW M3 vehicles.',
       sliderTitle: 'Featured Transformation — Drag Slider',
       sliderBefore: 'Factory Stock Paint',
       sliderAfter: 'Atelier Wrapped Finish',
@@ -983,7 +983,7 @@ export const translations = {
         fullWraps: 'Porsche 911',
         partialWraps: 'BMW M4',
         chromeDelete: 'Mercedes-AMG GT',
-        ppf: 'Audi RS6',
+        ppf: 'BMW 5 Series',
         cayenne: 'Porsche Cayenne',
         windowTinting: 'BMW M3',
       },
@@ -1016,13 +1016,13 @@ export const translations = {
           vehicle: 'Mercedes-AMG GT 63 S'
         },
         ppf: {
-          name: 'PPF Armor: Audi RS6',
-          title: 'Audi RS6 Avant: Unprotected Paint vs. 200μm Stealth PPF',
+          name: 'PPF Armor: BMW 5 Series',
+          title: 'BMW 5 Series Sedan: Unprotected Paint vs. 200μm Stealth PPF',
           beforeLabel: 'Unprotected Factory Gloss Paint',
           afterLabel: '200μm Stealth Matte PPF',
-          desc: '200-micron self-healing hydrophobic paint protection film shielding against gravel impact.',
+          desc: '200-micron self-healing hydrophobic paint protection film shielding against gravel impact on BMW 5 Series Sedan.',
           turnaround: '5 Days',
-          vehicle: 'Audi RS6 Avant'
+          vehicle: 'BMW 5 Series Sedan'
         },
         cayenne: {
           name: 'Full Spec: Porsche Cayenne',

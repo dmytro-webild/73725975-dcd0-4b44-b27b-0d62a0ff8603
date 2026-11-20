@@ -26,9 +26,9 @@ const CLOSEUP_PHOTOS = [
   {
     id: "detail-3",
     title: "Satin Sheen & Reflection Control",
-    category: "Audi RS6 Avant",
+    category: "BMW 5 Series Sedan",
     image: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
-    caption: "200-micron self-healing PPF topcoat diffusing ambient lighting across Audi RS6 Avant body lines."
+    caption: "200-micron self-healing PPF topcoat diffusing ambient lighting across BMW 5 Series body lines."
   },
   {
     id: "detail-4",
