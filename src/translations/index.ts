@@ -865,7 +865,7 @@ export const translations = {
         {
           id: 'full-wraps',
           title: 'Full Car Wraps',
-          subtitle: 'Reference Model: Porsche 911 Carrera S',
+          subtitle: '',
           category: 'Full Body Customization',
           vehicleModel: 'Porsche 911 Carrera S',
           description: "Transform your Porsche 911 Carrera S's aesthetic with seamless full body wrapping. Every panel, handle, and edge is meticulously prepared and wrapped.",
@@ -882,7 +882,7 @@ export const translations = {
         {
           id: 'partial-wraps',
           title: 'Partial Wraps & Accents',
-          subtitle: 'Reference Model: BMW M4 Competition',
+          subtitle: '',
           category: 'Panel Styling',
           vehicleModel: 'BMW M4 Competition',
           description: 'Elevate key features of your BMW M4 Competition with high-contrast panel wraps, forged carbon bonnets, and custom M racing stripes.',
@@ -899,7 +899,7 @@ export const translations = {
         {
           id: 'chrome-delete',
           title: 'Chrome Delete',
-          subtitle: 'Reference Model: Mercedes-AMG GT 63 S',
+          subtitle: '',
           category: 'Styling Detail',
           vehicleModel: 'Mercedes-AMG GT 63 S',
           description: 'Replace factory brightwork on the Mercedes-AMG GT 63 S with a refined stealth blackout look across window surrounds, Panamericana grille, and badging.',
@@ -916,7 +916,7 @@ export const translations = {
         {
           id: 'ppf',
           title: 'Paint Protection Film (PPF)',
-          subtitle: 'Reference Model: Audi RS6 Avant',
+          subtitle: '',
           category: 'Paint Protection',
           vehicleModel: 'Audi RS6 Avant',
           description: "Shield your Audi RS6 Avant's factory paint from stone chips, gravel, and road debris with optically clear or stealth matte 200-micron polyurethane film.",
@@ -933,7 +933,7 @@ export const translations = {
         {
           id: 'window-tinting',
           title: 'Window Tinting',
-          subtitle: 'Reference Model: Porsche Cayenne Turbo GT',
+          subtitle: '',
           category: 'Glass Protection',
           vehicleModel: 'Porsche Cayenne Turbo GT',
           description: 'Enhance cabin privacy and eliminate interior solar heat buildup on the Porsche Cayenne Turbo GT with high-performance nano-ceramic glass tinting.',
