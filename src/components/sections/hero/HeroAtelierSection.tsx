@@ -158,7 +158,7 @@ export default function HeroAtelierSection({
             {/* Atelier Specification Badge Overlay */}
             <div className="absolute bottom-3 left-3 z-20 px-3 py-1 rounded-full bg-background/80 border border-border/50 text-[10px] font-mono tracking-wider text-foreground/80 uppercase backdrop-blur-md flex items-center gap-1.5 pointer-events-none">
               <span className="size-1.5 rounded-full bg-primary animate-pulse" />
-              <span>PORSCHE 911 GT3 • ATELIER SPEC</span>
+              <span>ATELIER SPEC</span>
             </div>
           </div>
         </div>
