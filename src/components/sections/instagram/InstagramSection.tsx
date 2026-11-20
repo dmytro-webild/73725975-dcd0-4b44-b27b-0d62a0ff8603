@@ -1,4 +1,5 @@
 import { Instagram, Heart, MessageCircle, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/context/useLanguage";
 
 export interface InstagramPost {
   id: string;
@@ -68,6 +69,8 @@ const INSTAGRAM_POSTS: InstagramPost[] = [
 ];
 
 export default function InstagramSection() {
+  const { t } = useLanguage();
+
   return (
     <section id="instagram" className="relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40">
       <div className="mx-auto w-[var(--container)]">
@@ -76,11 +79,11 @@ export default function InstagramSection() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-border/60 bg-muted/40 text-[length:var(--text-label)] font-mono uppercase tracking-[0.15em] text-foreground/70">
               <Instagram className="size-3.5 text-primary" />
-              <span>@jdcarwrappingatelier</span>
+              <span>{t.instagram.badge}</span>
             </div>
             <h2 className="text-[length:var(--text-h1)] font-light uppercase tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] leading-[0.9]">
-              Instagram Studio Feed <br />
-              <span className="text-foreground/50">#JDCARWRAPPINGATELIER</span>
+              {t.instagram.titleLine1} <br />
+              <span className="text-foreground/50">{t.instagram.titleLine2}</span>
             </h2>
           </div>
 
@@ -90,7 +93,7 @@ export default function InstagramSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 border border-border/80 text-foreground font-mono text-xs uppercase tracking-widest hover:bg-muted transition-all shrink-0"
           >
-            <span>Follow On Instagram</span>
+            <span>{t.instagram.followBtn}</span>
             <ExternalLink className="size-4" />
           </a>
         </div>

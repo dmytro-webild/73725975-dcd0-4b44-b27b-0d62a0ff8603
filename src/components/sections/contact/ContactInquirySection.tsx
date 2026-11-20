@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Upload, X, CheckCircle2, Send, MessageCircle, MapPin, Mail, Phone, Calendar, Car, Image as ImageIcon } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useLanguage } from "@/context/useLanguage";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -17,6 +18,8 @@ export interface ContactInquirySectionProps {
 }
 
 export default function ContactInquirySection({ className, appliedSpec }: ContactInquirySectionProps) {
+  const { t } = useLanguage();
+
   const [vehicleMake, setVehicleMake] = useState("");
   const [vehicleModel, setVehicleModel] = useState("");
   const [vehicleYear, setVehicleYear] = useState("2024");
@@ -103,6 +106,15 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
     return `https://wa.me/41790000000?text=${text}`;
   };
 
+  const availableServicesOptions = [
+    "Full Car Wrap",
+    "Partial Wrap",
+    "Chrome Delete",
+    "PPF Protection",
+    "Window Tinting",
+    "Custom Detail"
+  ];
+
   return (
     <section id="contact" className={cn("relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40", className)}>
       <div className="mx-auto w-[var(--container)]">
@@ -111,15 +123,15 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-border/60 bg-muted/40 text-[length:var(--text-label)] font-mono uppercase tracking-[0.15em] text-foreground/70">
               <Mail className="size-3.5 text-primary" />
-              <span>Atelier Consultations</span>
+              <span>{t.contact.badge}</span>
             </div>
             <h2 className="text-[length:var(--text-h1)] font-light uppercase tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] leading-[0.9]">
-              Request Atelier Quote <br />
-              <span className="text-foreground/50">Private Consultation Zurich</span>
+              {t.contact.titleLine1} <br />
+              <span className="text-foreground/50">{t.contact.titleLine2}</span>
             </h2>
           </div>
           <p className="text-[length:var(--text-body)] text-foreground/60 max-w-md">
-            Complete the specification form below or connect directly via WhatsApp to receive a bespoke quote for your vehicle.
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -133,10 +145,10 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                   <CheckCircle2 className="size-8" />
                 </div>
                 <h3 className="text-[length:var(--text-h2)] font-light uppercase [font-family:var(--font-heading)]">
-                  Inquiry Received
+                  {t.contact.submittedTitle}
                 </h3>
                 <p className="text-[length:var(--text-body-lg)] text-foreground/80 max-w-md mx-auto">
-                  Thank you, <span className="text-foreground font-semibold">{clientName || "Valued Client"}</span>. Our senior wrapping technician will review your vehicle specifications and contact you within 24 hours.
+                  {t.contact.submittedMessage.replace("{name}", clientName || "Valued Client")}
                 </p>
 
                 <div className="p-4 bg-muted/40 border border-border/40 font-mono text-xs max-w-md mx-auto space-y-2 text-left text-foreground/70">
@@ -146,7 +158,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                   <div><span className="text-foreground/40">Location:</span> Canton of Zurich Studio</div>
                 </div>
 
-                <div className="pt-4 flex justify-center gap-4">
+                <div className="pt-4 flex justify-center gap-4 flex-wrap">
                   <button
                     onClick={() => {
                       setIsSubmitted(false);
@@ -157,7 +169,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                     }}
                     className="px-6 py-3 border border-border/80 font-mono text-xs uppercase tracking-widest hover:bg-muted transition-all cursor-pointer"
                   >
-                    Submit Another Inquiry
+                    {t.contact.submitAnother}
                   </button>
                   <a
                     href={buildWhatsAppUrl()}
@@ -166,7 +178,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                     className="px-6 py-3 bg-emerald-600 text-white font-mono text-xs uppercase tracking-widest hover:bg-emerald-500 transition-all inline-flex items-center gap-2"
                   >
                     <MessageCircle className="size-4" />
-                    <span>WhatsApp Direct</span>
+                    <span>{t.contact.whatsappDirect}</span>
                   </a>
                 </div>
               </div>
@@ -176,11 +188,11 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 <div>
                   <h4 className="text-xs font-mono uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
                     <Car className="size-4" />
-                    <span>1. Vehicle Information</span>
+                    <span>{t.contact.sections.vehicle}</span>
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">Year</label>
+                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.year}</label>
                       <input
                         type="text"
                         value={vehicleYear}
@@ -191,7 +203,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">Make</label>
+                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.make}</label>
                       <input
                         type="text"
                         value={vehicleMake}
@@ -202,7 +214,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                       />
                     </div>
                     <div>
-                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">Model / Trim</label>
+                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.model}</label>
                       <input
                         type="text"
                         value={vehicleModel}
@@ -218,10 +230,10 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 {/* 2. Service Selection Checkboxes */}
                 <div>
                   <label className="text-xs font-mono uppercase tracking-widest text-primary mb-3 block">
-                    2. Select Required Services
+                    {t.contact.sections.services}
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {["Full Car Wrap", "Partial Wrap", "Chrome Delete", "PPF Protection", "Window Tinting", "Custom Detail"].map((srv) => {
+                    {availableServicesOptions.map((srv) => {
                       const isChecked = selectedServices.includes(srv);
                       return (
                         <button
@@ -246,10 +258,10 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 {/* 3. Desired Color / Customizer Spec */}
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase">Desired Color, Finish & Spec</label>
+                    <label className="text-[11px] font-mono text-foreground/60 uppercase">{t.contact.sections.spec}</label>
                     {appliedSpec && (
                       <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest">
-                        ✓ 3D Spec Applied
+                        {t.contact.sections.specApplied}
                       </span>
                     )}
                   </div>
@@ -266,7 +278,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 <div>
                   <label className="text-xs font-mono uppercase tracking-widest text-primary mb-2 block flex items-center gap-2">
                     <ImageIcon className="size-3.5" />
-                    <span>4. Attach Vehicle / Design Photo (Optional)</span>
+                    <span>{t.contact.sections.upload}</span>
                   </label>
 
                   {uploadedImage ? (
@@ -295,10 +307,10 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                     >
                       <Upload className="size-6 text-foreground/40 group-hover:text-foreground mx-auto mb-2 transition-colors" />
                       <p className="text-xs font-mono text-foreground/80 uppercase tracking-wider">
-                        Click or Drag & Drop Vehicle Photo
+                        {t.contact.sections.uploadInstruction}
                       </p>
                       <p className="text-[10px] font-mono text-foreground/50 mt-1">
-                        PNG, JPG or WEBP up to 10MB
+                        {t.contact.sections.uploadFormats}
                       </p>
                       <input
                         ref={fileInputRef}
@@ -314,7 +326,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 {/* 5. Preferred Date & Client Info */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">Preferred Timeframe / Date</label>
+                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.timeframe}</label>
                     <input
                       type="text"
                       value={appointmentDate}
@@ -325,7 +337,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">Full Name</label>
+                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.name}</label>
                     <input
                       type="text"
                       value={clientName}
@@ -337,7 +349,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">Email Address</label>
+                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.email}</label>
                     <input
                       type="email"
                       value={clientEmail}
@@ -349,7 +361,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">Phone Number (CH / Int)</label>
+                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.phone}</label>
                     <input
                       type="tel"
                       value={clientPhone}
@@ -362,7 +374,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
 
                 {/* Notes */}
                 <div>
-                  <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">Additional Project Details</label>
+                  <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.notes}</label>
                   <textarea
                     rows={3}
                     value={additionalNotes}
@@ -380,11 +392,11 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                     className="w-full sm:w-auto px-8 py-4 bg-foreground text-background font-mono text-xs uppercase tracking-widest font-semibold hover:bg-foreground/90 transition-all inline-flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <span>Processing Specification...</span>
+                      <span>{t.contact.sections.submitting}</span>
                     ) : (
                       <>
                         <Send className="size-4" />
-                        <span>Submit Atelier Quote Request</span>
+                        <span>{t.contact.sections.submitBtn}</span>
                       </>
                     )}
                   </button>
@@ -396,7 +408,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                     className="w-full sm:w-auto px-6 py-4 border border-emerald-600/60 text-emerald-400 font-mono text-xs uppercase tracking-widest hover:bg-emerald-950/40 transition-all inline-flex items-center justify-center gap-2"
                   >
                     <MessageCircle className="size-4" />
-                    <span>Quick WhatsApp Quote</span>
+                    <span>{t.contact.sections.quickWhatsapp}</span>
                   </a>
                 </div>
               </form>
@@ -407,23 +419,23 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
           <div className="lg:col-span-4 space-y-6">
             <div className="p-6 sm:p-8 border border-border/60 bg-card/60 backdrop-blur-sm space-y-6">
               <h3 className="text-[length:var(--text-h3)] font-light uppercase tracking-tight [font-family:var(--font-heading)]">
-                Atelier Location
+                {t.contact.info.title}
               </h3>
 
               <div className="space-y-4 font-mono text-xs text-foreground/80">
                 <div className="flex items-start gap-3">
                   <MapPin className="size-4 text-foreground shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-foreground/50 block">Studio Location:</span>
-                    <span>Canton of Zurich, Switzerland</span>
-                    <p className="text-[10px] text-foreground/50 mt-0.5">Exact address provided upon private appointment booking confirmation.</p>
+                    <span className="text-foreground/50 block">{t.contact.info.locationLabel}</span>
+                    <span>{t.contact.info.locationVal}</span>
+                    <p className="text-[10px] text-foreground/50 mt-0.5">{t.contact.info.locationNote}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3 pt-3 border-t border-border/40">
                   <Mail className="size-4 text-foreground shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-foreground/50 block">Email Consultations:</span>
+                    <span className="text-foreground/50 block">{t.contact.info.emailLabel}</span>
                     <a href="mailto:info@jdcarwrapping.ch" className="hover:underline">info@jdcarwrapping.ch</a>
                   </div>
                 </div>
@@ -431,7 +443,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 <div className="flex items-start gap-3 pt-3 border-t border-border/40">
                   <Phone className="size-4 text-foreground shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-foreground/50 block">WhatsApp Studio Line:</span>
+                    <span className="text-foreground/50 block">{t.contact.info.phoneLabel}</span>
                     <a href={buildWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="hover:underline text-emerald-400">
                       +41 79 000 00 00
                     </a>
@@ -441,9 +453,9 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 <div className="flex items-start gap-3 pt-3 border-t border-border/40">
                   <Calendar className="size-4 text-foreground shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-foreground/50 block">Operating Hours:</span>
-                    <span>Monday – Friday: 08:00 – 18:00</span>
-                    <p className="text-[10px] text-foreground/50 mt-0.5">Saturday: By Prior Appointment Only</p>
+                    <span className="text-foreground/50 block">{t.contact.info.hoursLabel}</span>
+                    <span>{t.contact.info.hoursVal}</span>
+                    <p className="text-[10px] text-foreground/50 mt-0.5">{t.contact.info.hoursNote}</p>
                   </div>
                 </div>
               </div>
@@ -453,10 +465,10 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
             <div className="p-6 border border-emerald-600/40 bg-emerald-950/20 backdrop-blur-sm text-foreground space-y-3">
               <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs uppercase tracking-widest font-semibold">
                 <MessageCircle className="size-4" />
-                <span>Instant WhatsApp Spec</span>
+                <span>{t.contact.info.instantWhatsappTitle}</span>
               </div>
               <p className="text-xs text-foreground/80 leading-relaxed font-mono">
-                Have photos of your car ready on your phone? Click below to send your vehicle specs and photos directly to our Zurich head installer.
+                {t.contact.info.instantWhatsappDesc}
               </p>
               <a
                 href={buildWhatsAppUrl()}
@@ -464,7 +476,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 rel="noopener noreferrer"
                 className="w-full py-3 bg-emerald-600 text-white font-mono text-xs uppercase tracking-widest text-center hover:bg-emerald-500 transition-all font-semibold block"
               >
-                Chat on WhatsApp Now
+                {t.contact.info.instantWhatsappBtn}
               </a>
             </div>
           </div>

@@ -7,7 +7,7 @@ import { modelChapter, type ModelChapter } from "@/components/kit/modelPose";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-type FooterLink = { text: string; href: string };
+type FooterLink = { text: string; href: string; onClick?: (e: React.MouseEvent) => void };
 
 type FooterColumn = { title: string; links: FooterLink[] };
 
@@ -61,7 +61,11 @@ const FooterWordmark = ({
               <ul className="flex flex-col gap-[0.5rem]">
                 {column.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
-                    <a href={link.href} className="text-[length:var(--text-small)] leading-[1.2] text-foreground transition-opacity duration-300 [overflow-wrap:anywhere] hover:opacity-50">
+                    <a
+                      href={link.href}
+                      onClick={link.onClick}
+                      className="text-[length:var(--text-small)] leading-[1.2] text-foreground transition-opacity duration-300 [overflow-wrap:anywhere] hover:opacity-50"
+                    >
                       {link.text}
                     </a>
                   </li>
@@ -105,7 +109,11 @@ const FooterWordmark = ({
         >
           {bottomLinks.map((link, index) => (
             <li key={index}>
-              <a href={link.href} className="whitespace-nowrap transition-colors duration-300 hover:text-foreground">
+              <a
+                href={link.href}
+                onClick={link.onClick}
+                className="whitespace-nowrap transition-colors duration-300 hover:text-foreground cursor-pointer"
+              >
                 {link.text}
               </a>
             </li>

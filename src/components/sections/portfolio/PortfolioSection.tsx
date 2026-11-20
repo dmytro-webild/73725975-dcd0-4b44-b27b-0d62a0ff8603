@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Eye, X, ArrowRight, ShieldCheck, MapPin, Sparkles } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useLanguage } from "@/context/useLanguage";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -10,7 +11,8 @@ export interface ProjectItem {
   id: string;
   title: string;
   vehicle: string;
-  category: "Full Wraps" | "Partial Wraps" | "Chrome Delete" | "PPF" | "Window Tinting";
+  category: string;
+  categoryKey: "all" | "fullWraps" | "partialWraps" | "chromeDelete" | "ppf" | "windowTinting";
   finish: string;
   turnaround: string;
   location: string;
@@ -20,12 +22,12 @@ export interface ProjectItem {
   specs: string[];
 }
 
-const PROJECTS: ProjectItem[] = [
+const PROJECTS: Omit<ProjectItem, "category">[] = [
   {
     id: "porsche-gt3-satin",
     title: "Stealth Satin Black Transformation",
     vehicle: "Porsche 911 GT3 RS (992)",
-    category: "Full Wraps",
+    categoryKey: "fullWraps",
     finish: "Stealth Satin Obsidian Black Vinyl",
     turnaround: "4 Days",
     location: "Canton of Zurich Atelier",
@@ -38,7 +40,7 @@ const PROJECTS: ProjectItem[] = [
     id: "bmw-m4-nardo",
     title: "Nardo Grey & Forged Carbon Spec",
     vehicle: "BMW M4 Competition (G82)",
-    category: "Full Wraps",
+    categoryKey: "fullWraps",
     finish: "Nardo Grey Gloss + Forged Carbon",
     turnaround: "4 Days",
     location: "Zurich Studio",
@@ -51,7 +53,7 @@ const PROJECTS: ProjectItem[] = [
     id: "amg-gt-ppf",
     title: "Full Body Stealth PPF Shield",
     vehicle: "Mercedes-AMG GT 63 S",
-    category: "PPF",
+    categoryKey: "ppf",
     finish: "Matte Stealth Paint Protection Film",
     turnaround: "5 Days",
     location: "Zurich Atelier",
@@ -64,7 +66,7 @@ const PROJECTS: ProjectItem[] = [
     id: "audi-rs6-blackout",
     title: "Complete Satin Chrome Delete",
     vehicle: "Audi RS6 Avant (C8)",
-    category: "Chrome Delete",
+    categoryKey: "chromeDelete",
     finish: "Satin Black Trim Blackout",
     turnaround: "1 Day",
     location: "Zurich Studio",
@@ -77,7 +79,7 @@ const PROJECTS: ProjectItem[] = [
     id: "ferrari-f8-tint",
     title: "Ceramic Heat Rejection Tinting",
     vehicle: "Ferrari F8 Tributo",
-    category: "Window Tinting",
+    categoryKey: "windowTinting",
     finish: "Nano-Ceramic 15% Privacy Tint",
     turnaround: "5 Hours",
     location: "Zurich Atelier",
@@ -90,7 +92,7 @@ const PROJECTS: ProjectItem[] = [
     id: "tesla-plaid-roof",
     title: "Gloss Black Roof & Accent Spec",
     vehicle: "Tesla Model S Plaid",
-    category: "Partial Wraps",
+    categoryKey: "partialWraps",
     finish: "Gloss Piano Black Accent Wrap",
     turnaround: "2 Days",
     location: "Zurich Studio",
@@ -100,8 +102,6 @@ const PROJECTS: ProjectItem[] = [
     specs: ["Panoramic Roof Wrap", "Mirror Cap Accents", "Trunk Lip Spoiler", "Camera Trim Blackout"]
   }
 ];
-
-const CATEGORIES = ["All", "Full Wraps", "Partial Wraps", "Chrome Delete", "PPF", "Window Tinting"] as const;
 
 export interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -212,11 +212,26 @@ export function BeforeAfterSlider({
 }
 
 export default function PortfolioSection() {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
+  const { t } = useLanguage();
+  const [activeCategoryKey, setActiveCategoryKey] = useState<string>("all");
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
-  const filteredProjects = PROJECTS.filter((p) =>
-    activeCategory === "All" ? true : p.category === activeCategory
+  const categories = [
+    { key: "all", label: t.portfolio.categories.all },
+    { key: "fullWraps", label: t.portfolio.categories.fullWraps },
+    { key: "partialWraps", label: t.portfolio.categories.partialWraps },
+    { key: "chromeDelete", label: t.portfolio.categories.chromeDelete },
+    { key: "ppf", label: t.portfolio.categories.ppf },
+    { key: "windowTinting", label: t.portfolio.categories.windowTinting },
+  ];
+
+  const projects: ProjectItem[] = PROJECTS.map((p) => ({
+    ...p,
+    category: t.portfolio.categories[p.categoryKey],
+  }));
+
+  const filteredProjects = projects.filter((p) =>
+    activeCategoryKey === "all" ? true : p.categoryKey === activeCategoryKey
   );
 
   return (
@@ -227,15 +242,15 @@ export default function PortfolioSection() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-border/60 bg-muted/40 text-[length:var(--text-label)] font-mono uppercase tracking-[0.15em] text-foreground/70">
               <Sparkles className="size-3.5 text-primary" />
-              <span>Atelier Portfolio</span>
+              <span>{t.portfolio.badge}</span>
             </div>
             <h2 className="text-[length:var(--text-h1)] font-light uppercase tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] leading-[0.9]">
-              Vehicle Transformations <br />
-              <span className="text-foreground/50">Canton of Zurich Gallery</span>
+              {t.portfolio.titleLine1} <br />
+              <span className="text-foreground/50">{t.portfolio.titleLine2}</span>
             </h2>
           </div>
           <p className="text-[length:var(--text-body)] text-foreground/60 max-w-md">
-            Explore our portfolio of luxury automotive wraps, PPF armor, and custom blackout styling executed for discerning Swiss vehicle owners.
+            {t.portfolio.description}
           </p>
         </div>
 
@@ -243,7 +258,7 @@ export default function PortfolioSection() {
         <div className="mb-16">
           <div className="mb-4 flex items-center justify-between">
             <h3 className="text-[length:var(--text-h3)] font-light uppercase tracking-wider [font-family:var(--font-heading)]">
-              Featured Transformation — Drag Slider
+              {t.portfolio.sliderTitle}
             </h3>
             <span className="text-xs font-mono uppercase tracking-widest text-foreground/50">
               Porsche 911 GT3 RS
@@ -252,26 +267,26 @@ export default function PortfolioSection() {
           <BeforeAfterSlider
             beforeImage="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200"
             afterImage="https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200"
-            beforeLabel="Factory White Paint"
-            afterLabel="Atelier Satin Obsidian Black"
+            beforeLabel={t.portfolio.sliderBefore}
+            afterLabel={t.portfolio.sliderAfter}
             className="h-[380px] sm:h-[480px] lg:h-[560px] w-full"
           />
         </div>
 
         {/* Category Filters */}
         <div className="flex flex-wrap gap-2 mb-10 border-b border-border/40 pb-4">
-          {CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
+              key={cat.key}
+              onClick={() => setActiveCategoryKey(cat.key)}
               className={cn(
                 "px-4 py-2 text-[length:var(--text-small)] font-mono uppercase tracking-wider transition-all border cursor-pointer",
-                activeCategory === cat
+                activeCategoryKey === cat.key
                   ? "bg-foreground text-background border-foreground font-semibold"
                   : "bg-muted/30 text-foreground/70 border-border/40 hover:bg-muted hover:text-foreground"
               )}
             >
-              {cat}
+              {cat.label}
             </button>
           ))}
         </div>
@@ -304,7 +319,7 @@ export default function PortfolioSection() {
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-background/40 backdrop-blur-xs">
                   <div className="px-4 py-2 bg-foreground text-background font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2">
                     <Eye className="size-4" />
-                    <span>Inspect Specs</span>
+                    <span>{t.portfolio.inspectBtn}</span>
                   </div>
                 </div>
               </div>
@@ -327,7 +342,7 @@ export default function PortfolioSection() {
                 </div>
 
                 <div className="pt-4 border-t border-border/40 flex items-center justify-between text-xs font-mono text-foreground/60">
-                  <span>Turnaround: {project.turnaround}</span>
+                  <span>{t.portfolio.turnaroundLabel}: {project.turnaround}</span>
                   <ArrowRight className="size-4 text-foreground/40 group-hover:text-foreground group-hover:translate-x-1 transition-all" />
                 </div>
               </div>
@@ -360,12 +375,12 @@ export default function PortfolioSection() {
                   <BeforeAfterSlider
                     beforeImage={selectedProject.beforeImage}
                     afterImage={selectedProject.afterImage}
-                    beforeLabel="Before Wrap"
-                    afterLabel="After Transformation"
+                    beforeLabel={t.portfolio.modalBefore}
+                    afterLabel={t.portfolio.modalAfter}
                     className="h-[300px] sm:h-[400px] w-full"
                   />
                   <p className="text-[11px] font-mono text-foreground/50 text-center mt-2">
-                    Drag middle handle to compare factory vs wrapped atelier finish
+                    {t.portfolio.modalInstruction}
                   </p>
                 </div>
 
@@ -390,11 +405,11 @@ export default function PortfolioSection() {
 
                       <div className="grid grid-cols-2 gap-3 text-xs font-mono">
                         <div className="p-3 bg-muted/30 border border-border/40">
-                          <span className="text-foreground/50 block">Turnaround:</span>
+                          <span className="text-foreground/50 block">{t.portfolio.turnaroundLabel}:</span>
                           <span className="text-foreground">{selectedProject.turnaround}</span>
                         </div>
                         <div className="p-3 bg-muted/30 border border-border/40">
-                          <span className="text-foreground/50 block">Studio:</span>
+                          <span className="text-foreground/50 block">{t.portfolio.studioLabel}:</span>
                           <span className="text-foreground">{selectedProject.location}</span>
                         </div>
                       </div>
@@ -402,7 +417,7 @@ export default function PortfolioSection() {
 
                     <div className="mb-6">
                       <h4 className="text-xs font-mono uppercase tracking-widest text-foreground/50 mb-3">
-                        Specification Highlights
+                        {t.portfolio.specsHeader}
                       </h4>
                       <div className="space-y-2">
                         {selectedProject.specs.map((spec, i) => (
@@ -420,7 +435,7 @@ export default function PortfolioSection() {
                     onClick={() => setSelectedProject(null)}
                     className="w-full py-3.5 bg-foreground text-background font-mono text-xs uppercase tracking-widest text-center hover:bg-foreground/90 transition-all font-semibold"
                   >
-                    Request Quote For This Spec
+                    {t.portfolio.requestQuoteForSpec}
                   </a>
                 </div>
               </div>

@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, MessageCircle, ShieldCheck, MapPin } from "lucide
 import { modelChapter, type ModelChapter } from "@/components/kit/modelPose";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useLanguage } from "@/context/useLanguage";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -20,6 +21,7 @@ export default function HeroAtelierSection({
   className,
 }: HeroAtelierSectionProps) {
   const reduce = useReducedMotion();
+  const { t } = useLanguage();
 
   return (
     <section
@@ -43,12 +45,12 @@ export default function HeroAtelierSection({
         >
           <span className="flex items-center gap-1.5 text-emerald-400">
             <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-            Canton of Zurich, Switzerland
+            {t.hero.locationBadge}
           </span>
           <span className="text-foreground/30">•</span>
           <span className="flex items-center gap-1.5">
             <MapPin className="size-3.5 text-primary" />
-            Appointment Only Studio
+            {t.hero.appointmentBadge}
           </span>
         </motion.div>
       </div>
@@ -63,7 +65,7 @@ export default function HeroAtelierSection({
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-xs font-mono uppercase tracking-[0.3em] text-foreground/50 mb-3"
           >
-            JD CAR WRAPPING ATELIER ZURICH
+            {t.hero.subheading}
           </motion.p>
 
           <motion.h1
@@ -72,8 +74,8 @@ export default function HeroAtelierSection({
             transition={{ duration: 1, ease: EXPO, delay: 0.2 }}
             className="text-[length:max(3.5rem,7.5vw)] font-light uppercase tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] leading-[0.85] mb-6"
           >
-            REDEFINE <br />
-            <span className="text-foreground/50">YOUR DRIVE.</span>
+            {t.hero.h1Line1} <br />
+            <span className="text-foreground/50">{t.hero.h1Line2}</span>
           </motion.h1>
 
           <motion.p
@@ -82,7 +84,7 @@ export default function HeroAtelierSection({
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-[length:var(--text-h3)] font-light uppercase tracking-widest text-primary/90 mb-4 font-mono"
           >
-            Precision. Protection. Personalization.
+            {t.hero.tagline}
           </motion.p>
 
           <motion.p
@@ -91,7 +93,7 @@ export default function HeroAtelierSection({
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-[length:var(--text-body-lg)] text-foreground/70 max-w-xl leading-relaxed mb-8"
           >
-            Switzerland’s premier automotive customization studio. Specializing in high-end full vinyl wraps, paint protection film (PPF), chrome delete, and ceramic glass tinting for luxury supercars.
+            {t.hero.description}
           </motion.p>
 
           {/* Call to Actions */}
@@ -106,7 +108,7 @@ export default function HeroAtelierSection({
               className="btn-link inline-flex items-center gap-2.5 px-8 py-4 bg-foreground text-background font-mono text-xs uppercase tracking-widest hover:bg-foreground/90 transition-all font-semibold shadow-xl"
             >
               <Sparkles className="size-4" />
-              <span>CREATE YOUR STYLE</span>
+              <span>{t.hero.createStyleBtn}</span>
               <ArrowRight className="size-4" />
             </a>
 
@@ -114,7 +116,7 @@ export default function HeroAtelierSection({
               href="#portfolio"
               className="inline-flex items-center gap-2 px-6 py-4 border border-border/80 text-foreground font-mono text-xs uppercase tracking-widest hover:bg-muted transition-all"
             >
-              <span>Explore Portfolio</span>
+              <span>{t.hero.explorePortfolioBtn}</span>
             </a>
 
             <a
@@ -124,7 +126,7 @@ export default function HeroAtelierSection({
               className="inline-flex items-center gap-2 px-4 py-4 border border-emerald-600/40 text-emerald-400 font-mono text-xs uppercase tracking-widest hover:bg-emerald-950/40 transition-all"
             >
               <MessageCircle className="size-4" />
-              <span className="hidden sm:inline">WhatsApp</span>
+              <span className="hidden sm:inline">{t.hero.whatsappBtn}</span>
             </a>
           </motion.div>
         </div>
@@ -143,19 +145,19 @@ export default function HeroAtelierSection({
       <div className="mx-auto w-[var(--container)] relative z-10 pt-6 border-t border-border/40 grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs text-foreground/60">
         <div className="flex items-center gap-2">
           <ShieldCheck className="size-4 text-foreground/80 shrink-0" />
-          <span>Dust-Free Clean Room</span>
+          <span>{t.hero.badge1}</span>
         </div>
         <div className="flex items-center gap-2">
           <ShieldCheck className="size-4 text-foreground/80 shrink-0" />
-          <span>0% Blade contact (Knifeless)</span>
+          <span>{t.hero.badge2}</span>
         </div>
         <div className="flex items-center gap-2">
           <ShieldCheck className="size-4 text-foreground/80 shrink-0" />
-          <span>10-Year PPF Warranty</span>
+          <span>{t.hero.badge3}</span>
         </div>
         <div className="flex items-center gap-2">
           <ShieldCheck className="size-4 text-foreground/80 shrink-0" />
-          <span>100% Swiss Legal Compliance</span>
+          <span>{t.hero.badge4}</span>
         </div>
       </div>
     </section>
