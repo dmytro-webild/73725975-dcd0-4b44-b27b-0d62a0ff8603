@@ -4,6 +4,7 @@ import { ShieldCheck, Sparkles, Sliders, CheckCircle2, ArrowRight, Layers, Eye, 
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useLanguage } from "@/context/useLanguage";
+import Media, { MotionMedia } from "@/components/kit/Media";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -26,7 +27,7 @@ const CLOSEUP_PHOTOS = [
     id: "detail-3",
     title: "Satin Sheen & Reflection Control",
     category: "Quality Materials",
-    image: "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200",
+    image: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174512849-7i3po9ed.avif",
     caption: "Multi-layered cast vinyl diffusing ambient studio lighting seamlessly across vehicle contours."
   },
   {
@@ -156,7 +157,7 @@ export default function DetailsSection() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Featured Close-Up Large Photo Display */}
             <div className="lg:col-span-8 relative aspect-[16/10] sm:aspect-[16/9] overflow-hidden border border-border/60 bg-black group">
-              <motion.img
+              <MotionMedia
                 key={activePhoto.id}
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -205,7 +206,7 @@ export default function DetailsSection() {
                     )}
                   >
                     <div className="size-16 shrink-0 relative overflow-hidden border border-border/40">
-                      <img src={photo.image} alt={photo.title} className="size-full object-cover" />
+                      <Media src={photo.image} alt={photo.title} className="size-full object-cover" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <span className={cn(
