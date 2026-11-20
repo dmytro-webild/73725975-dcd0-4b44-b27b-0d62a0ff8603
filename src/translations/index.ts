@@ -220,7 +220,7 @@ export const translations = {
           subtitle: '',
           category: 'Vollkarosserie Veredelung',
           vehicleModel: 'Porsche 911 Carrera S',
-          description: 'Verwandeln Sie die Ästhetik Ihres Porsche 911 Carrera S mit einer nahtlosen Vollfolierung. Jede Karosseriefläche, Türgriff und Kante wird akribisch vorbereitet und ohne sichtbare Originallack-Kanten foliert.',
+          description: 'Verwandeln Sie die Ästhetik Ihres Autos mit einer nahtlosen Vollfolierung. Jede Karosseriefläche, Türgriff und Kante wird akribisch vorbereitet und ohne sichtbare Originallack-Kanten foliert.',
           finishes: ['Glanz', 'Matt', 'Satin', 'Metallic', 'Color-Shift', 'Carbon & Struktur'],
           keyFeatures: [
             'Präzise Kantenumbiegung an allen Türen & Klappen des Porsche 911',
