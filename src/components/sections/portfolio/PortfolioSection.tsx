@@ -178,7 +178,7 @@ export function BeforeAfterPhotoSlider({
 // Export BeforeAfterSlider alias for backwards compatibility
 export const BeforeAfterSlider = BeforeAfterPhotoSlider;
 
-// 6 Variations of Cars - Before & After Film Processing
+// 5 Variations of Cars - Before & After Film Processing
 const CAR_VARIATIONS: CarVariationItem[] = [
   {
     id: "bmw-m3-ceramic-tint",
@@ -270,24 +270,6 @@ const CAR_VARIATIONS: CarVariationItem[] = [
     gridSpan: "lg:col-span-4",
     isTintService: false,
   },
-  {
-    id: "porsche-cayenne-liquid-gold",
-    title: "Liquid Quartz Gold Satin & Tönung",
-    vehicle: "Porsche Cayenne Turbo GT",
-    categoryKey: "fullWraps",
-    categoryLabel: "Vollfolierung",
-    finish: "Liquid Quartz Gold Satin Metal & Tint",
-    turnaround: "4 Tage",
-    location: "Zürich Studio",
-    beforeImage: "https://images.pexels.com/photos/40046464/pexels-photo-40046464.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/40046464/pexels-photo-40046464.jpeg?auto=compress&w=1200",
-    beforeLabel: "ДО: Werkslack Silber",
-    afterLabel: "ПОСЛЕ: Gold Satin & Tönung",
-    description: "Exklusive Folierung in Liquid Quartz Gold Satin kombiniert mit rundum Keramik-Hitzeschutztönung für maximale Ästhetik und Hitzeschutz.",
-    specs: ["Liquid Gold Satin Metal", "Keramik-Hitzeschutz-Tönung", "Nahtlose Kantenverlegung", "5 Jahre Garantie"],
-    gridSpan: "lg:col-span-8",
-    isTintService: true,
-  },
 ];
 
 export default function PortfolioSection() {
@@ -296,7 +278,7 @@ export default function PortfolioSection() {
   const [selectedCar, setSelectedCar] = useState<CarVariationItem | null>(null);
 
   const categories = [
-    { key: "all", label: "Alle 6 Fahrzeug-Variationen" },
+    { key: "all", label: "Alle 5 Fahrzeug-Variationen" },
     { key: "windowTinting", label: "Keramik-Tönung" },
     { key: "fullWraps", label: "Vollfolierung" },
     { key: "partialWraps", label: "Teilfolierung / Dach" },
@@ -316,7 +298,7 @@ export default function PortfolioSection() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-border/60 bg-muted/40 text-[length:var(--text-label)] font-mono uppercase tracking-[0.15em] text-foreground/70">
               <Sparkles className="size-3.5 text-primary" />
-              <span>{t.portfolio.badge} — 6 Fahrzeug-Variationen</span>
+              <span>{t.portfolio.badge} — 5 Fahrzeug-Variationen</span>
             </div>
             <h2 className="text-[length:var(--text-h1)] font-light uppercase tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] leading-[0.9]">
               Vorher & Nachher <br />
@@ -324,7 +306,7 @@ export default function PortfolioSection() {
             </h2>
           </div>
           <p className="text-[length:var(--text-body)] text-foreground/60 max-w-md">
-            Symphonie aus 6 verschiedenen Fahrzeugmodellen im direkten Vorher/Nachher-Vergleich vor und nach der Folien- & Tönungsbehandlung. Identisches Modell, identischer Blickwinkel.
+            Symphonie aus 5 verschiedenen Fahrzeugmodellen im direkten Vorher/Nachher-Vergleich vor und nach der Folien- & Tönungsbehandlung. Identisches Modell, identischer Blickwinkel.
           </p>
         </div>
 
