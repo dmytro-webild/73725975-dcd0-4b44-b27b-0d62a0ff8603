@@ -1,115 +1,118 @@
-import HeroWordmarkDial from "@/components/sections/hero/HeroWordmarkDial";
-import FeaturesVerticalWordmark from "@/components/sections/features/FeaturesVerticalWordmark";
+import { useState } from "react";
+import HeroAtelierSection from "@/components/sections/hero/HeroAtelierSection";
+import ServicesSection from "@/components/sections/services/ServicesSection";
+import Customizer3DSection from "@/components/sections/customizer/Customizer3DSection";
+import PortfolioSection from "@/components/sections/portfolio/PortfolioSection";
+import AboutSection from "@/components/sections/about/AboutSection";
 import PricingAxisColumns from "@/components/sections/pricing/PricingAxisColumns";
-import GallerySinglePart from "@/components/sections/gallery/GallerySinglePart";
 import TestimonialAxisCounter from "@/components/sections/testimonial/TestimonialAxisCounter";
 import FaqTrackedRows from "@/components/sections/faq/FaqTrackedRows";
-import ContactAnchorDetails from "@/components/sections/contact/ContactAnchorDetails";
+import ContactInquirySection from "@/components/sections/contact/ContactInquirySection";
+import InstagramSection from "@/components/sections/instagram/InstagramSection";
+import WhatsAppWidget from "@/components/sections/whatsapp/WhatsAppWidget";
 import ScrollToneBackdrop from "@/components/kit/ScrollToneBackdrop";
 import ModelStage from "@/components/kit/ModelStage";
 import LoaderRingProgress from "@/components/loaders/LoaderRingProgress";
 
 export default function HomePage() {
+  const [appliedSpec, setAppliedSpec] = useState<{
+    colorName: string;
+    finish: string;
+    hex: string;
+  } | null>(null);
+
+  const handleApplySpec = (spec: { colorName: string; finish: string; hex: string }) => {
+    setAppliedSpec(spec);
+  };
+
   return (
     <>
-      <ScrollToneBackdrop
-
-      />
+      <ScrollToneBackdrop />
 
       <ModelStage
         src="https://storage.googleapis.com/webild/default/models/supercar/model.a5a995cd30bf.glb"
         scale={3.7}
       />
 
-      <LoaderRingProgress
+      <LoaderRingProgress />
 
-      />
-
-      <div id="hero" data-webild-section="HeroWordmarkDial" data-webild-section-id="HeroWordmarkDial-1" data-section="hero">
-        <HeroWordmarkDial
-          title="JD WRAP"
-          modelPose={{}}
-          colorLabel="Finish"
-          items={[
-            {
-              name: "Satin Obsidian"
-            }
-          ]}
-          modelLabel="Studio"
-          model="ZH-01"
-          introDelay={2.6}
-          media="model"
-          productImageAlt="Technician inspecting vehicle paint finish at JD Car Wrapping Atelier in Zurich"
-        />
-      </div>
-
-      <div id="finishes" data-webild-section="FeaturesVerticalWordmark" data-webild-section-id="FeaturesVerticalWordmark-1" data-section="finishes">
-        <FeaturesVerticalWordmark
-          title="JD WRAP"
-          items={[
-            {
-              title: "Full Car Wrapping",
-              description: "Complete vehicle color transformation available in gloss, matte, satin, metallic, and custom vinyl finishes tailored for your luxury vehicle."
-            },
-            {
-              title: "Paint Protection Film",
-              description: "Transparent self-healing PPF engineered to shield original factory paint against stone chips, scratches, and road debris across Swiss roads."
-            },
-            {
-              title: "Chrome Delete",
-              description: "Sleek blackout styling for window trims, front grilles, and side mirrors, alongside targeted partial body panel accents."
-            }
-          ]}
-          model={{
-            ry: 360
+      {/* Hero Section */}
+      <div id="hero" data-webild-section="HeroAtelierSection" data-webild-section-id="HeroAtelierSection-1" data-section="hero">
+        <HeroAtelierSection
+          modelPose={{
+            ry: 360,
+            scale: 1,
           }}
           media="model"
-          productImageAlt="Technician applying custom blue wrap to vehicle body panel"
         />
       </div>
 
+      {/* Five Dedicated Services Section */}
+      <div id="services" data-webild-section="ServicesSection" data-webild-section-id="ServicesSection-1" data-section="services">
+        <ServicesSection />
+      </div>
+
+      {/* Interactive 3D Car Customizer Visualizer */}
+      <div id="customizer" data-webild-section="Customizer3DSection" data-webild-section-id="Customizer3DSection-1" data-section="customizer">
+        <Customizer3DSection onApplySpec={handleApplySpec} />
+      </div>
+
+      {/* Filterable Portfolio Gallery & Before/After Drag Slider */}
+      <div id="portfolio" data-webild-section="PortfolioSection" data-webild-section-id="PortfolioSection-1" data-section="portfolio">
+        <PortfolioSection />
+      </div>
+
+      {/* About The Atelier */}
+      <div id="about" data-webild-section="AboutSection" data-webild-section-id="AboutSection-1" data-section="about">
+        <AboutSection />
+      </div>
+
+      {/* Atelier Pricing Packages */}
       <div id="pricing" data-webild-section="PricingAxisColumns" data-webild-section-id="PricingAxisColumns-1" data-section="pricing">
         <PricingAxisColumns
-          counter="03 options"
-          title="Atelier Tiers"
-          description="Tailored styling and paint protection packages crafted for discerning vehicle owners in Zurich."
+          counter="03 Options"
+          title="Atelier Packages"
+          description="Tailored styling and paint protection packages crafted for discerning vehicle owners in Canton of Zurich."
           items={[
             {
-              name: "Partial Wrap",
-              price: "By Quote",
+              name: "Partial Wrap & Accents",
+              price: "From CHF 1,200",
               features: [
-                "Chrome delete detail",
-                "Roof and mirror wrap",
-                "Custom panel accents"
+                "Chrome delete blackout trim",
+                "Gloss roof & mirror accents",
+                "Custom bonnet & stripe details",
+                "3-Year Atelier Warranty"
               ],
               button: {
-                text: "Request Quote",
+                text: "Inquire Package",
                 href: "#contact"
               }
             },
             {
-              name: "Full Wrap",
-              price: "By Quote",
+              name: "Full Body Car Wrap",
+              price: "From CHF 3,800",
               features: [
-                "Full color change",
-                "Matte or satin wrap",
-                "Precision application"
+                "Full color & texture change",
+                "Door jamb edge execution",
+                "Knifeless tape technology",
+                "5-Year Atelier Warranty"
               ],
               button: {
-                text: "Request Quote",
+                text: "Inquire Package",
                 href: "#contact"
               }
             },
             {
-              name: "PPF Shield",
-              price: "By Quote",
+              name: "PPF Shield Protection",
+              price: "From CHF 4,500",
               features: [
-                "Paint protection film",
-                "Stone chip defense",
-                "Self healing film"
+                "Self-healing 200μm clear film",
+                "Front Track or Full Armor",
+                "Stone chip gravel defense",
+                "10-Year Manufacturer Warranty"
               ],
               button: {
-                text: "Request Quote",
+                text: "Inquire Package",
                 href: "#contact"
               }
             }
@@ -127,52 +130,29 @@ export default function HomePage() {
         />
       </div>
 
-      <div id="profile" data-webild-section="GallerySinglePart" data-webild-section-id="GallerySinglePart-1" data-section="profile">
-        <GallerySinglePart
-          counter="01 / 07"
-          title="Matte Stealth Finish"
-          description="Full vehicle body wrap in dark matte film, executed with precision finishing in Zurich."
-          model={{
-            ry: 360,
-            rz: -90,
-            rx: -108,
-            radius: 4,
-            scale: 2.1,
-            y: -0.45,
-            sm: {
-              radius: 6,
-              scale: 1.3,
-              y: -0.3
-            }
-          }}
-          media="image"
-          productImageSrc="https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg"
-          productImageAlt="Person working on car wrapping"
-        />
-      </div>
-
+      {/* Owner Testimonials */}
       <div id="testimonials" data-webild-section="TestimonialAxisCounter" data-webild-section-id="TestimonialAxisCounter-1" data-section="testimonials">
         <TestimonialAxisCounter
           items={[
             {
-              quote: "Flawless satin wrap finish. The edges and tension around the corners are perfection.",
-              name: "Natalie Coleman",
-              role: "Porsche GT3 owner"
+              quote: "Flawless satin wrap finish on my 911 GT3 RS. The edges around the door jambs are completely indistinguishable from factory paint.",
+              name: "Marc von Berg",
+              role: "Porsche 911 GT3 RS Owner — Zurich"
             },
             {
-              quote: "Full PPF application gave me complete peace of mind on the alpine roads.",
+              quote: "Full PPF application gave me complete confidence on high-speed alpine passes. Zero stone chip damage after 15,000 kilometers.",
               name: "Nathan Bennett",
-              role: "Audi RS6 owner"
+              role: "Audi RS6 Avant Owner — Zurich"
             },
             {
-              quote: "Sleek chrome delete transformed the look of my car instantly. Sublime craft.",
+              quote: "Sleek chrome delete blackout transformed the profile of my AMG GT instantly. Extraordinary Swiss craft standards.",
               name: "Imogen Price",
-              role: "Tesla Model S owner"
+              role: "Mercedes-AMG GT 63 S Owner — Zurich"
             },
             {
-              quote: "Meticulous attention to detail. The studio standard in Zurich is unmatched.",
+              quote: "Meticulous dust-free clean room execution. The customizer online matched the physical vinyl sample 100%.",
               name: "Callum Henderson",
-              role: "BMW M5 owner"
+              role: "BMW M4 Competition Owner — Zurich"
             }
           ]}
           model={{
@@ -188,29 +168,30 @@ export default function HomePage() {
         />
       </div>
 
+      {/* Frequently Asked Questions */}
       <div id="faq" data-webild-section="FaqTrackedRows" data-webild-section-id="FaqTrackedRows-1" data-section="faq">
         <FaqTrackedRows
-          title="Before Booking"
+          title="Atelier FAQ"
           items={[
             {
-              question: "How long does a full vehicle wrap take?",
-              answer: "Full wraps take between 3 and 5 business days to ensure proper disassembly, surface preparation, vinyl application, and curing."
+              question: "How long does a full vehicle wrap take at your Zurich studio?",
+              answer: "Full car wraps typically require between 3 and 5 business days. This allows sufficient time for precision panel disassembly, micro-cleaning preparation, knifeless vinyl installation, and post-heating curing."
             },
             {
-              question: "Are your window tints legal on Swiss roads?",
-              answer: "Yes. All window tinting installed at our atelier strictly complies with applicable Swiss road traffic regulations."
+              question: "Are your window tints and lighting wraps 100% legal on Swiss roads?",
+              answer: "Yes. All ceramic window tinting and optical lighting films installed at our Canton of Zurich atelier strictly comply with applicable Swiss Federal Road Traffic Office (ASTRA) regulations."
             },
             {
-              question: "What is the difference between vinyl and PPF?",
-              answer: "Vinyl wrapping alters the color and visual finish of your car, while Paint Protection Film provides a clear layer to safeguard paint from chips and scratches."
+              question: "What is the difference between vinyl car wrapping and Paint Protection Film (PPF)?",
+              answer: "Vinyl wrapping is designed to transform the aesthetic color, finish, and texture of your vehicle (gloss, matte, satin, metallic). Paint Protection Film (PPF) is an optically clear 200-micron self-healing armor engineered specifically for impact protection against stone chips and gravel."
             },
             {
-              question: "Can paint protection film be safely removed?",
-              answer: "Yes. Professional removal preserves your vehicle's original factory paint completely intact."
+              question: "Will wrapping or PPF damage my vehicle's original factory paint?",
+              answer: "No. High-quality European vinyl and PPF films protect your original paint from UV degradation and minor scratches. When professionally removed, your original paint remains preserved in factory condition."
             },
             {
-              question: "How do I schedule an atelier appointment?",
-              answer: "Services are offered strictly by appointment at our Canton of Zurich location. Contact us online or via email to reserve a time slot."
+              question: "How do I schedule an appointment at the Canton of Zurich atelier?",
+              answer: "Services are provided strictly by private appointment. You can submit an inquiry with your preferred vehicle specs through our online form or connect with us directly via WhatsApp."
             }
           ]}
           model={{
@@ -227,38 +208,18 @@ export default function HomePage() {
         />
       </div>
 
-      <div id="contact" data-webild-section="ContactAnchorDetails" data-webild-section-id="ContactAnchorDetails-1" data-section="contact">
-        <ContactAnchorDetails
-          title="Request a Quote"
-          model={{
-            ry: 380,
-            rx: -15,
-            radius: 6,
-            scale: 0.77
-          }}
-          media="image"
-          details={[
-            {
-              label: "Location",
-              value: "Zurich (By appointment)"
-            },
-            {
-              label: "Email",
-              value: "info@jdcarwrapping.ch",
-              href: "mailto:info@jdcarwrapping.ch"
-            },
-            {
-              label: "Opening Hours",
-              value: "Mon to Fri, 08:00 to 18:00"
-            }
-          ]}
-          nameLabel="Full Name"
-          emailLabel="Email Address"
-          messageLabel="Vehicle Model & Service Details"
-          submitText="Submit Inquiry"
-          successText="Thank you. Our team will review your inquiry and reply promptly."
-        />
+      {/* Detailed Customer Inquiry Form with Image Upload & Spec Population */}
+      <div id="contact" data-webild-section="ContactInquirySection" data-webild-section-id="ContactInquirySection-1" data-section="contact">
+        <ContactInquirySection appliedSpec={appliedSpec} />
       </div>
+
+      {/* Instagram Feed Section */}
+      <div id="instagram" data-webild-section="InstagramSection" data-webild-section-id="InstagramSection-1" data-section="instagram">
+        <InstagramSection />
+      </div>
+
+      {/* Floating WhatsApp Action Widget */}
+      <WhatsAppWidget />
     </>
   );
 }
