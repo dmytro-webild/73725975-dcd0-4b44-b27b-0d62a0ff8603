@@ -223,7 +223,7 @@ export const translations = {
           description: 'Verwandeln Sie die Ästhetik Ihres Autos mit einer nahtlosen Vollfolierung. Jede Karosseriefläche, Türgriff und Kante wird akribisch vorbereitet und ohne sichtbare Originallack-Kanten foliert.',
           finishes: ['Glanz', 'Matt', 'Satin', 'Metallic', 'Color-Shift', 'Carbon & Struktur'],
           keyFeatures: [
-            'Präzise Kantenumbiegung an allen Türen & Klappen des Porsche 911',
+            'Präzise Kantenumbiegung an allen Türen & Klappen',
             'Schützt den werkseitigen Originallack vollständig',
             'Jederzeit rückstandslos entfernbar',
             'Europäische Premiumfolien (3M, Avery Dennison, Inozetek)'
