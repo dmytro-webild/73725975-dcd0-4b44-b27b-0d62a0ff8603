@@ -78,7 +78,7 @@ export default function DetailsSection() {
   ];
 
   return (
-    <section id="details" className="relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40">
+    <section id="details" className="relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40 overflow-x-clip">
       <div className="mx-auto w-[var(--container)]">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -98,7 +98,7 @@ export default function DetailsSection() {
         </div>
 
         {/* Top Feature Grid - 5 Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-16">
           {pillars.map((pillar, index) => {
             const Icon = pillar.icon;
             return (
@@ -156,7 +156,7 @@ export default function DetailsSection() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Featured Close-Up Large Photo Display */}
-            <div className="lg:col-span-8 relative aspect-[16/10] sm:aspect-[16/9] overflow-hidden border border-border/60 bg-black group">
+            <div className="lg:col-span-8 relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] overflow-hidden border border-border/60 bg-black group">
               <MotionMedia
                 key={activePhoto.id}
                 initial={{ opacity: 0, scale: 1.02 }}
@@ -168,7 +168,7 @@ export default function DetailsSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
 
-              <div className="absolute bottom-0 inset-x-0 p-6 sm:p-8 backdrop-blur-md bg-background/80 border-t border-border/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 lg:p-8 backdrop-blur-md bg-background/80 border-t border-border/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 block mb-1">
                     {activePhoto.category}

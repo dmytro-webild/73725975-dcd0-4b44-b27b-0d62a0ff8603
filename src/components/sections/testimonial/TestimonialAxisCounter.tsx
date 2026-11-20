@@ -103,7 +103,7 @@ export default function TestimonialAxisCounter({
     <section
       aria-label={ariaLabel ?? (isDe ? "Kundenstimmen" : "Client Reviews")}
       className={cn(
-        "relative py-20 lg:py-28 bg-[#121316] text-slate-100 border-y border-white/10 overflow-hidden",
+        "relative py-20 lg:py-28 bg-[#121316] text-slate-100 border-y border-white/10 overflow-x-clip",
         className
       )}
     >
@@ -164,7 +164,7 @@ export default function TestimonialAxisCounter({
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EXPO }}
-          className="relative mb-12 p-8 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10 backdrop-blur-md shadow-2xl overflow-hidden"
+          className="relative mb-12 p-5 sm:p-8 lg:p-12 rounded-3xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10 backdrop-blur-md shadow-2xl overflow-hidden"
         >
           <Quote className="absolute top-6 right-8 size-24 text-white/[0.03] pointer-events-none" />
 

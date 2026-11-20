@@ -269,7 +269,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
   };
 
   const fallbackView = (
-    <div className="relative w-full h-full min-h-[440px] sm:min-h-[520px] lg:min-h-[600px] flex items-center justify-center overflow-hidden bg-muted/20">
+    <div className="relative w-full h-full min-h-[360px] sm:min-h-[480px] lg:min-h-[560px] flex items-center justify-center overflow-hidden bg-muted/20">
       <img
         src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200"
         alt="Porsche 911 Customizer Fallback Preview"
@@ -289,7 +289,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
   );
 
   return (
-    <section id="customizer" className={cn("relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40 overflow-hidden", className)}>
+    <section id="customizer" className={cn("relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40 overflow-x-clip", className)}>
       <div className="mx-auto w-[var(--container)]">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
@@ -311,7 +311,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
         {/* Main 3D Workspace Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* 3D Canvas / Preview Container */}
-          <div className="lg:col-span-8 relative min-h-[440px] sm:min-h-[520px] lg:min-h-[600px] bg-card border border-border/60 overflow-hidden flex flex-col justify-between">
+          <div className="lg:col-span-8 relative min-h-[360px] sm:min-h-[480px] lg:min-h-[560px] bg-card border border-border/60 overflow-hidden flex flex-col justify-between">
             {/* Background Studio Lights / Grid overlay */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)] pointer-events-none" />
 

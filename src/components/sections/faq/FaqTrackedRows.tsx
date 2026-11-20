@@ -184,7 +184,7 @@ const FaqTrackedRows = ({
                       transition={{ duration: kit.base, ease: EASE }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-[clamp(1.25rem,1.8vw,1.75rem)] pl-[calc(2.25rem+var(--gap))] pr-[calc(11px+var(--gap))] text-[length:var(--text-small)] leading-[1.5] text-foreground/70">
+                      <p className="pb-[clamp(1.25rem,1.8vw,1.75rem)] pl-6 sm:pl-[calc(2.25rem+var(--gap))] pr-[calc(11px+var(--gap))] text-[length:var(--text-small)] leading-[1.5] text-foreground/70">
                         {item.answer}
                       </p>
                     </motion.div>

@@ -9,7 +9,7 @@ export default function HowItWorksSection() {
   const icons = [MessageSquare, FileText, Wrench, ShieldCheck];
 
   return (
-    <section id="how-it-works" className="relative py-[var(--section-space)] bg-background text-foreground border-t border-border/40 overflow-hidden">
+    <section id="how-it-works" className="relative py-[var(--section-space)] bg-background text-foreground border-t border-border/40 overflow-x-clip">
       <div className="mx-auto w-[var(--container)] relative z-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
@@ -29,7 +29,7 @@ export default function HowItWorksSection() {
         </div>
 
         {/* 4 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
           {howItWorks.steps.map((step, idx) => {
             const Icon = icons[idx % icons.length];
             return (

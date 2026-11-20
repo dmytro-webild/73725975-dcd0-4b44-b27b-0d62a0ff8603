@@ -99,7 +99,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
   ];
 
   return (
-    <section id="contact" className={cn("relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40", className)}>
+    <section id="contact" className={cn("relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40 overflow-x-clip", className)}>
       <div className="mx-auto w-[var(--container)]">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">

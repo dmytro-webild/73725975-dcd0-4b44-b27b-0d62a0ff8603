@@ -29,7 +29,7 @@ export default function FindYourFinishSection() {
   const activeFinish = finishDetails.items.find((f) => f.id === activeFinishId) || finishDetails.items[0];
 
   return (
-    <section id="finishes" className="relative py-[var(--section-space)] bg-card border-t border-border/40 overflow-hidden text-foreground">
+    <section id="finishes" className="relative py-[var(--section-space)] bg-card border-t border-border/40 overflow-x-clip text-foreground">
       {/* Background glow & subtle accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-[600px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -86,7 +86,7 @@ export default function FindYourFinishSection() {
               <img
                 src={activeFinish.image}
                 alt={activeFinish.name}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
 

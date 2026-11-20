@@ -16,7 +16,7 @@ function LayoutContent() {
   };
 
   return (
-    <div className="relative isolate min-h-svh flex flex-col bg-background text-foreground" data-button="outline" data-card="hairline" data-pattern="none">
+    <div className="relative isolate min-h-svh flex flex-col bg-background text-foreground overflow-x-clip" data-button="outline" data-card="hairline" data-pattern="none">
       <header data-webild-section="Header">
         <NavbarHairlineRing
           brand="JD CAR WRAPPING ATELIER"
