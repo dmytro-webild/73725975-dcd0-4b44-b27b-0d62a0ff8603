@@ -24,7 +24,15 @@ const Layer = ({ tone, index, tops, scrollY, span, reduce }: LayerProps) => {
     if (reduce) return progress >= 0.5 ? 1 : 0;
     return Math.min(1, Math.max(0, progress));
   });
-  return <motion.div style={{ opacity, backgroundColor: `var(--${tone})` }} className="absolute inset-0" />;
+  return (
+    <motion.div
+      style={{
+        opacity,
+        background: tone === "background" ? "var(--background-gradient, var(--background))" : `var(--${tone})`,
+      }}
+      className="absolute inset-0"
+    />
+  );
 };
 
 const ScrollToneBackdrop = ({ span = 0.3 }: { span?: number }) => {
