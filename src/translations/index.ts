@@ -304,7 +304,7 @@ export const translations = {
     customizer: {
       badge: 'Interaktives Atelier 3D',
       title: 'KREIEREN SIE IHREN STIL',
-      subtitle: '360°-Konfiguration & Farbauswahl (Porsche 911 & BMW M3)',
+      subtitle: '360°-Konfiguration & Farbauswahl ',
       instruction: 'Wählen Sie Ihre gewünschte Folienfarbe und Oberflächenstruktur aus. Übernehmen Sie die Konfiguration anschliessend direkt in Ihre unverbindliche Offertanfrage.',
       finishesLabel: 'Oberfläche / Finish',
       finishes: {
