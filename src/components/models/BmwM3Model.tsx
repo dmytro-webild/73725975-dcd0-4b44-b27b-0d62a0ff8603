@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { arch, extrudeProfile, finishes, useParts } from "@/components/kit/codeModel";
 import Wheels from "@/components/models/Wheels";
 
-type BmwM3ModelProps = { color?: string };
+type BmwM3ModelProps = { color?: string; isBeforeMode?: boolean };
 
 const LENGTH = 4.79;
 const WIDTH = 1.9;
@@ -43,8 +43,34 @@ const canopyShape = () => {
   return s;
 };
 
-export default function BmwM3Model({ color = "rgb(20, 24, 30)" }: BmwM3ModelProps) {
-  const f = useParts(() => finishes(color), [color]);
+export default function BmwM3Model({ color = "rgb(20, 24, 30)", isBeforeMode = false }: BmwM3ModelProps) {
+  const f = useParts(() => {
+    const base = finishes(color);
+    if (isBeforeMode) {
+      base.glass = new THREE.MeshPhysicalMaterial({
+        name: "glass",
+        color: "rgb(180, 210, 235)",
+        transparent: true,
+        opacity: 0.28,
+        metalness: 0.1,
+        roughness: 0.05,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.02,
+      });
+    } else {
+      base.glass = new THREE.MeshPhysicalMaterial({
+        name: "glass",
+        color: "rgb(5, 7, 12)",
+        transparent: true,
+        opacity: 0.96,
+        metalness: 0.85,
+        roughness: 0.02,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.01,
+      });
+    }
+    return base;
+  }, [color, isBeforeMode]);
   const g = useParts(
     () => ({
       body: extrudeProfile(bodyShape(), WIDTH - 0.08, 0.05),
