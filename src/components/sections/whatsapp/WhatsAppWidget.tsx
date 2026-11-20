@@ -9,20 +9,20 @@ export default function WhatsAppWidget() {
   )}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 group">
+    <div className="fixed bottom-6 right-6 z-50 group">
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp with JD Car Wrapping Atelier"
-        className="flex items-center gap-3 px-4 py-3 bg-emerald-600 hover:bg-emerald-500 text-white shadow-2xl rounded-full border border-emerald-400/40 transition-all duration-300 hover:scale-105 group-hover:pr-5 cursor-pointer"
+        className="flex items-center gap-3 px-4 py-3 bg-emerald-600 hover:bg-emerald-500 text-white shadow-2xl rounded-full border border-emerald-400/50 transition-all duration-300 hover:scale-105 cursor-pointer backdrop-blur-md"
       >
-        <div className="relative">
+        <div className="relative shrink-0">
           <MessageCircle className="size-6 text-white" />
           <span className="absolute -top-1 -right-1 size-2.5 rounded-full bg-emerald-300 animate-ping" />
         </div>
-        <div className="hidden sm:flex flex-col text-left">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-100 leading-none">
+        <div className="flex flex-col text-left">
+          <span className="text-[9px] font-mono uppercase tracking-widest text-emerald-100 leading-none">
             {t.whatsappWidget.tooltip}
           </span>
           <span className="text-xs font-mono font-semibold tracking-wide text-white leading-tight">

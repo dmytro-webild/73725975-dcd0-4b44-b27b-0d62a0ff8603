@@ -173,24 +173,25 @@ export default function ServicesSection({ className, onSelectService }: Services
             {/* Action Bar */}
             <div className="pt-6 border-t border-border/40 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2">
-                <Shield className="size-4 text-foreground/70" />
-                <span className="text-[length:var(--text-small)] font-mono text-foreground/70">{selectedService.warranty}</span>
+                <Shield className="size-4 text-emerald-400" />
+                <span className="text-[length:var(--text-small)] font-mono text-foreground/80 font-medium">{selectedService.warranty}</span>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <a
                   href="#customizer"
                   onClick={() => onSelectService && onSelectService(selectedService.id)}
-                  className="btn-link inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-mono text-xs uppercase tracking-widest hover:bg-foreground/90 transition-all"
+                  className="inline-flex items-center gap-2 px-5 py-3 border border-border/80 text-foreground font-mono text-xs uppercase tracking-widest hover:bg-muted transition-all"
                 >
                   <span>{t.services.customize3d}</span>
                   <ArrowUpRight className="size-4" />
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-border/80 text-foreground font-mono text-xs uppercase tracking-widest hover:bg-muted transition-all"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background font-mono text-xs uppercase tracking-widest font-semibold hover:bg-foreground/90 transition-all shadow-md"
                 >
-                  <span>{t.services.inquireNow}</span>
+                  <span>{t.services.inquireNow} ({selectedService.title})</span>
+                  <ArrowUpRight className="size-4" />
                 </a>
               </div>
             </div>
@@ -205,7 +206,7 @@ export default function ServicesSection({ className, onSelectService }: Services
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
 
-            <div className="relative z-10 p-6 lg:p-8 backdrop-blur-md bg-background/70 border-t border-border/40">
+            <div className="relative z-10 p-6 lg:p-8 backdrop-blur-md bg-background/80 border-t border-border/40">
               <div className="flex items-center justify-between text-[length:var(--text-label)] font-mono uppercase tracking-widest text-foreground/60 mb-2">
                 <span>Atelier Spec: {selectedService.id.toUpperCase()}</span>
                 <span>Zurich Studio</span>
@@ -213,12 +214,60 @@ export default function ServicesSection({ className, onSelectService }: Services
               <p className="text-[length:var(--text-h3)] [font-family:var(--font-heading)] font-light text-foreground">
                 {selectedService.title}
               </p>
-              <p className="text-xs font-mono text-foreground/70 mt-1">
+              <p className="text-xs font-mono text-foreground/70 mt-1 mb-4">
                 Hand-fitted with micro-precision in climate-controlled clean room environment.
               </p>
+              <a
+                href="#contact"
+                className="w-full py-3 bg-foreground text-background font-mono text-xs uppercase tracking-widest text-center font-semibold hover:bg-foreground/90 transition-all inline-flex items-center justify-center gap-2"
+              >
+                <span>{t.services.inquireNow}</span>
+                <ArrowUpRight className="size-4" />
+              </a>
             </div>
           </div>
         </motion.div>
+
+        {/* Overview Cards Grid for Instant Quote Access Across All 5 Services */}
+        <div className="mt-16 pt-12 border-t border-border/40">
+          <h3 className="text-xs font-mono uppercase tracking-widest text-foreground/50 mb-6">
+            All Atelier Services — Direct Quote Request
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {services.map((srv) => {
+              const isCurrent = srv.id === activeTab;
+              return (
+                <div
+                  key={srv.id}
+                  className={cn(
+                    "p-5 border bg-card/40 flex flex-col justify-between transition-all duration-300",
+                    isCurrent ? "border-foreground/80 bg-card/80" : "border-border/40 hover:border-border/80"
+                  )}
+                >
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-foreground/40 block mb-1">
+                      {srv.category}
+                    </span>
+                    <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground mb-2">
+                      {srv.title}
+                    </h4>
+                    <p className="text-[11px] text-foreground/60 line-clamp-2 mb-4">
+                      {srv.subtitle}
+                    </p>
+                  </div>
+                  <a
+                    href="#contact"
+                    onClick={() => setActiveTab(srv.id)}
+                    className="w-full py-2 px-3 border border-border/60 hover:bg-foreground hover:text-background text-foreground text-center font-mono text-[10px] uppercase tracking-widest transition-all inline-flex items-center justify-center gap-1.5"
+                  >
+                    <span>Quote Service</span>
+                    <ArrowUpRight className="size-3" />
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

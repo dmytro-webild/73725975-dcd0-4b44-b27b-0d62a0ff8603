@@ -20,12 +20,10 @@ export interface ContactInquirySectionProps {
 export default function ContactInquirySection({ className, appliedSpec }: ContactInquirySectionProps) {
   const { t } = useLanguage();
 
-  const [vehicleMake, setVehicleMake] = useState("");
-  const [vehicleModel, setVehicleModel] = useState("");
-  const [vehicleYear, setVehicleYear] = useState("2024");
+  const [vehicle, setVehicle] = useState("");
+  const [vehicleYear, setVehicleYear] = useState("");
   const [customSpecText, setCustomSpecText] = useState("");
   const [selectedServices, setSelectedServices] = useState<string[]>(["Full Car Wrap"]);
-  const [appointmentDate, setAppointmentDate] = useState("");
   const [clientName, setClientName] = useState("");
   const [clientEmail, setClientEmail] = useState("");
   const [clientPhone, setClientPhone] = useState("");
@@ -66,20 +64,6 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
     }
   };
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
-      setUploadedImage({
-        url,
-        name: file.name,
-        size: `${sizeMb} MB`,
-      });
-    }
-  };
-
   const removeImage = () => {
     setUploadedImage(null);
     if (fileInputRef.current) {
@@ -93,12 +77,12 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 1200);
+    }, 1000);
   };
 
   const buildWhatsAppUrl = () => {
     const specInfo = customSpecText ? ` Spec: ${customSpecText}.` : "";
-    const vehicleInfo = `${vehicleYear} ${vehicleMake} ${vehicleModel}`.trim() || "Vehicle";
+    const vehicleInfo = `${vehicleYear ? vehicleYear + " " : ""}${vehicle}`.trim() || "Vehicle";
     const servicesText = selectedServices.join(", ") || "Car Wrapping";
     const text = encodeURIComponent(
       `Hello JD Car Wrapping Atelier Zurich! I would like to request a quote for my ${vehicleInfo}.${specInfo} Services: ${servicesText}. My name is ${clientName || "Customer"}.`
@@ -108,9 +92,8 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
 
   const availableServicesOptions = [
     "Full Car Wrap",
-    "Partial Wrap",
-    "Chrome Delete",
     "PPF Protection",
+    "Chrome Delete",
     "Window Tinting",
     "Custom Detail"
   ];
@@ -137,10 +120,10 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
 
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-          {/* Left Column: Inquiry Form */}
+          {/* Left Column: Streamlined Inquiry Form */}
           <div className="lg:col-span-8 border border-border/60 bg-card/60 p-6 sm:p-8 lg:p-10 backdrop-blur-sm">
             {isSubmitted ? (
-              <div className="text-center py-16 px-4 space-y-6">
+              <div className="text-center py-12 px-4 space-y-6">
                 <div className="size-16 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto">
                   <CheckCircle2 className="size-8" />
                 </div>
@@ -152,18 +135,18 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 </p>
 
                 <div className="p-4 bg-muted/40 border border-border/40 font-mono text-xs max-w-md mx-auto space-y-2 text-left text-foreground/70">
-                  <div><span className="text-foreground/40">Vehicle:</span> {vehicleYear} {vehicleMake} {vehicleModel}</div>
+                  <div><span className="text-foreground/40">Vehicle:</span> {vehicleYear ? `${vehicleYear} ` : ""}{vehicle}</div>
                   <div><span className="text-foreground/40">Services:</span> {selectedServices.join(", ")}</div>
                   {customSpecText && <div><span className="text-foreground/40">Custom Spec:</span> {customSpecText}</div>}
-                  <div><span className="text-foreground/40">Location:</span> Canton of Zurich Studio</div>
+                  <div><span className="text-foreground/40">Studio:</span> Canton of Zurich Atelier</div>
                 </div>
 
                 <div className="pt-4 flex justify-center gap-4 flex-wrap">
                   <button
                     onClick={() => {
                       setIsSubmitted(false);
-                      setVehicleMake("");
-                      setVehicleModel("");
+                      setVehicle("");
+                      setVehicleYear("");
                       setCustomSpecText("");
                       removeImage();
                     }}
@@ -183,208 +166,198 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                {/* 1. Vehicle Details */}
-                <div>
-                  <h4 className="text-xs font-mono uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
-                    <Car className="size-4" />
-                    <span>{t.contact.sections.vehicle}</span>
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Section 1: Vehicle & Services */}
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                    <div className="sm:col-span-3">
+                      <label className="text-[11px] font-mono text-foreground/70 uppercase block mb-1.5 flex items-center gap-1.5 font-semibold">
+                        <Car className="size-3.5 text-primary" />
+                        <span>Vehicle Make & Model *</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={vehicle}
+                        onChange={(e) => setVehicle(e.target.value)}
+                        placeholder="e.g. Porsche 911 GT3 RS / BMW M4"
+                        className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground transition-colors"
+                        required
+                      />
+                    </div>
                     <div>
-                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.year}</label>
+                      <label className="text-[11px] font-mono text-foreground/70 uppercase block mb-1.5">
+                        Year
+                      </label>
                       <input
                         type="text"
                         value={vehicleYear}
                         onChange={(e) => setVehicleYear(e.target.value)}
-                        placeholder="e.g. 2024"
-                        className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground"
-                        required
+                        placeholder="2024"
+                        className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground transition-colors"
                       />
                     </div>
-                    <div>
-                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.make}</label>
-                      <input
-                        type="text"
-                        value={vehicleMake}
-                        onChange={(e) => setVehicleMake(e.target.value)}
-                        placeholder="e.g. Porsche / BMW / Audi"
-                        className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.model}</label>
-                      <input
-                        type="text"
-                        value={vehicleModel}
-                        onChange={(e) => setVehicleModel(e.target.value)}
-                        placeholder="e.g. 911 GT3 RS / M4 Comp"
-                        className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground"
-                        required
-                      />
+                  </div>
+
+                  {/* Services Pill Selector */}
+                  <div>
+                    <label className="text-[11px] font-mono text-foreground/70 uppercase block mb-2 font-semibold">
+                      Select Required Services *
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {availableServicesOptions.map((srv) => {
+                        const isChecked = selectedServices.includes(srv);
+                        return (
+                          <button
+                            type="button"
+                            key={srv}
+                            onClick={() => toggleService(srv)}
+                            className={cn(
+                              "px-3 py-2 text-xs font-mono uppercase tracking-wider border transition-all cursor-pointer flex items-center gap-2",
+                              isChecked
+                                ? "bg-foreground text-background border-foreground font-medium"
+                                : "bg-muted/20 text-foreground/70 border-border/40 hover:border-foreground/40 hover:text-foreground"
+                            )}
+                          >
+                            <span>{srv}</span>
+                            {isChecked && <CheckCircle2 className="size-3.5 text-background" />}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
 
-                {/* 2. Service Selection Checkboxes */}
-                <div>
-                  <label className="text-xs font-mono uppercase tracking-widest text-primary mb-3 block">
-                    {t.contact.sections.services}
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                    {availableServicesOptions.map((srv) => {
-                      const isChecked = selectedServices.includes(srv);
-                      return (
+                <div className="h-px bg-border/40 my-4" />
+
+                {/* Section 2: Color Finish & Optional Photo */}
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="text-[11px] font-mono text-foreground/70 uppercase font-semibold">
+                        Desired Color / Finish / 3D Spec
+                      </label>
+                      {appliedSpec && (
+                        <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest font-medium">
+                          ✓ 3D Spec Applied
+                        </span>
+                      )}
+                    </div>
+                    <input
+                      type="text"
+                      value={customSpecText}
+                      onChange={(e) => setCustomSpecText(e.target.value)}
+                      placeholder="e.g. Satin Obsidian Black / Nardo Grey / Forged Carbon Roof"
+                      className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground transition-colors"
+                    />
+                  </div>
+
+                  {/* Compact Photo Upload */}
+                  <div>
+                    {uploadedImage ? (
+                      <div className="p-3 bg-muted/50 border border-border/60 flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <img src={uploadedImage.url} alt="Vehicle Preview" className="size-10 object-cover border border-border/60 shrink-0" />
+                          <div className="min-w-0">
+                            <p className="text-xs font-mono text-foreground truncate">{uploadedImage.name}</p>
+                            <span className="text-[10px] font-mono text-emerald-400">{uploadedImage.size} • Photo attached</span>
+                          </div>
+                        </div>
                         <button
                           type="button"
-                          key={srv}
-                          onClick={() => toggleService(srv)}
-                          className={cn(
-                            "p-3 text-xs font-mono uppercase tracking-wider text-left border transition-all cursor-pointer flex items-center justify-between",
-                            isChecked
-                              ? "bg-foreground text-background border-foreground font-semibold"
-                              : "bg-muted/20 text-foreground/70 border-border/40 hover:bg-muted"
-                          )}
+                          onClick={removeImage}
+                          className="p-1.5 text-foreground/50 hover:text-foreground hover:bg-muted transition-all cursor-pointer"
                         >
-                          <span>{srv}</span>
-                          {isChecked && <CheckCircle2 className="size-4 text-background shrink-0 ml-1" />}
+                          <X className="size-4" />
                         </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* 3. Desired Color / Customizer Spec */}
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase">{t.contact.sections.spec}</label>
-                    {appliedSpec && (
-                      <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest">
-                        {t.contact.sections.specApplied}
-                      </span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-between p-3 border border-dashed border-border/60 hover:border-foreground/50 bg-muted/20 transition-all">
+                        <div className="flex items-center gap-2">
+                          <ImageIcon className="size-4 text-foreground/50" />
+                          <span className="text-xs font-mono text-foreground/70">
+                            Attach Vehicle Photo (Optional)
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          className="px-3 py-1 bg-muted border border-border/60 font-mono text-[10px] uppercase tracking-wider text-foreground hover:bg-muted/80 transition-all cursor-pointer inline-flex items-center gap-1.5"
+                        >
+                          <Upload className="size-3" />
+                          <span>Browse</span>
+                        </button>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleFileChange}
+                          className="hidden"
+                        />
+                      </div>
                     )}
                   </div>
-                  <input
-                    type="text"
-                    value={customSpecText}
-                    onChange={(e) => setCustomSpecText(e.target.value)}
-                    placeholder="e.g. Stealth Satin Obsidian Black / Nardo Grey Gloss / Forged Carbon Roof"
-                    className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground"
-                  />
                 </div>
 
-                {/* 4. Reference Image Upload */}
-                <div>
-                  <label className="text-xs font-mono uppercase tracking-widest text-primary mb-2 block flex items-center gap-2">
-                    <ImageIcon className="size-3.5" />
-                    <span>{t.contact.sections.upload}</span>
-                  </label>
+                <div className="h-px bg-border/40 my-4" />
 
-                  {uploadedImage ? (
-                    <div className="p-4 bg-muted/50 border border-border/60 flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <img src={uploadedImage.url} alt="Vehicle Upload Preview" className="size-14 object-cover border border-border/60 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs font-mono text-foreground truncate">{uploadedImage.name}</p>
-                          <span className="text-[10px] font-mono text-foreground/50">{uploadedImage.size} • Ready for quote</span>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={removeImage}
-                        className="p-2 text-foreground/50 hover:text-foreground hover:bg-muted border border-border/40 transition-all cursor-pointer"
-                      >
-                        <X className="size-4" />
-                      </button>
-                    </div>
-                  ) : (
-                    <div
-                      onDragOver={(e) => e.preventDefault()}
-                      onDrop={handleDrop}
-                      onClick={() => fileInputRef.current?.click()}
-                      className="border border-dashed border-border/80 hover:border-foreground/50 bg-muted/20 p-6 text-center cursor-pointer transition-all group"
-                    >
-                      <Upload className="size-6 text-foreground/40 group-hover:text-foreground mx-auto mb-2 transition-colors" />
-                      <p className="text-xs font-mono text-foreground/80 uppercase tracking-wider">
-                        {t.contact.sections.uploadInstruction}
-                      </p>
-                      <p className="text-[10px] font-mono text-foreground/50 mt-1">
-                        {t.contact.sections.uploadFormats}
-                      </p>
+                {/* Section 3: Client Contact Details */}
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                      <label className="text-[11px] font-mono text-foreground/70 uppercase block mb-1.5 font-semibold">
+                        Your Name *
+                      </label>
                       <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        className="hidden"
+                        type="text"
+                        value={clientName}
+                        onChange={(e) => setClientName(e.target.value)}
+                        placeholder="Full Name"
+                        className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground transition-colors"
+                        required
                       />
                     </div>
-                  )}
-                </div>
-
-                {/* 5. Preferred Date & Client Info */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.timeframe}</label>
-                    <input
-                      type="text"
-                      value={appointmentDate}
-                      onChange={(e) => setAppointmentDate(e.target.value)}
-                      placeholder="e.g. Next Week / Preferred Month"
-                      className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground"
-                    />
+                    <div>
+                      <label className="text-[11px] font-mono text-foreground/70 uppercase block mb-1.5 font-semibold">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        value={clientEmail}
+                        onChange={(e) => setClientEmail(e.target.value)}
+                        placeholder="name@domain.ch"
+                        className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground transition-colors"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] font-mono text-foreground/70 uppercase block mb-1.5">
+                        Phone / WhatsApp
+                      </label>
+                      <input
+                        type="tel"
+                        value={clientPhone}
+                        onChange={(e) => setClientPhone(e.target.value)}
+                        placeholder="+41 79 000 00 00"
+                        className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground transition-colors"
+                      />
+                    </div>
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.name}</label>
-                    <input
-                      type="text"
-                      value={clientName}
-                      onChange={(e) => setClientName(e.target.value)}
-                      placeholder="Your Full Name"
-                      className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.email}</label>
-                    <input
-                      type="email"
-                      value={clientEmail}
-                      onChange={(e) => setClientEmail(e.target.value)}
-                      placeholder="name@domain.com"
-                      className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.phone}</label>
-                    <input
-                      type="tel"
-                      value={clientPhone}
-                      onChange={(e) => setClientPhone(e.target.value)}
-                      placeholder="+41 79 000 00 00"
-                      className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground"
+                    <label className="text-[11px] font-mono text-foreground/70 uppercase block mb-1.5">
+                      Additional Notes (Optional)
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={additionalNotes}
+                      onChange={(e) => setAdditionalNotes(e.target.value)}
+                      placeholder="Special requests, door jamb wrapping, ceramic coating add-on, preferred date..."
+                      className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground resize-none transition-colors"
                     />
                   </div>
                 </div>
 
-                {/* Notes */}
-                <div>
-                  <label className="text-[11px] font-mono text-foreground/60 uppercase block mb-1">{t.contact.sections.notes}</label>
-                  <textarea
-                    rows={3}
-                    value={additionalNotes}
-                    onChange={(e) => setAdditionalNotes(e.target.value)}
-                    placeholder="Mention any specific requests, door jamb wrapping, ceramic coating add-on, or vehicle condition..."
-                    className="w-full px-4 py-3 bg-muted/40 border border-border/60 text-foreground font-mono text-xs focus:outline-none focus:border-foreground resize-none"
-                  />
-                </div>
-
-                {/* Submit Action */}
+                {/* Direct Action Buttons */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-border/40">
                   <button
                     type="submit"
@@ -396,7 +369,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                     ) : (
                       <>
                         <Send className="size-4" />
-                        <span>{t.contact.sections.submitBtn}</span>
+                        <span>Request Atelier Quote</span>
                       </>
                     )}
                   </button>
@@ -408,7 +381,7 @@ export default function ContactInquirySection({ className, appliedSpec }: Contac
                     className="w-full sm:w-auto px-6 py-4 border border-emerald-600/60 text-emerald-400 font-mono text-xs uppercase tracking-widest hover:bg-emerald-950/40 transition-all inline-flex items-center justify-center gap-2"
                   >
                     <MessageCircle className="size-4" />
-                    <span>{t.contact.sections.quickWhatsapp}</span>
+                    <span>Instant WhatsApp Quote</span>
                   </a>
                 </div>
               </form>
