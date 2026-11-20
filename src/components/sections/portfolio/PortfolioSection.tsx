@@ -572,7 +572,7 @@ const PROJECTS: Omit<ProjectItem, "category">[] = [
     turnaround: "4 Days",
     location: "Zurich Studio",
     beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/tmp/porsche-911-carrera-s-992-canton-zurich--1795174685906-2c734e80.jpg",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
     description: "Complete full vehicle transformation from factory Carrara White gloss to Satin Obsidian Black, featuring door jamb execution and knifeless edge tucking.",
     specs: ["Full Body Satin Wrap", "Door Jamb Precision Execution", "Knifeless Tape Trimmed", "Self-Healing Topcoat"],
     gridSpan: "lg:col-span-8 lg:row-span-2"
@@ -586,7 +586,7 @@ const PROJECTS: Omit<ProjectItem, "category">[] = [
     turnaround: "2 Days",
     location: "Canton Zurich Atelier",
     beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/tmp/porsche-911-carrera-s-992-canton-zurich--1795174685906-2c734e80.jpg",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
     description: "High-contrast partial wrap featuring forged carbon roof execution, gloss piano black side skirts, and front spoiler blackout.",
     specs: ["Forged Carbon Roof Wrap", "Piano Black Side Skirts", "Mirror Cap Accents", "Front Splitter Blackout"],
     gridSpan: "lg:col-span-4"
@@ -600,7 +600,7 @@ const PROJECTS: Omit<ProjectItem, "category">[] = [
     turnaround: "5 Days",
     location: "Zurich Studio",
     beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/tmp/porsche-911-carrera-s-992-canton-zurich--1795174685906-2c734e80.jpg",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
     description: "Converted factory gloss finish into a sleek matte sheen using 200-micron self-healing hydrophobic PPF, guarding against alpine gravel impact.",
     specs: ["200μm Self-Healing PPF", "Hydrophobic Topcoat", "Full Track Front Shield", "10-Year Warranty"],
     gridSpan: "lg:col-span-4"
@@ -614,7 +614,7 @@ const PROJECTS: Omit<ProjectItem, "category">[] = [
     turnaround: "1 Day",
     location: "Zurich Atelier",
     beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/tmp/porsche-911-carrera-s-992-canton-zurich--1795174685906-2c734e80.jpg",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
     description: "Total blackout conversion of aluminum window trims, grille surrounds, rear lettering, and badges to high-gloss piano black.",
     specs: ["Window Surround Blackout", "Grille Frame Wrap", "Rear Model Badge Blackout", "Mirror Base Blackout"],
     gridSpan: "lg:col-span-4"
@@ -628,7 +628,7 @@ const PROJECTS: Omit<ProjectItem, "category">[] = [
     turnaround: "4 Days",
     location: "Zurich Studio",
     beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/tmp/porsche-911-carrera-s-992-canton-zurich--1795174685906-2c734e80.jpg",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
     description: "Full body wrap in exclusive Liquid Quartz Gold, combined with ceramic heat-rejection window tinting and brake caliper detailing.",
     specs: ["Liquid Gold Satin Metal", "Ceramic Heat Shield Tint", "Knifeless Edge Tucking", "5-Year Guarantee"],
     gridSpan: "lg:col-span-4"
@@ -642,7 +642,7 @@ const PROJECTS: Omit<ProjectItem, "category">[] = [
     turnaround: "1 Day",
     location: "Zurich Atelier",
     beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/tmp/porsche-911-carrera-s-992-canton-zurich--1795174685906-2c734e80.jpg",
+    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
     description: "Nano-ceramic window tinting providing 99% UV rejection and 92% IR thermal shielding, compliant with Swiss ASTRA standards.",
     specs: ["99% UV Protection", "92% IR Heat Rejection", "Swiss ASTRA Compliant", "Scratch-Resistant Coating"],
     gridSpan: "lg:col-span-8"
