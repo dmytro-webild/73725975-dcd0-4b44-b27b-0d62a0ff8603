@@ -28,7 +28,6 @@ const NavbarHairlineRing = ({
   const { language, setLanguage, t } = useLanguage();
 
   const navLinks: NavLink[] = [
-    { label: t.nav.services, href: "#services" },
     { label: t.nav.customizer, href: "#customizer" },
     { label: t.nav.portfolio, href: "#portfolio" },
     { label: t.nav.details, href: "#details" },
