@@ -6,7 +6,9 @@ export const translations = {
       brandSub: 'Atelier Zürich • Nur nach Termin',
       services: 'Dienstleistungen',
       customizer: '3D Visualisierer',
+      finishes: 'Oberflächen',
       portfolio: 'Portfolio',
+      howItWorks: 'Ablauf',
       about: 'Über uns',
       pricing: 'Pakete',
       reviews: 'Kundenstimmen',
@@ -14,6 +16,133 @@ export const translations = {
       contact: 'Angebot anfragen',
       imprint: 'Impressum',
       privacy: 'Datenschutz',
+    },
+    finishesShowcase: {
+      badge: 'Oberflächen & Materialien Showcase',
+      titleLine1: 'FIND YOUR FINISH',
+      titleLine2: 'Haptik & Materialproben',
+      description: 'Entdecken Sie die fünf exklusiven Oberflächen-Kategorien unseres Ateliers. Jedes Finish wird mit erstklassigen Folien verarbeitet und bietet hervorragenden UV- und Lackschutz.',
+      finishCategoryLabel: 'Finish Spezifikation',
+      durabilityLabel: 'Haltbarkeit',
+      maintenanceLabel: 'Pflegeaufwand',
+      configureBtn: 'In 3D Visualisierer anpassen',
+      items: [
+        {
+          id: 'satin',
+          name: 'Satin Finish (Seidenmatt)',
+          specCode: 'JD-SATIN-MATTE-01',
+          swatchHex: '#5b6572',
+          sheenLevel: '30% Reflexion / Seidenglanz',
+          image: 'https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200',
+          description: 'Der perfekte Kompromiss zwischen Glanz und Matt. Reflektiert Licht in weichen Konturen und betont die Formensprache von Sportwagen wie dem Porsche 911.',
+          durability: '5 – 7 Jahre Garantie',
+          maintenance: 'Standard Textilwäsche / Handwäsche',
+          features: [
+            'Sanfter Seidenglanz hebt Karosserie-Lichtkanten hervor',
+            'Sehr widerstandsfähig gegen Fingerabdrücke und Wasserflecken',
+            'Optional mit transparenter Satin-PPF kombinierbar'
+          ]
+        },
+        {
+          id: 'gloss',
+          name: 'Hochglanz Veredelung',
+          specCode: 'JD-GLOSS-PIANO-02',
+          swatchHex: '#64748b',
+          sheenLevel: '98% Tiefenglanz / Spiegeleffekt',
+          image: 'https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200',
+          description: 'Maximale Farbtiefe und brillanter Spiegeleffekt. Nicht von einer hochwertigen Mehrschicht-Werkslackierung zu unterscheiden.',
+          durability: '5 – 7 Jahre Garantie',
+          maintenance: 'Handwäsche empfohlen',
+          features: [
+            'Tiefenbrillanz vergleichbar mit Keramik-Klarlack',
+            'Nahtlose Optik für Vollfolierung & Dachakzente',
+            'UV-Schutzfilter verhindert Verblassen'
+          ]
+        },
+        {
+          id: 'matte',
+          name: 'Strukturfreies Matt',
+          specCode: 'JD-MATTE-STEALTH-03',
+          swatchHex: '#121214',
+          sheenLevel: '5% Reflexion / Stealth Optics',
+          image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200',
+          description: 'Aggressiver, kompromissloser Stealth-Look. Licht wird schattenfrei absorbiert für ein pures, monolithisches Erscheinungsbild.',
+          durability: '5 – 7 Jahre Garantie',
+          maintenance: 'Spezielle Matt-Folienpflege',
+          features: [
+            '0% störende Lichtreflexionen',
+            'Verleiht der Karosserie eine muskulöse Silhouette',
+            'Perfekt für Chrome Delete & Gesamtfahrzeug'
+          ]
+        },
+        {
+          id: 'metallic',
+          name: 'Metallic & Perleffekt',
+          specCode: 'JD-METALLIC-QUARTZ-04',
+          swatchHex: '#b45309',
+          sheenLevel: 'High-Sparkle Flake Optik',
+          image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200',
+          description: 'Angereichert mit feinsten Pigment- und Metallic-Flakes. Erzeugt bei Sonneneinstrahlung faszinierende Farb- und Glanzeffekte.',
+          durability: '5 – 7 Jahre Garantie',
+          maintenance: 'Einfache Standardpflege',
+          features: [
+            'Hochverdichtete Metallic-Pigmentierung',
+            'Dreidimensionale Tiefe unter direktem Sonnenlicht',
+            'Verfügbar in Satin-Metallic & Glanz-Metallic'
+          ]
+        },
+        {
+          id: 'special',
+          name: 'Forged Carbon & Spezial-PPF',
+          specCode: 'JD-CARBON-SPECIAL-05',
+          swatchHex: '#064e3b',
+          sheenLevel: 'Echt-Struktur & Color-Shift',
+          image: 'https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg',
+          description: 'Exklusive Spezialfolien von Forged Carbon Texturen über chamäleonartige Color-Shift Folien bis hin zu selbstheilender Stealth-PPF.',
+          durability: 'Bis zu 10 Jahre Garantie',
+          maintenance: 'Sehr pflegeleicht',
+          features: [
+            'Fühlbare Forged Carbon- & Waben-Strukturen',
+            '200-Mikron PPF Schlagfestigkeit gegen Alpinsplit',
+            'Color-Shift Effekt je nach Blickwinkel'
+          ]
+        }
+      ]
+    },
+    howItWorks: {
+      badge: 'Der Weg zu Ihrem Wunschfahrzeug',
+      titleLine1: 'HOW IT WORKS',
+      titleLine2: '4-Schritte Customer Journey',
+      description: 'Von der ersten Idee bis zur Schlüsselübergabe in unserem Zürcher Reinraum-Atelier — präzise, transparent und persönlich.',
+      ctaTitle: 'Bereit für Ihre Fahrzeug-Transformation?',
+      ctaSubtitle: 'Vereinbaren Sie Ihren persönlichen Beratungstermin im Kanton Zürich.',
+      ctaButton: 'Beratungstermin Buchen',
+      steps: [
+        {
+          number: '01',
+          title: 'Erstberatung & Folienauswahl',
+          description: 'Gemeinsam besprechen wir Ihre Wünsche. Sie begutachten echte Folienmuster (Satin, Matt, Glanz, PPF) an Ihrem Fahrzeug und wählen Ihre Wunscheigenschaften.',
+          highlight: 'Persönlich & Diskret'
+        },
+        {
+          number: '02',
+          title: 'Individuelle Offerte & Termin',
+          description: 'Sie erhalten eine transparente Fixpreis-Offerte inklusive Zeitplan. Nach der Terminbestätigung reservieren wir den Reinraum exklusiv für Ihren Wagen.',
+          highlight: 'Transparentes Fixpreisangebot'
+        },
+        {
+          number: '03',
+          title: 'Reinraum-Prep & Knifeless Wrap',
+          description: 'Gründliche Lackentfettung, Demontage von Zierteilen falls nötig, und messerfreie Knifeless-Tape Verklebung ohne jegliches Klingenrisiko am Werkslack.',
+          highlight: '0% Klingen-Risiko'
+        },
+        {
+          number: '04',
+          title: 'Qualitätsprüfung & Übergabe',
+          description: 'Akribische Endkontrolle im Lichttunnel, Empfehlungen zur Pflege sowie Übergabe des Atelier-Garantiezertifikats bei der Fahrzeugabholung.',
+          highlight: 'Lichttunnel Qualitätscheck'
+        }
+      ]
     },
     hero: {
       locationBadge: 'Kanton Zürich, Schweiz',
@@ -407,7 +536,9 @@ export const translations = {
       brandSub: 'Zurich Studio • Appointment Only',
       services: 'Services',
       customizer: '3D Visualizer',
+      finishes: 'Finishes',
       portfolio: 'Portfolio',
+      howItWorks: 'Process',
       about: 'About Atelier',
       pricing: 'Packages',
       reviews: 'Reviews',
@@ -415,6 +546,133 @@ export const translations = {
       contact: 'Request Quote',
       imprint: 'Imprint',
       privacy: 'Privacy Policy',
+    },
+    finishesShowcase: {
+      badge: 'Finishes & Materials Showcase',
+      titleLine1: 'FIND YOUR FINISH',
+      titleLine2: 'Tactile Material Samples',
+      description: 'Explore our studio’s five signature finish categories. Each material option is applied using top-tier European films offering supreme UV, scratch, and gravel defense.',
+      finishCategoryLabel: 'Finish Specification',
+      durabilityLabel: 'Durability',
+      maintenanceLabel: 'Maintenance',
+      configureBtn: 'Configure in 3D Visualizer',
+      items: [
+        {
+          id: 'satin',
+          name: 'Satin Finish (Semi-Matte)',
+          specCode: 'JD-SATIN-MATTE-01',
+          swatchHex: '#5b6572',
+          sheenLevel: '30% Sheen / Silky Lustre',
+          image: 'https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200',
+          description: 'The ultimate balance between gloss depth and stealth matte. Diffuses ambient light across vehicle contours, enhancing body lines on supercars like the Porsche 911.',
+          durability: '5 - 7 Year Warranty',
+          maintenance: 'Standard Wash / Hand Wash',
+          features: [
+            'Soft satin sheen highlights vehicle body contours',
+            'Resistant to fingerprints and water spots',
+            'Can be combined with clear satin PPF'
+          ]
+        },
+        {
+          id: 'gloss',
+          name: 'High Gloss Finish',
+          specCode: 'JD-GLOSS-PIANO-02',
+          swatchHex: '#64748b',
+          sheenLevel: '98% Depth Gloss / Mirror Optic',
+          image: 'https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200',
+          description: 'Maximum paint depth and brilliant mirror clarity. Indistinguishable from factory multi-coat paint.',
+          durability: '5 - 7 Year Warranty',
+          maintenance: 'Hand Wash Recommended',
+          features: [
+            'Mirror clarity matching ceramic clear coats',
+            'Seamless execution for full wraps & roof contrast',
+            'UV-shielding layer prevents color fading'
+          ]
+        },
+        {
+          id: 'matte',
+          name: 'Stealth Matte',
+          specCode: 'JD-MATTE-STEALTH-03',
+          swatchHex: '#121214',
+          sheenLevel: '5% Reflection / Stealth Optics',
+          image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200',
+          description: 'Uncompromising stealth aesthetic. Absorbs light without reflection for a pure, monolithic silhouette.',
+          durability: '5 - 7 Year Warranty',
+          maintenance: 'Dedicated Matte Film Cleaner',
+          features: [
+            '0% harsh glare or mirror reflections',
+            'Accentuates muscular vehicle proportions',
+            'Ideal for full wraps and chrome delete packages'
+          ]
+        },
+        {
+          id: 'metallic',
+          name: 'Metallic & Pearl Effect',
+          specCode: 'JD-METALLIC-QUARTZ-04',
+          swatchHex: '#b45309',
+          sheenLevel: 'High-Sparkle Flake Optics',
+          image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200',
+          description: 'Infused with fine metallic pigments. Creates captivating light play and color depth under sunlight.',
+          durability: '5 - 7 Year Warranty',
+          maintenance: 'Standard Vehicle Wash',
+          features: [
+            'High-density metallic flake pigmentation',
+            'Three-dimensional depth under direct light',
+            'Available in Satin Metallic and Gloss Metallic'
+          ]
+        },
+        {
+          id: 'special',
+          name: 'Forged Carbon & Special PPF',
+          specCode: 'JD-CARBON-SPECIAL-05',
+          swatchHex: '#064e3b',
+          sheenLevel: 'Tactile Texture & Color-Shift',
+          image: 'https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg',
+          description: 'Exclusive specialty films ranging from forged carbon textures to chameleon color-shift films and self-healing PPF armor.',
+          durability: 'Up to 10 Year Warranty',
+          maintenance: 'Low Maintenance',
+          features: [
+            'Tactile Forged Carbon & Honeycomb textures',
+            '200-micron PPF protection against gravel',
+            'Angle-dependent color-shift effects'
+          ]
+        }
+      ]
+    },
+    howItWorks: {
+      badge: 'Your Customer Journey',
+      titleLine1: 'HOW IT WORKS',
+      titleLine2: '4-Step Atelier Process',
+      description: 'From initial design consultation to clean room delivery at our Zurich studio — precise, transparent, and personalized.',
+      ctaTitle: 'Ready for Your Vehicle Transformation?',
+      ctaSubtitle: 'Schedule your private consultation appointment in the Canton of Zurich.',
+      ctaButton: 'Book Consultation',
+      steps: [
+        {
+          number: '01',
+          title: 'Consultation & Specification',
+          description: 'We discuss your styling vision. You examine physical material swatches (Satin, Matte, Gloss, PPF) directly on your vehicle.',
+          highlight: 'Personal & Discrete'
+        },
+        {
+          number: '02',
+          title: 'Tailored Quote & Booking',
+          description: 'You receive a transparent fixed-price proposal and project timeline. Once confirmed, we reserve our clean room exclusively for your vehicle.',
+          highlight: 'Fixed Price Guarantee'
+        },
+        {
+          number: '03',
+          title: 'Clean Room Prep & Knifeless Wrap',
+          description: 'Paint decontamination, disassembly of trims where required, and 0%-blade knifeless tape execution with zero paint contact.',
+          highlight: '0% Blade Risk'
+        },
+        {
+          number: '04',
+          title: 'Quality Inspection & Handover',
+          description: 'Rigorous light tunnel inspection, care handbook delivery, and presentation of your Atelier Warranty Certificate.',
+          highlight: 'Light Tunnel Quality Control'
+        }
+      ]
     },
     hero: {
       locationBadge: 'Canton of Zurich, Switzerland',

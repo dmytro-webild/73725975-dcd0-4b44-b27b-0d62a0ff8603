@@ -20,86 +20,93 @@ export interface ProjectItem {
   afterImage: string;
   description: string;
   specs: string[];
+  gridSpan?: string;
 }
 
 const PROJECTS: Omit<ProjectItem, "category">[] = [
   {
-    id: "porsche-gt3-satin",
-    title: "Stealth Satin Black Transformation",
-    vehicle: "Porsche 911 GT3 RS (992)",
+    id: "porsche-911-satin-grey",
+    title: "Satin Metallic Grey Atelier Edition",
+    vehicle: "Porsche 911 Carrera S (992)",
     categoryKey: "fullWraps",
-    finish: "Stealth Satin Obsidian Black Vinyl",
-    turnaround: "4 Days",
-    location: "Canton of Zurich Atelier",
-    beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200",
-    description: "Complete vehicle wrap from factory White to Satin Obsidian Black, combined with gloss carbon wing accents and knifeless door jamb tucking.",
-    specs: ["Full Body Satin Wrap", "Door Jamb Execution", "Forged Carbon Wing Accent", "Knifeless Tape Trimmed"]
-  },
-  {
-    id: "bmw-m4-nardo",
-    title: "Nardo Grey & Forged Carbon Spec",
-    vehicle: "BMW M4 Competition (G82)",
-    categoryKey: "fullWraps",
-    finish: "Nardo Grey Gloss + Forged Carbon",
+    finish: "Satin Metallic Anthracite Grey Vinyl",
     turnaround: "4 Days",
     location: "Zurich Studio",
-    beforeImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200",
-    description: "Full body Nardo Grey vinyl wrap accompanied by gloss black roof wrap and full front bumper chrome delete.",
-    specs: ["Gloss Nardo Grey Film", "Gloss Black Roof Wrap", "Front Kidney Grille Blackout", "Side Mirror Caps"]
+    beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
+    afterImage: "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200",
+    description: "Complete full vehicle transformation from gloss white to Satin Metallic Grey, featuring full door jamb execution and knifeless tape precision.",
+    specs: ["Full Body Satin Wrap", "Door Jamb Precision Execution", "Knifeless Tape Trimmed", "Self-Healing Topcoat"],
+    gridSpan: "lg:col-span-8 lg:row-span-2"
   },
   {
-    id: "amg-gt-ppf",
-    title: "Full Body Stealth PPF Shield",
+    id: "bmw-m4-deep-blue",
+    title: "Deep Metallic Blue & Forged Carbon",
+    vehicle: "BMW M4 Competition (G82)",
+    categoryKey: "fullWraps",
+    finish: "Deep Metallic Ocean Blue + Gloss Black",
+    turnaround: "4 Days",
+    location: "Canton Zurich Atelier",
+    beforeImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
+    afterImage: "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200",
+    description: "Full body Deep Blue wrap combined with gloss black roof wrap, high-contrast side skirts, and front bumper blackout trim.",
+    specs: ["Gloss Deep Blue Metallic", "Gloss Piano Roof Wrap", "Kidney Grille Blackout", "Forged Mirror Accents"],
+    gridSpan: "lg:col-span-4"
+  },
+  {
+    id: "amg-gt-olive",
+    title: "Stealth Matte Olive Green Armor",
     vehicle: "Mercedes-AMG GT 63 S",
     categoryKey: "ppf",
     finish: "Matte Stealth Paint Protection Film",
     turnaround: "5 Days",
-    location: "Zurich Atelier",
+    location: "Zurich Studio",
     beforeImage: "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&w=1200",
     afterImage: "https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg",
-    description: "Converted original gloss paint into a silky satin matte sheen using 200-micron self-healing PPF, protecting against high-speed alpine gravel.",
-    specs: ["200μm Self-Healing PPF", "Hydrophobic Topcoat", "Full Front Track Coverage", "10-Year Warranty"]
+    description: "Converted OEM metallic black into a silky matte olive green sheen using 200-micron self-healing PPF, protecting against high-speed alpine gravel.",
+    specs: ["200μm Self-Healing PPF", "Hydrophobic Topcoat", "Full Track Front Protection", "10-Year Warranty"],
+    gridSpan: "lg:col-span-4"
   },
   {
-    id: "audi-rs6-blackout",
-    title: "Complete Satin Chrome Delete",
+    id: "audi-rs6-satin-black",
+    title: "Total Satin Black Chrome Delete",
     vehicle: "Audi RS6 Avant (C8)",
     categoryKey: "chromeDelete",
-    finish: "Satin Black Trim Blackout",
+    finish: "Satin Obsidian Trim Blackout",
     turnaround: "1 Day",
-    location: "Zurich Studio",
+    location: "Zurich Atelier",
     beforeImage: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&w=1200",
     afterImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    description: "Total blackout conversion of aluminum window trims, roof rails, front Singleframe grille, and rear diffuser inserts.",
-    specs: ["Window Surround Blackout", "Roof Rail Wrap", "Grille Surround", "Badges & Emblems"]
+    description: "Total blackout conversion of aluminum window trims, roof rails, front Singleframe grille surround, and badging.",
+    specs: ["Window Surround Blackout", "Roof Rail Wrap", "Grille Surround", "Badges & Emblems"],
+    gridSpan: "lg:col-span-4"
   },
   {
-    id: "ferrari-f8-tint",
-    title: "Ceramic Heat Rejection Tinting",
-    vehicle: "Ferrari F8 Tributo",
+    id: "taycan-liquid-gold",
+    title: "Liquid Gold Satin Quartz Spec",
+    vehicle: "Porsche Taycan Turbo S",
+    categoryKey: "fullWraps",
+    finish: "Liquid Quartz Gold Satin Metal",
+    turnaround: "4 Days",
+    location: "Zurich Studio",
+    beforeImage: "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200",
+    afterImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
+    description: "Full body wrap in exclusive Liquid Quartz Gold, combined with ceramic heat-rejection window tinting and brake caliper detailing.",
+    specs: ["Liquid Gold Satin Metal", "Ceramic Heat Shield Tint", "Knifeless Edge Tucking", "5-Year Guarantee"],
+    gridSpan: "lg:col-span-4"
+  },
+  {
+    id: "huracan-forged-carbon",
+    title: "Forged Carbon & Nano-Ceramic Tint",
+    vehicle: "Lamborghini Huracán EVO",
     categoryKey: "windowTinting",
     finish: "Nano-Ceramic 15% Privacy Tint",
-    turnaround: "5 Hours",
+    turnaround: "2 Days",
     location: "Zurich Atelier",
     beforeImage: "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200",
-    description: "Premium ceramic window tinting providing 99% UV rejection and 92% IR thermal shielding, certified compliant with Swiss traffic regulations.",
-    specs: ["99% UV Protection", "92% IR Rejection", "Canton Zurich Compliant", "Non-Interference Ceramic"]
-  },
-  {
-    id: "tesla-plaid-roof",
-    title: "Gloss Black Roof & Accent Spec",
-    vehicle: "Tesla Model S Plaid",
-    categoryKey: "partialWraps",
-    finish: "Gloss Piano Black Accent Wrap",
-    turnaround: "2 Days",
-    location: "Zurich Studio",
-    beforeImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
     afterImage: "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&w=1200",
-    description: "Panoramic gloss black roof wrap extension seamlessly integrated with satin black side mirror caps and lip spoiler.",
-    specs: ["Panoramic Roof Wrap", "Mirror Cap Accents", "Trunk Lip Spoiler", "Camera Trim Blackout"]
+    description: "Nano-ceramic window tinting providing 99% UV rejection and 92% IR thermal shielding, paired with forged carbon aero accents.",
+    specs: ["99% UV Protection", "92% IR Rejection", "ASTRA Swiss Compliant", "Forged Carbon Accents"],
+    gridSpan: "lg:col-span-8"
   }
 ];
 
@@ -172,10 +179,10 @@ export function BeforeAfterSlider({
       onTouchMove={handleTouchMove}
       className={cn("relative overflow-hidden select-none cursor-ew-resize group border border-border/60 bg-card", className)}
     >
-      {/* After Image (Full background) */}
+      {/* After Image */}
       <img src={afterImage} alt={afterLabel} className="absolute inset-0 size-full object-cover object-center" />
 
-      {/* Before Image (Clipped overlay) */}
+      {/* Before Image */}
       <div
         className="absolute inset-y-0 left-0 overflow-hidden"
         style={{ width: `${sliderPos}%` }}
@@ -196,7 +203,7 @@ export function BeforeAfterSlider({
         {afterLabel}
       </div>
 
-      {/* Divider Line & Handle */}
+      {/* Handle */}
       <div
         className="absolute top-0 bottom-0 z-20 w-0.5 bg-foreground shadow-[0_0_12px_rgba(255,255,255,0.8)]"
         style={{ left: `${sliderPos}%` }}
@@ -254,14 +261,15 @@ export default function PortfolioSection() {
           </p>
         </div>
 
-        {/* Featured Interactive Before & After Slider */}
+        {/* Featured Interactive Before & After Slider (Porsche 911 Satin Grey) */}
         <div className="mb-16">
           <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-[length:var(--text-h3)] font-light uppercase tracking-wider [font-family:var(--font-heading)]">
-              {t.portfolio.sliderTitle}
+            <h3 className="text-[length:var(--text-h3)] font-light uppercase tracking-wider [font-family:var(--font-heading)] flex items-center gap-2">
+              <Sparkles className="size-4 text-primary" />
+              <span>{t.portfolio.sliderTitle}</span>
             </h3>
-            <span className="text-xs font-mono uppercase tracking-widest text-foreground/50">
-              Porsche 911 GT3 RS
+            <span className="text-xs font-mono uppercase tracking-widest text-foreground/70 font-semibold">
+              Porsche 911 Carrera S — Satin Metallic Grey
             </span>
           </div>
           <BeforeAfterSlider
@@ -291,8 +299,8 @@ export default function PortfolioSection() {
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Asymmetric Editorial Collage Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8">
           {filteredProjects.map((project) => (
             <motion.div
               layout
@@ -302,46 +310,53 @@ export default function PortfolioSection() {
               exit={{ opacity: 0, y: 16 }}
               transition={{ duration: 0.4 }}
               onClick={() => setSelectedProject(project)}
-              className="group cursor-pointer border border-border/60 bg-card/60 overflow-hidden flex flex-col justify-between hover:border-foreground/40 transition-all duration-300"
+              className={cn(
+                "group cursor-pointer border border-border/60 bg-card/60 overflow-hidden flex flex-col justify-between hover:border-foreground/50 transition-all duration-300 relative min-h-[360px]",
+                activeCategoryKey === "all" ? (project.gridSpan || "lg:col-span-4") : "lg:col-span-4"
+              )}
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-muted">
+              <div className="relative size-full min-h-[260px] flex-grow overflow-hidden bg-muted">
                 <img
                   src={project.afterImage}
                   alt={project.title}
                   className="size-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-background/20 group-hover:bg-background/0 transition-colors" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90" />
 
-                <div className="absolute top-3 left-3 px-2.5 py-1 bg-background/80 backdrop-blur-md border border-border/60 text-[10px] font-mono uppercase tracking-widest text-foreground">
-                  {project.category}
+                <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
+                  <div className="px-2.5 py-1 bg-background/90 backdrop-blur-md border border-border/60 text-[10px] font-mono uppercase tracking-widest text-foreground">
+                    {project.category}
+                  </div>
                 </div>
 
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-background/40 backdrop-blur-xs">
-                  <div className="px-4 py-2 bg-foreground text-background font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2">
+                {/* Inspect Overlay Button */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-background/50 backdrop-blur-xs z-20">
+                  <div className="px-5 py-2.5 bg-foreground text-background font-mono text-xs uppercase tracking-widest inline-flex items-center gap-2 font-bold shadow-xl">
                     <Eye className="size-4" />
                     <span>{t.portfolio.inspectBtn}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col justify-between flex-grow">
+              {/* Card Meta Content */}
+              <div className="p-6 relative z-10 bg-card/90 backdrop-blur-md border-t border-border/40 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between text-xs font-mono text-foreground/50 mb-2">
-                    <span>{project.vehicle}</span>
+                  <div className="flex items-center justify-between text-xs font-mono text-foreground/50 mb-1.5">
+                    <span className="font-semibold text-foreground/90">{project.vehicle}</span>
                     <span className="flex items-center gap-1">
                       <MapPin className="size-3" />
                       {project.location}
                     </span>
                   </div>
-                  <h4 className="text-[length:var(--text-h3)] font-light uppercase tracking-tight [font-family:var(--font-heading)] mb-2">
+                  <h4 className="text-[length:var(--text-h3)] font-light uppercase tracking-tight [font-family:var(--font-heading)] mb-1">
                     {project.title}
                   </h4>
-                  <p className="text-xs font-mono text-primary/90 mb-4">
+                  <p className="text-xs font-mono text-primary/90 mb-3">
                     {project.finish}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-border/40 flex items-center justify-between text-xs font-mono text-foreground/60">
+                <div className="pt-3 border-t border-border/40 flex items-center justify-between text-xs font-mono text-foreground/60">
                   <span>{t.portfolio.turnaroundLabel}: {project.turnaround}</span>
                   <ArrowRight className="size-4 text-foreground/40 group-hover:text-foreground group-hover:translate-x-1 transition-all" />
                 </div>
