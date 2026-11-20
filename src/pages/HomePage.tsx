@@ -14,7 +14,6 @@ import ContactInquirySection from "@/components/sections/contact/ContactInquiryS
 import InstagramSection from "@/components/sections/instagram/InstagramSection";
 import WhatsAppWidget from "@/components/sections/whatsapp/WhatsAppWidget";
 import ScrollToneBackdrop from "@/components/kit/ScrollToneBackdrop";
-import ModelStage from "@/components/kit/ModelStage";
 import LoaderRingProgress from "@/components/loaders/LoaderRingProgress";
 import { useLanguage } from "@/context/useLanguage";
 
@@ -42,22 +41,12 @@ export default function HomePage() {
     <>
       <ScrollToneBackdrop />
 
-      {/* Realistic Porsche 911 3D Stage */}
-      <ModelStage
-        src="https://storage.googleapis.com/webild/default/models/sports-car/model.fd149a09dc4d.glb"
-        scale={3.7}
-      />
-
       <LoaderRingProgress />
 
       {/* Hero Section */}
       <div id="hero" data-webild-section="HeroAtelierSection" data-webild-section-id="HeroAtelierSection-1" data-section="hero">
         <HeroAtelierSection
-          modelPose={{
-            ry: 360,
-            scale: 1,
-          }}
-          media="model"
+          media="image"
         />
       </div>
 
@@ -103,17 +92,7 @@ export default function HomePage() {
           title={t.pricing.title}
           description={t.pricing.description}
           items={pricingItems}
-          model={{
-            rx: -27,
-            ry: 360,
-            radius: 8.5,
-            scale: 0.65,
-            sm: {
-              radius: 10,
-              scale: 0.7
-            }
-          }}
-          media="model"
+          media="image"
         />
       </div>
 
@@ -121,15 +100,6 @@ export default function HomePage() {
       <div id="testimonials" data-webild-section="TestimonialAxisCounter" data-webild-section-id="TestimonialAxisCounter-1" data-section="testimonials">
         <TestimonialAxisCounter
           items={t.testimonials.items}
-          model={{
-            ry: 380,
-            rx: -15,
-            radius: 7,
-            scale: 0.75,
-            sm: {
-              radius: 9
-            }
-          }}
           media="image"
         />
       </div>
@@ -141,16 +111,6 @@ export default function HomePage() {
           title={t.faq.title}
           script={t.faq.script}
           items={t.faq.items}
-          model={{
-            rx: -15,
-            ry: 370,
-            radius: 10,
-            scale: 0.8,
-            sm: {
-              radius: 10,
-              scale: 0.95
-            }
-          }}
           media="image"
         />
       </div>

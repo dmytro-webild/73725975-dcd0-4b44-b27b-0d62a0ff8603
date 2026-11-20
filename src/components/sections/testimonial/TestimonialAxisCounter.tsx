@@ -1,169 +1,310 @@
-import { useCallback, useEffect, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
+"use client";
+
+import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
+import { Star, Quote, CheckCircle2, ChevronLeft, ChevronRight, MessageSquare } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { useKitMotion } from "@/components/kit/kitMotion";
-import { modelChapter, type ModelChapter } from "@/components/kit/modelPose";
+import { useLanguage } from "@/context/useLanguage";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-const pad = (n: number) => String(n).padStart(2, "0");
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role?: string;
+  rating?: number;
+};
 
-type Testimonial = { quote: string; name: string; role?: string };
-
-type TestimonialAxisCounterProps = {
+export type TestimonialAxisCounterProps = {
   script?: string;
   ghost?: string;
   items?: Testimonial[];
-  model?: ModelChapter;
+  model?: unknown;
   media?: "model" | "image";
   ariaLabel?: string;
   className?: string;
 };
 
-const EASE = [0.19, 1, 0.22, 1] as const;
+const EXPO = [0.19, 1, 0.22, 1] as const;
 
-const TestimonialAxisCounter = ({
-  script,
-  ghost,
-  items = [
-    { quote: "It feels finished from every angle. Nothing added, nothing missing.", name: "Claire Duval", role: "Collector, Paris" },
-    { quote: "The quietest object on my desk, and the one everyone asks about.", name: "Marcus Lindqvist", role: "Architect, Stockholm" },
-    { quote: "You can tell someone cared about the parts you never see.", name: "Aiko Tanaka", role: "Industrial designer, Tokyo" },
-    { quote: "Delivered on time, built to last, and a pleasure to own.", name: "Daniel Okafor", role: "Founder, Lagos" },
-  ],
-  model,
-  media = "model",
+export default function TestimonialAxisCounter({
+  items,
   ariaLabel,
   className,
-}: TestimonialAxisCounterProps) => {
-  const isModel = media === "model";
+}: TestimonialAxisCounterProps) {
   const reduce = useReducedMotion();
-  const kit = useKitMotion();
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start", loop: items.length > 1, duration: 32 });
-  const [current, setCurrent] = useState(0);
+  const { language } = useLanguage();
+  const [activeTab, setActiveTab] = useState(0);
 
-  const sync = useCallback(() => {
-    if (!emblaApi) return;
-    setCurrent(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
+  const defaultItems: Testimonial[] = [
+    {
+      quote: language === "de"
+        ? "Makellose Satin-Schwarz-Folierung an meinem Porsche 911 GT3 RS. Die Kanten an den Einstiegen sind von einer Werkslackierung nicht zu unterscheiden."
+        : "Flawless satin wrap finish on my 911 GT3 RS. The edges around the door jambs are completely indistinguishable from factory paint.",
+      name: "Marc von Berg",
+      role: language === "de" ? "Porsche 911 GT3 RS Besitzer — Zürich" : "Porsche 911 GT3 RS Owner — Zurich",
+      rating: 5,
+    },
+    {
+      quote: language === "de"
+        ? "Die PPF-Ganzkörperfolierung an meinem Audi RS6 Avant gibt mir absolutes Vertrauen auf Pässen. Nach 15.000 Kilometern kein einziger Steinschlag."
+        : "Full PPF application on my Audi RS6 Avant gave me complete confidence on high-speed alpine passes. Zero stone chip damage.",
+      name: "Nathan Bennett",
+      role: language === "de" ? "Audi RS6 Avant Besitzer — Zürich" : "Audi RS6 Avant Owner — Zurich",
+      rating: 5,
+    },
+    {
+      quote: language === "de"
+        ? "Das Chrome Delete Blackout hat das Profil meines AMG GT sofort aufgewertet. Schweizer Handwerkskunst auf höchstem Niveau."
+        : "Sleek chrome delete blackout transformed the profile of my AMG GT instantly. Extraordinary Swiss craft standards.",
+      name: "Imogen Price",
+      role: language === "de" ? "Mercedes-AMG GT 63 S Besitzerin — Zürich" : "Mercedes-AMG GT 63 S Owner — Zurich",
+      rating: 5,
+    },
+    {
+      quote: language === "de"
+        ? "Akribisch saubere Arbeit im Reinraum am BMW M4. Die Online-Farbvorschau stimmte 1:1 mit dem realen Folienmuster überein."
+        : "Meticulous dust-free clean room execution on my BMW M4. The customizer online matched the physical vinyl sample 100%.",
+      name: "Callum Henderson",
+      role: language === "de" ? "BMW M4 Competition Besitzer — Zürich" : "BMW M4 Competition Owner — Zurich",
+      rating: 5,
+    },
+    {
+      quote: language === "de"
+        ? "Messerscharfe Knifeless-Kanten und perfekter Stealth-Look für meinen BMW M3. Äusserst kompetentes Atelier-Team."
+        : "Razor-sharp knifeless tape execution and flawless stealth look for my BMW M3. Outstanding team of craftsmen.",
+      name: "Lukas Weber",
+      role: language === "de" ? "BMW M3 Competition Besitzer — Zürich" : "BMW M3 Competition Owner — Zurich",
+      rating: 5,
+    },
+    {
+      quote: language === "de"
+        ? "Hervorragende Nano-Keramik Scheibentönung an unserem Porsche Cayenne. Perfekter Hitzeschutz und makellose Optik."
+        : "Outstanding nano-ceramic window tinting on our Porsche Cayenne. Perfect heat rejection and pristine optical clarity.",
+      name: "Sophie Miller",
+      role: language === "de" ? "Porsche Cayenne Turbo GT Besitzerin — Zürich" : "Porsche Cayenne Turbo GT Owner — Zurich",
+      rating: 5,
+    },
+  ];
 
-  useEffect(() => {
-    if (!emblaApi) return;
-    sync();
-    emblaApi.on("select", sync).on("reInit", sync);
-    return () => {
-      emblaApi.off("select", sync).off("reInit", sync);
-    };
-  }, [emblaApi, sync]);
+  const reviewList = items && items.length > 0 ? items : defaultItems;
+  const isDe = language === "de";
 
-  const draw = (axis: "x" | "y", delay: number) => ({
-    initial: reduce ? false : axis === "x" ? { scaleX: 0 } : { scaleY: 0 },
-    whileInView: axis === "x" ? { scaleX: 1 } : { scaleY: 1 },
-    viewport: { once: true, margin: "0px 0px -10% 0px" },
-    transition: { duration: 1.6, ease: EASE, delay },
-  });
-  const fade = (delay: number) => ({
-    initial: reduce ? false : { opacity: 0 },
-    whileInView: { opacity: 1 },
-    viewport: { once: true, margin: "0px 0px -15% 0px" },
-    transition: { duration: kit.slow, ease: EASE, delay },
-  });
+  const nextReview = () => {
+    setActiveTab((prev) => (prev + 1) % reviewList.length);
+  };
+
+  const prevReview = () => {
+    setActiveTab((prev) => (prev - 1 + reviewList.length) % reviewList.length);
+  };
 
   return (
-    <section aria-label={ariaLabel ?? "Testimonials"} {...modelChapter(media === "model" ? model : undefined)} className={cn("relative overflow-x-clip py-[var(--section-space)] text-foreground", className)}>
-      {ghost && (
-        <p aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-[length:calc(var(--text-display)*1.9)] leading-none text-accent/15 [font-family:var(--font-accent)]">
-          {ghost}
-        </p>
+    <section
+      aria-label={ariaLabel ?? (isDe ? "Kundenstimmen" : "Client Reviews")}
+      className={cn(
+        "relative py-20 lg:py-28 bg-[#121316] text-slate-100 border-y border-white/10 overflow-hidden",
+        className
       )}
-      {isModel && (
-        <>
-          <motion.div aria-hidden="true" {...draw("y", 0)} className="pointer-events-none absolute inset-y-0 left-[calc(50%-var(--container)/4)] hidden w-px origin-top bg-foreground/10 lg:block" />
-          <motion.div
-            aria-hidden="true"
-            {...draw("x", 0.2)}
-            className="pointer-events-none absolute inset-x-0 top-[calc(var(--section-space)+clamp(7.5rem,32vw,10.5rem))] h-px origin-left bg-foreground/10 lg:right-1/2 lg:top-1/2"
-          />
-        </>
-      )}
-      <div className={cn("relative mx-auto grid w-[var(--container)] grid-cols-1 items-center gap-[clamp(2rem,5vw,3rem)]", isModel && "lg:grid-cols-2 lg:gap-[var(--gap)]")}>
-        {isModel && (
-          <div aria-hidden="true" className="relative mx-auto h-[clamp(15rem,64vw,21rem)] w-full lg:h-[min(78svh,40rem)]">
-            <motion.div {...draw("y", 0)} className="pointer-events-none absolute -top-[var(--section-space)] bottom-0 left-1/2 w-px origin-top bg-foreground/10 lg:hidden" />
-            <motion.div {...fade(0.3)} className="pointer-events-none absolute inset-0 hidden overflow-hidden lg:block">
-              <div className="absolute left-1/2 top-1/2 h-px w-[160%] -translate-x-1/2 rotate-[38deg] bg-foreground/[0.07]" />
-              <div className="absolute left-1/2 top-1/2 h-px w-[160%] -translate-x-1/2 -rotate-[38deg] bg-foreground/[0.07]" />
+    >
+      {/* Dark Graphite Ambient Glows */}
+      <div className="absolute top-0 left-1/4 size-[500px] bg-emerald-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 size-[500px] bg-sky-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="mx-auto w-[var(--container)] relative z-10">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 border-b border-white/10 pb-8">
+          <div>
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono uppercase tracking-[0.2em] text-emerald-400 mb-4"
+            >
+              <CheckCircle2 className="size-3.5" />
+              <span>{isDe ? "Echte Kundenmeinungen" : "Verified Atelier Reviews"}</span>
             </motion.div>
-            <div data-model-anchor className="absolute inset-y-0 left-1/2 aspect-[4/5] -translate-x-1/2" />
+
+            <motion.h2
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: EXPO }}
+              className="text-3xl sm:text-4xl lg:text-5xl font-light uppercase tracking-[0.04em] [font-family:var(--font-heading)] text-white"
+            >
+              {isDe ? "Kundenstimmen & Referenzen" : "Client Testimonials & Feedback"}
+            </motion.h2>
           </div>
-        )}
 
-        <div className={cn("relative z-20 flex min-w-0 flex-col items-center text-center", isModel && "lg:items-start lg:pl-[clamp(1rem,4vw,4rem)] lg:text-left")}>
-          {!isModel && <motion.div aria-hidden="true" {...draw("y", 0)} className="mb-[clamp(1.5rem,2.6vw,2.5rem)] h-[clamp(4rem,8vw,7rem)] w-px origin-top bg-foreground/15" />}
-          {script && (
-            <motion.p {...fade(0)} className="mb-[clamp(1rem,1.6vw,1.5rem)] text-[length:var(--text-script)] leading-[0.9] text-accent [font-family:var(--font-accent)]">
-              {script}
-            </motion.p>
-          )}
-          <motion.div {...fade(0)} className="flex items-center gap-[0.75rem]">
-            <svg aria-hidden="true" width="9" height="9" viewBox="0 0 8 8" fill="none" className="text-foreground">
-              <path fill="currentColor" d="M3.5 0h1v8h-1z" />
-              <path fill="currentColor" d="M8 3.5v1H0v-1z" />
-            </svg>
-            <p aria-hidden="true" className="whitespace-nowrap text-[length:var(--text-label)] leading-none tabular-nums text-foreground/40">{`${pad(current + 1)} / ${pad(items.length)}`}</p>
-          </motion.div>
-
-          <motion.div {...fade(0.15)} ref={emblaRef} className="mt-[clamp(1.5rem,2.6vw,2.5rem)] w-full cursor-grab overflow-hidden active:cursor-grabbing">
-            <div className="flex touch-pan-y">
-              {items.map((item, index) => (
-                <figure
-                  key={index}
-                  aria-roledescription="slide"
-                  aria-label={`${index + 1} / ${items.length}`}
-                  className={cn("flex min-w-0 shrink-0 grow-0 basis-full flex-col items-center", isModel && "lg:items-start")}
-                >
-                  <blockquote className="max-w-[16em] text-balance text-[length:var(--text-h2)] font-light leading-[var(--quote-leading,1.15)] [text-transform:var(--display-case,uppercase)] tracking-[0.06em] [font-family:var(--font-heading)] [overflow-wrap:anywhere]">
-                    <p>{item.quote}</p>
-                  </blockquote>
-                  <figcaption className={cn("mt-[clamp(1.5rem,2.6vw,2.5rem)] flex flex-col items-center gap-[0.375rem]", isModel && "lg:items-start")}>
-                    <p className="text-[length:var(--text-small)] leading-[1.2]">{item.name}</p>
-                    {item.role && <p className="text-[length:var(--text-small)] leading-[1.2] text-foreground/40">{item.role}</p>}
-                  </figcaption>
-                </figure>
+          {/* Rating Summary Box */}
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex items-center gap-4 px-5 py-3 rounded-xl bg-white/[0.04] border border-white/10 backdrop-blur-md self-start md:self-auto"
+          >
+            <div className="flex items-center text-amber-400 gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
               ))}
             </div>
+            <div className="h-6 w-px bg-white/15" />
+            <div className="text-xs font-mono tracking-wider">
+              <span className="font-bold text-white">5.0 / 5.0</span>
+              <span className="text-white/50 ml-2">({isDe ? "Ausgezeichnet" : "Excellent"})</span>
+            </div>
           </motion.div>
+        </div>
 
-          {items.length > 1 && (
-            <motion.div {...fade(0.3)} className="mt-[clamp(2rem,3.4vw,3rem)] flex items-center gap-[0.75rem]">
-              <button
+        {/* Featured Testimonial Spotlight */}
+        <motion.div
+          key={activeTab}
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EXPO }}
+          className="relative mb-12 p-8 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-b from-white/[0.07] to-white/[0.02] border border-white/10 backdrop-blur-md shadow-2xl overflow-hidden"
+        >
+          <Quote className="absolute top-6 right-8 size-24 text-white/[0.03] pointer-events-none" />
+
+          <div className="relative z-10 max-w-4xl">
+            <div className="flex items-center gap-1.5 mb-6 text-amber-400">
+              {[...Array(reviewList[activeTab]?.rating || 5)].map((_, i) => (
+                <Star key={i} className="size-5 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+
+            <blockquote className="text-xl sm:text-2xl lg:text-3xl font-light leading-relaxed text-slate-100 mb-8 [font-family:var(--font-heading)]">
+              "{reviewList[activeTab].quote}"
+            </blockquote>
+
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-white/10">
+              <div className="flex items-center gap-4">
+                <div className="size-12 rounded-full bg-gradient-to-br from-emerald-500/20 to-sky-500/20 border border-white/20 flex items-center justify-center font-mono font-bold text-lg text-emerald-400 shadow-inner">
+                  {reviewList[activeTab].name.charAt(0)}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white text-base tracking-wide">
+                    {reviewList[activeTab].name}
+                  </h3>
+                  {reviewList[activeTab].role && (
+                    <p className="text-xs font-mono text-emerald-400/90 tracking-wider">
+                      {reviewList[activeTab].role}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-mono text-emerald-300">
+                <CheckCircle2 className="size-3.5" />
+                <span>{isDe ? "Verifizierte Folierung" : "Verified Wrap"}</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Carousel Controls & Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {reviewList.map((item, index) => {
+            const isActive = index === activeTab;
+            return (
+              <motion.button
+                key={index}
                 type="button"
-                aria-label="Previous testimonial"
-                onClick={() => emblaApi?.scrollPrev()}
-                className="flex size-[2.75rem] items-center justify-center rounded-full border border-foreground/25 transition-colors duration-300 hover:border-foreground/60"
+                onClick={() => setActiveTab(index)}
+                initial={reduce ? false : { opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className={cn(
+                  "text-left p-6 rounded-2xl transition-all duration-300 cursor-pointer flex flex-col justify-between border backdrop-blur-md group",
+                  isActive
+                    ? "bg-white/[0.08] border-emerald-500/50 shadow-lg shadow-emerald-500/5"
+                    : "bg-white/[0.03] border-white/10 hover:bg-white/[0.06] hover:border-white/20"
+                )}
               >
-                <svg aria-hidden="true" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                  <path d="M13 5H1M5 1 1 5l4 4" stroke="currentColor" strokeWidth="1" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                aria-label="Next testimonial"
-                onClick={() => emblaApi?.scrollNext()}
-                className="flex size-[2.75rem] items-center justify-center rounded-full border border-foreground/25 transition-colors duration-300 hover:border-foreground/60"
-              >
-                <svg aria-hidden="true" width="14" height="10" viewBox="0 0 14 10" fill="none">
-                  <path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" strokeWidth="1" />
-                </svg>
-              </button>
-            </motion.div>
-          )}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center text-amber-400 gap-1">
+                      {[...Array(item.rating || 5)].map((_, i) => (
+                        <Star key={i} className="size-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <span
+                      className={cn(
+                        "text-[10px] font-mono uppercase tracking-widest px-2 py-0.5 rounded-full border",
+                        isActive
+                          ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+                          : "text-white/40 border-white/10 group-hover:text-white/60"
+                      )}
+                    >
+                      {String(index + 1).padStart(2, "0")} / {String(reviewList.length).padStart(2, "0")}
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-slate-300 leading-relaxed line-clamp-3 mb-4 font-light">
+                    "{item.quote}"
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-white/5 flex items-center justify-between">
+                  <div>
+                    <p className="text-xs font-semibold text-white group-hover:text-emerald-400 transition-colors">
+                      {item.name}
+                    </p>
+                    {item.role && (
+                      <p className="text-[11px] font-mono text-white/50 truncate max-w-[200px]">
+                        {item.role}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+
+        {/* Action Footer: Invite Contact */}
+        <div className="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <div className="size-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
+              <MessageSquare className="size-5" />
+            </div>
+            <div>
+              <p className="text-xs font-mono uppercase tracking-wider text-white">
+                {isDe ? "Möchten Sie Ihr Fahrzeug veredeln?" : "Ready to transform your vehicle?"}
+              </p>
+              <p className="text-xs text-white/50">
+                {isDe ? "Vereinbaren Sie eine persönliche Beratung in Zürich." : "Schedule a personal atelier consultation in Zurich."}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={prevReview}
+              aria-label="Previous Review"
+              className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer text-white"
+            >
+              <ChevronLeft className="size-5" />
+            </button>
+            <button
+              onClick={nextReview}
+              aria-label="Next Review"
+              className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors cursor-pointer text-white"
+            >
+              <ChevronRight className="size-5" />
+            </button>
+            <a
+              href="#contact"
+              className="ml-2 px-6 py-3 rounded-xl bg-white text-black font-mono text-xs uppercase tracking-widest font-semibold hover:bg-white/90 transition-all shadow-lg"
+            >
+              {isDe ? "Beratung anfragen" : "Request Consultation"}
+            </a>
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default TestimonialAxisCounter;
+}
