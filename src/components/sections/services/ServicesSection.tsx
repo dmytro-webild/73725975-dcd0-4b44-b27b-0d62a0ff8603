@@ -77,9 +77,6 @@ export default function ServicesSection({ className, onSelectService }: Services
               <span className="text-foreground/50">{t.services.titleLine2}</span>
             </h2>
           </div>
-          <p className="text-[length:var(--text-body)] text-foreground/60 max-w-md">
-            {t.services.description}
-          </p>
         </div>
 
         {/* Service Navigation Tabs */}
