@@ -72,7 +72,7 @@ export default function InstagramSection() {
   const { t } = useLanguage();
 
   return (
-    <section id="instagram" className="relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40">
+    <section id="instagram" className="relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40 overflow-x-clip">
       <div className="mx-auto w-[var(--container)]">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">

@@ -46,7 +46,7 @@ const FooterWordmark = ({
       initial={reduce ? false : "hidden"}
       whileInView="shown"
       viewport={{ once: true, amount: 0.05 }}
-      className={cn("relative overflow-hidden pb-[var(--section-space)] pt-[clamp(2rem,3.6vw,3.25rem)] text-foreground", className)}
+      className={cn("relative overflow-x-clip pb-[var(--section-space)] pt-[clamp(2rem,3.6vw,3.25rem)] text-foreground", className)}
     >
       {columns.length > 0 && (
         <motion.nav
@@ -75,7 +75,7 @@ const FooterWordmark = ({
           ))}
         </motion.nav>
       )}
-      <h2 ref={wordmark} className={cn("flex w-full px-[clamp(0.5rem,1.4vw,1.25rem)] text-[length:clamp(5rem,24.3vw,21.875rem)] uppercase leading-[0.8] tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] [font-weight:var(--heading-weight)]", fit ? "justify-center" : media === "model" ? "justify-between" : "justify-center gap-x-[0.2em]")}>
+      <h2 ref={wordmark} className={cn("flex w-full px-[clamp(0.5rem,1.4vw,1.25rem)] text-[length:clamp(2.5rem,14vw,18rem)] uppercase leading-[0.8] tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] [font-weight:var(--heading-weight)]", fit ? "justify-center" : media === "model" ? "justify-between" : "justify-center gap-x-[0.2em]")}>
         <div className="sr-only">{title}</div>
         <div ref={wordmarkRow} aria-hidden="true" className={fit ? "inline-flex gap-x-[0.2em]" : "contents"}>
         {words.map((word, wordIndex) => (

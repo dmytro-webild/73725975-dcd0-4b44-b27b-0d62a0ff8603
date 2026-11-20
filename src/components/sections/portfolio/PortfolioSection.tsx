@@ -324,7 +324,7 @@ export default function PortfolioSection() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-5xl bg-card border border-border/80 p-6 sm:p-8 lg:p-10 text-foreground overflow-hidden my-auto shadow-2xl"
+              className="relative w-full max-w-5xl bg-card border border-border/80 p-6 sm:p-8 lg:p-10 text-foreground overflow-y-auto max-h-[88vh] my-auto shadow-2xl"
             >
               {/* Close Button */}
               <button

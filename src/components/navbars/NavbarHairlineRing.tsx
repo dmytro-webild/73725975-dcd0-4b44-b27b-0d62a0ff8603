@@ -50,9 +50,9 @@ const NavbarHairlineRing = ({
         initial={reduce ? false : { opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: EASE }}
-        className="fixed inset-x-0 top-0 z-[60] bg-background/90 backdrop-blur-xl border-b border-border/50 text-foreground shadow-sm"
+        className="fixed inset-x-0 top-0 z-[60] bg-background/90 backdrop-blur-xl border-b border-border/50 text-foreground shadow-sm px-4 sm:px-6 lg:px-8"
       >
-        <div className="mx-auto flex h-[4.5rem] w-[var(--container)] items-center justify-between gap-3 xl:gap-8 lg:h-[5.25rem]">
+        <div className="mx-auto flex h-[4.5rem] w-full max-w-[var(--max-w)] items-center justify-between gap-3 xl:gap-6 lg:h-[5.25rem]">
           {/* Brand Logo / Wordmark with High Legibility */}
           <a href="#" className="flex items-center gap-3 shrink-0 group py-1">
             {logoSrc ? (
@@ -72,12 +72,12 @@ const NavbarHairlineRing = ({
           </a>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-4 xl:gap-6 font-mono text-[11px] xl:text-xs uppercase tracking-wider text-foreground/80">
+          <div className="hidden xl:flex items-center gap-3.5 2xl:gap-5 font-mono text-[11px] uppercase tracking-wider text-foreground/80 shrink-0">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="hover:text-primary transition-colors py-2.5 relative font-medium group"
+                className="hover:text-primary transition-colors py-2.5 relative font-medium group whitespace-nowrap"
               >
                 <span>{link.label}</span>
                 <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />

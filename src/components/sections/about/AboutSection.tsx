@@ -7,7 +7,7 @@ export default function AboutSection() {
   const icons = [Shield, Sparkles, Lock, MapPin];
 
   return (
-    <section id="about" className="relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40">
+    <section id="about" className="relative py-[var(--section-space)] text-foreground bg-background border-t border-border/40 overflow-x-clip">
       <div className="mx-auto w-[var(--container)]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Editorial Copy */}
@@ -64,11 +64,11 @@ export default function AboutSection() {
           </div>
 
           {/* Right Column: Editorial Photograph */}
-          <div className="lg:col-span-5 relative group overflow-hidden border border-border/60 bg-card aspect-[4/5]">
+          <div className="lg:col-span-5 relative group overflow-hidden border border-border/60 bg-card aspect-[4/5] min-h-[340px]">
             <img
               src="https://images.pexels.com/photos/5895627/pexels-photo-5895627.jpeg?auto=compress&w=1200"
               alt="Atelier technician inspecting paint finish at JD Car Wrapping Studio Zurich"
-              className="size-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-85"
+              className="absolute inset-0 size-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-85"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
 

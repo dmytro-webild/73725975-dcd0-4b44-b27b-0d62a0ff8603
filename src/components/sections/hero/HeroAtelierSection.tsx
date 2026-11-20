@@ -28,7 +28,7 @@ export default function HeroAtelierSection({
       {...modelChapter(media === "model" ? modelPose : undefined)}
       aria-label="Hero"
       className={cn(
-        "relative min-h-[90vh] lg:min-h-screen flex flex-col justify-between pt-[6.5rem] lg:pt-[7.5rem] pb-10 overflow-hidden text-foreground bg-background",
+        "relative min-h-[85vh] lg:min-h-[90vh] flex flex-col justify-between pt-[6rem] lg:pt-[7rem] pb-8 overflow-x-clip text-foreground bg-background",
         className
       )}
     >
