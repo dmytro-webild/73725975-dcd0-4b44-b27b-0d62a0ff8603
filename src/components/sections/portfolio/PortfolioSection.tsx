@@ -1,19 +1,22 @@
-import { useState, useRef, useCallback, useLayoutEffect, useMemo, useEffect } from "react";
+import { useState, useRef, useCallback, useLayoutEffect, useMemo, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Eye, X, ArrowRight, ShieldCheck, MapPin, Sparkles, Sliders, Box, Camera, Check, Layers } from "lucide-react";
+import { Eye, X, ArrowRight, MapPin, Sparkles, Sliders, Box, Camera, Check, Layers } from "lucide-react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, ContactShadows, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useLanguage } from "@/context/useLanguage";
+import BmwM3Model from "@/components/models/BmwM3Model";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
 const PORSCHE_MODEL_URL = "https://storage.googleapis.com/webild/default/models/sports-car/model.fd149a09dc4d.glb";
 
 // Preload 3D Porsche 911 Model
-useGLTF.preload(PORSCHE_MODEL_URL);
+try {
+  useGLTF.preload(PORSCHE_MODEL_URL);
+} catch {}
 
 export type ServicePairKey = "fullWraps" | "partialWraps" | "chromeDelete" | "ppf" | "windowTinting";
 
@@ -33,7 +36,7 @@ export interface ProjectItem {
   gridSpan?: string;
 }
 
-// Renderable Porsche 911 with custom service-specific materials for before/after comparison
+// 3D Porsche 911 model with synced service materials
 function Porsche911ServiceCar({
   serviceKey,
   mode,
@@ -54,6 +57,8 @@ function Porsche911ServiceCar({
   });
 
   useEffect(() => {
+    if (!clonedScene) return;
+
     let bodyColor = new THREE.Color("#e2e8f0");
     let roughness = 0.08;
     let metalness = 0.15;
@@ -208,13 +213,40 @@ function Porsche911ServiceCar({
 
   return (
     <group ref={groupRef} rotation={[0, Math.PI / 4, 0]}>
-      <primitive
-        object={clonedScene}
-        scale={3.6}
-        position={[0, -0.6, 0]}
-      />
+      <primitive object={clonedScene} scale={3.6} position={[0, -0.6, 0]} />
     </group>
   );
+}
+
+// 3D Vehicle Renderer dispatching either Porsche 911 or BMW M3 Code Model with rotation syncing
+function ServiceCar3D({
+  serviceKey,
+  mode,
+  sharedRotationRef,
+}: {
+  serviceKey: ServicePairKey;
+  mode: "before" | "after";
+  sharedRotationRef?: React.RefObject<number>;
+}) {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame(() => {
+    if (groupRef.current && sharedRotationRef && sharedRotationRef.current !== undefined) {
+      groupRef.current.rotation.y = sharedRotationRef.current;
+    }
+  });
+
+  if (serviceKey === "windowTinting") {
+    // BMW M3 Competition 3D Code Model
+    const bmwColor = mode === "before" ? "#5b6572" : "#121316";
+    return (
+      <group ref={groupRef} rotation={[0, Math.PI / 4, 0]} position={[0, -0.4, 0]}>
+        <BmwM3Model color={bmwColor} />
+      </group>
+    );
+  }
+
+  return <Porsche911ServiceCar serviceKey={serviceKey} mode={mode} sharedRotationRef={sharedRotationRef} />;
 }
 
 // Studio HD Rendered Canvas representation matching genref-1.png for instant display
@@ -262,8 +294,8 @@ function StudioHDCarsView({ serviceKey, sliderPos }: { serviceKey: ServicePairKe
         <svg viewBox="0 0 1000 550" className="w-full max-w-4xl h-auto filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]">
           {/* Studio Shadow */}
           <ellipse cx="500" cy="460" rx="380" ry="30" fill="rgba(0,0,0,0.7)" filter="blur(10px)" />
-          
-          {/* Porsche Silhouette Body (After) */}
+
+          {/* Vehicle Silhouette Body (After) */}
           <path
             d="M 180 380 C 180 340, 240 300, 310 270 C 370 200, 480 140, 620 140 C 740 140, 830 200, 860 260 C 900 280, 930 330, 930 380 C 930 420, 900 440, 840 440 L 250 440 C 200 440, 180 410, 180 380 Z"
             fill={serviceKey === "fullWraps" ? "#141518" : serviceKey === "ppf" ? "#18261e" : "#242c38"}
@@ -282,7 +314,7 @@ function StudioHDCarsView({ serviceKey, sliderPos }: { serviceKey: ServicePairKe
           <circle cx="310" cy="420" r="35" fill="#27272a" stroke="#a1a1aa" strokeWidth="3" />
           <circle cx="780" cy="420" r="55" fill="#18181b" stroke="#71717a" strokeWidth="6" />
           <circle cx="780" cy="420" r="35" fill="#27272a" stroke="#a1a1aa" strokeWidth="3" />
-          
+
           {/* Window Trims (Chrome Delete indicator) */}
           <path
             d="M 350 260 L 820 260"
@@ -301,8 +333,8 @@ function StudioHDCarsView({ serviceKey, sliderPos }: { serviceKey: ServicePairKe
           <svg viewBox="0 0 1000 550" className="w-full max-w-4xl h-auto filter drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)]">
             {/* Studio Shadow */}
             <ellipse cx="500" cy="460" rx="380" ry="30" fill="rgba(0,0,0,0.7)" filter="blur(10px)" />
-            
-            {/* Porsche Silhouette Body (Before) */}
+
+            {/* Vehicle Silhouette Body (Before) */}
             <path
               d="M 180 380 C 180 340, 240 300, 310 270 C 370 200, 480 140, 620 140 C 740 140, 830 200, 860 260 C 900 280, 930 330, 930 380 C 930 420, 900 440, 840 440 L 250 440 C 200 440, 180 410, 180 380 Z"
               fill={serviceKey === "chromeDelete" ? "#1e3a8a" : serviceKey === "ppf" ? "#1e3a2b" : "#e2e8f0"}
@@ -321,7 +353,7 @@ function StudioHDCarsView({ serviceKey, sliderPos }: { serviceKey: ServicePairKe
             <circle cx="310" cy="420" r="35" fill="#334155" stroke="#cbd5e1" strokeWidth="3" />
             <circle cx="780" cy="420" r="55" fill="#18181b" stroke="#94a3b8" strokeWidth="6" />
             <circle cx="780" cy="420" r="35" fill="#334155" stroke="#cbd5e1" strokeWidth="3" />
-            
+
             {/* Chrome Trim (Before) */}
             <path
               d="M 350 260 L 820 260"
@@ -345,9 +377,7 @@ export interface BeforeAfterSliderProps {
 }
 
 export function BeforeAfterSlider({
-  serviceKey,
-  beforeImage,
-  afterImage,
+  serviceKey = "fullWraps",
   beforeLabel = "Factory Stock",
   afterLabel = "JD Wrapped Finish",
   className
@@ -442,99 +472,83 @@ export function BeforeAfterSlider({
         className
       )}
     >
-      {/* 3D Model comparison dual view if serviceKey is active */}
-      {serviceKey ? (
-        <>
-          {viewMode === "3d" ? (
-            <div className="absolute inset-0 size-full bg-[#0a0b0e]">
-              {/* Studio Lights backdrop */}
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)] pointer-events-none z-0" />
+      {/* 3D Model comparison dual view */}
+      {viewMode === "3d" ? (
+        <div className="absolute inset-0 size-full bg-[#0a0b0e]">
+          {/* Studio Lights backdrop */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)] pointer-events-none z-0" />
 
-              {/* AFTER 3D Canvas (Bottom Layer) */}
-              <div className="absolute inset-0 pointer-events-none">
-                <Canvas shadows gl={{ antialias: true, alpha: true }}>
-                  <PerspectiveCamera makeDefault position={[4.2, 1.5, 4.2]} fov={36} />
-                  <ambientLight intensity={1.2} />
-                  <directionalLight position={[10, 15, 10]} intensity={2.2} castShadow />
-                  <directionalLight position={[-10, 8, -5]} intensity={0.9} color="#a0c0f0" />
-                  <directionalLight position={[0, -5, 10]} intensity={0.4} />
+          {/* AFTER 3D Canvas (Bottom Layer) */}
+          <div className="absolute inset-0 pointer-events-none">
+            <Canvas shadows gl={{ antialias: true, alpha: true }}>
+              <PerspectiveCamera makeDefault position={[4.2, 1.5, 4.2]} fov={36} />
+              <ambientLight intensity={1.2} />
+              <directionalLight position={[10, 15, 10]} intensity={2.2} castShadow />
+              <directionalLight position={[-10, 8, -5]} intensity={0.9} color="#a0c0f0" />
+              <directionalLight position={[0, -5, 10]} intensity={0.4} />
 
-                  <Porsche911ServiceCar serviceKey={serviceKey} mode="after" sharedRotationRef={sharedRotationRef} />
+              <Suspense fallback={null}>
+                <ServiceCar3D serviceKey={serviceKey} mode="after" sharedRotationRef={sharedRotationRef} />
+              </Suspense>
 
-                  <ContactShadows position={[0, -0.61, 0]} opacity={0.7} scale={12} blur={2.0} far={5} />
-                </Canvas>
-              </div>
-
-              {/* BEFORE 3D Canvas (Top Clipped Layer) */}
-              <div
-                className="absolute inset-y-0 left-0 overflow-hidden z-10 border-r border-foreground/40 shadow-2xl pointer-events-none"
-                style={{ width: `${sliderPos}%` }}
-              >
-                <div
-                  className="absolute inset-y-0 left-0 size-full"
-                  style={{ width: containerWidth ? `${containerWidth}px` : "100%" }}
-                >
-                  <Canvas shadows gl={{ antialias: true, alpha: true }}>
-                    <PerspectiveCamera makeDefault position={[4.2, 1.5, 4.2]} fov={36} />
-                    <ambientLight intensity={1.2} />
-                    <directionalLight position={[10, 15, 10]} intensity={2.2} castShadow />
-                    <directionalLight position={[-10, 8, -5]} intensity={0.9} color="#a0c0f0" />
-                    <directionalLight position={[0, -5, 10]} intensity={0.4} />
-
-                    <Porsche911ServiceCar serviceKey={serviceKey} mode="before" sharedRotationRef={sharedRotationRef} />
-
-                    <ContactShadows position={[0, -0.61, 0]} opacity={0.7} scale={12} blur={2.0} far={5} />
-                  </Canvas>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <StudioHDCarsView serviceKey={serviceKey} sliderPos={sliderPos} />
-          )}
-
-          {/* Mode Switcher Buttons */}
-          <div className="absolute bottom-4 right-4 z-30 flex items-center gap-1 bg-background/90 backdrop-blur-md p-1 border border-border/60">
-            <button
-              type="button"
-              onClick={(e) => { e.stopPropagation(); setViewMode("3d"); }}
-              className={cn(
-                "px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all flex items-center gap-1",
-                viewMode === "3d" ? "bg-foreground text-background font-bold" : "text-foreground/70 hover:text-foreground"
-              )}
-            >
-              <Box className="size-3" />
-              <span>3D Engine</span>
-            </button>
-            <button
-              type="button"
-              onClick={(e) => { e.stopPropagation(); setViewMode("hd"); }}
-              className={cn(
-                "px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all flex items-center gap-1",
-                viewMode === "hd" ? "bg-foreground text-background font-bold" : "text-foreground/70 hover:text-foreground"
-              )}
-            >
-              <Camera className="size-3" />
-              <span>Studio HD</span>
-            </button>
+              <ContactShadows position={[0, -0.61, 0]} opacity={0.7} scale={12} blur={2.0} far={5} />
+            </Canvas>
           </div>
-        </>
-      ) : (
-        /* Image fallback mode for static modal items */
-        <>
-          <img src={afterImage} alt={afterLabel} className="absolute inset-0 size-full object-cover object-center" />
+
+          {/* BEFORE 3D Canvas (Top Clipped Layer) */}
           <div
-            className="absolute inset-y-0 left-0 overflow-hidden"
+            className="absolute inset-y-0 left-0 overflow-hidden z-10 border-r border-foreground/40 shadow-2xl pointer-events-none"
             style={{ width: `${sliderPos}%` }}
           >
-            <img
-              src={beforeImage}
-              alt={beforeLabel}
-              className="absolute inset-y-0 left-0 size-full object-cover object-center max-w-none"
+            <div
+              className="absolute inset-y-0 left-0 size-full"
               style={{ width: containerWidth ? `${containerWidth}px` : "100%" }}
-            />
+            >
+              <Canvas shadows gl={{ antialias: true, alpha: true }}>
+                <PerspectiveCamera makeDefault position={[4.2, 1.5, 4.2]} fov={36} />
+                <ambientLight intensity={1.2} />
+                <directionalLight position={[10, 15, 10]} intensity={2.2} castShadow />
+                <directionalLight position={[-10, 8, -5]} intensity={0.9} color="#a0c0f0" />
+                <directionalLight position={[0, -5, 10]} intensity={0.4} />
+
+                <Suspense fallback={null}>
+                  <ServiceCar3D serviceKey={serviceKey} mode="before" sharedRotationRef={sharedRotationRef} />
+                </Suspense>
+
+                <ContactShadows position={[0, -0.61, 0]} opacity={0.7} scale={12} blur={2.0} far={5} />
+              </Canvas>
+            </div>
           </div>
-        </>
+        </div>
+      ) : (
+        <StudioHDCarsView serviceKey={serviceKey} sliderPos={sliderPos} />
       )}
+
+      {/* Mode Switcher Buttons */}
+      <div className="absolute bottom-4 right-4 z-30 flex items-center gap-1 bg-background/90 backdrop-blur-md p-1 border border-border/60">
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); setViewMode("3d"); }}
+          className={cn(
+            "px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all flex items-center gap-1",
+            viewMode === "3d" ? "bg-foreground text-background font-bold" : "text-foreground/70 hover:text-foreground"
+          )}
+        >
+          <Box className="size-3" />
+          <span>3D Engine</span>
+        </button>
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); setViewMode("hd"); }}
+          className={cn(
+            "px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all flex items-center gap-1",
+            viewMode === "hd" ? "bg-foreground text-background font-bold" : "text-foreground/70 hover:text-foreground"
+          )}
+        >
+          <Camera className="size-3" />
+          <span>Studio HD</span>
+        </button>
+      </div>
 
       {/* BEFORE / AFTER BADGES */}
       <div className="absolute top-4 left-4 z-20 px-3 py-1.5 bg-background/90 backdrop-blur-md border border-border/70 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-foreground shadow-md flex items-center gap-2">
@@ -561,10 +575,10 @@ export function BeforeAfterSlider({
   );
 }
 
-// 6 Projects in the Portfolio Grid using identical vehicle pairs
+// 6 Projects in the Portfolio Grid showcasing all 6 required vehicle types
 const PROJECTS: Omit<ProjectItem, "category">[] = [
   {
-    id: "porsche-911-satin-grey",
+    id: "porsche-911-full-wrap",
     title: "Satin Metallic Obsidian Edition",
     vehicle: "Porsche 911 Carrera S (992)",
     categoryKey: "fullWraps",
@@ -572,78 +586,78 @@ const PROJECTS: Omit<ProjectItem, "category">[] = [
     turnaround: "4 Days",
     location: "Zurich Studio",
     beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
+    afterImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
     description: "Complete full vehicle transformation from factory Carrara White gloss to Satin Obsidian Black, featuring door jamb execution and knifeless edge tucking.",
     specs: ["Full Body Satin Wrap", "Door Jamb Precision Execution", "Knifeless Tape Trimmed", "Self-Healing Topcoat"],
     gridSpan: "lg:col-span-8 lg:row-span-2"
   },
   {
-    id: "porsche-911-forged-roof",
+    id: "bmw-m4-forged-roof",
     title: "Forged Carbon & Satin Accent Spec",
-    vehicle: "Porsche 911 Carrera S (992)",
+    vehicle: "BMW M4 Competition",
     categoryKey: "partialWraps",
     finish: "Forged Carbon Roof & Hood Accents",
     turnaround: "2 Days",
     location: "Canton Zurich Atelier",
-    beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
-    description: "High-contrast partial wrap featuring forged carbon roof execution, gloss piano black side skirts, and front spoiler blackout.",
+    beforeImage: "https://images.pexels.com/photos/16284837/pexels-photo-16284837.jpeg?auto=compress&w=1200",
+    afterImage: "https://images.pexels.com/photos/16284837/pexels-photo-16284837.jpeg?auto=compress&w=1200",
+    description: "High-contrast partial wrap on BMW M4 featuring forged carbon roof execution, gloss piano black side skirts, and front splitter blackout.",
     specs: ["Forged Carbon Roof Wrap", "Piano Black Side Skirts", "Mirror Cap Accents", "Front Splitter Blackout"],
     gridSpan: "lg:col-span-4"
   },
   {
-    id: "porsche-911-stealth-ppf",
-    title: "Stealth Matte 200μm PPF Shield",
-    vehicle: "Porsche 911 Carrera S (992)",
-    categoryKey: "ppf",
-    finish: "200μm Stealth Matte Paint Protection Film",
-    turnaround: "5 Days",
-    location: "Zurich Studio",
-    beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
-    description: "Converted factory gloss finish into a sleek matte sheen using 200-micron self-healing hydrophobic PPF, guarding against alpine gravel impact.",
-    specs: ["200μm Self-Healing PPF", "Hydrophobic Topcoat", "Full Track Front Shield", "10-Year Warranty"],
-    gridSpan: "lg:col-span-4"
-  },
-  {
-    id: "porsche-911-chrome-delete",
+    id: "amg-gt-shadowline",
     title: "Gloss Piano Black Shadowline Delete",
-    vehicle: "Porsche 911 Carrera S (992)",
+    vehicle: "Mercedes-AMG GT 63 S",
     categoryKey: "chromeDelete",
     finish: "Piano Black Trim & Grille Blackout",
     turnaround: "1 Day",
     location: "Zurich Atelier",
-    beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
-    description: "Total blackout conversion of aluminum window trims, grille surrounds, rear lettering, and badges to high-gloss piano black.",
-    specs: ["Window Surround Blackout", "Grille Frame Wrap", "Rear Model Badge Blackout", "Mirror Base Blackout"],
+    beforeImage: "https://images.pexels.com/photos/18370669/pexels-photo-18370669.jpeg?auto=compress&w=1200",
+    afterImage: "https://images.pexels.com/photos/18370669/pexels-photo-18370669.jpeg?auto=compress&w=1200",
+    description: "Total blackout conversion of aluminum window trims, Panamericana grille surrounds, rear lettering, and badges to high-gloss piano black.",
+    specs: ["Window Surround Blackout", "Panamericana Grille Frame Wrap", "Rear Model Badge Blackout", "Mirror Base Blackout"],
     gridSpan: "lg:col-span-4"
   },
   {
-    id: "porsche-911-liquid-gold",
+    id: "audi-rs6-stealth-ppf",
+    title: "Stealth Matte 200μm PPF Shield",
+    vehicle: "Audi RS6 Avant",
+    categoryKey: "ppf",
+    finish: "200μm Stealth Matte Paint Protection Film",
+    turnaround: "5 Days",
+    location: "Zurich Studio",
+    beforeImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
+    afterImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
+    description: "Converted Audi RS6 factory gloss finish into a sleek matte sheen using 200-micron self-healing hydrophobic PPF, guarding against alpine gravel impact.",
+    specs: ["200μm Self-Healing PPF", "Hydrophobic Topcoat", "Full Track Front Shield", "10-Year Warranty"],
+    gridSpan: "lg:col-span-4"
+  },
+  {
+    id: "porsche-cayenne-liquid-gold",
     title: "Liquid Quartz Gold Atelier Spec",
-    vehicle: "Porsche 911 Carrera S (992)",
+    vehicle: "Porsche Cayenne Turbo GT",
     categoryKey: "fullWraps",
     finish: "Liquid Quartz Gold Satin Metal",
     turnaround: "4 Days",
     location: "Zurich Studio",
-    beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
-    description: "Full body wrap in exclusive Liquid Quartz Gold, combined with ceramic heat-rejection window tinting and brake caliper detailing.",
+    beforeImage: "https://images.pexels.com/photos/40046464/pexels-photo-40046464.jpeg?auto=compress&w=1200",
+    afterImage: "https://images.pexels.com/photos/40046464/pexels-photo-40046464.jpeg?auto=compress&w=1200",
+    description: "Full body wrap in exclusive Liquid Quartz Gold on Porsche Cayenne, combined with ceramic heat-rejection window tinting and brake caliper detailing.",
     specs: ["Liquid Gold Satin Metal", "Ceramic Heat Shield Tint", "Knifeless Edge Tucking", "5-Year Guarantee"],
     gridSpan: "lg:col-span-4"
   },
   {
-    id: "porsche-911-ceramic-tint",
+    id: "bmw-m3-ceramic-tint",
     title: "15% Nano-Ceramic Heat & Privacy Shield",
-    vehicle: "Porsche 911 Carrera S (992)",
+    vehicle: "BMW M3 Competition (G80)",
     categoryKey: "windowTinting",
     finish: "Nano-Ceramic 15% Thermal Shield Tint",
     turnaround: "1 Day",
     location: "Zurich Atelier",
-    beforeImage: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    afterImage: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174640939-8efasj7e.webp",
-    description: "Nano-ceramic window tinting providing 99% UV rejection and 92% IR thermal shielding, compliant with Swiss ASTRA standards.",
+    beforeImage: "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200",
+    afterImage: "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200",
+    description: "Nano-ceramic window tinting on BMW M3 providing 99% UV rejection and 92% IR thermal shielding, compliant with Swiss ASTRA standards.",
     specs: ["99% UV Protection", "92% IR Heat Rejection", "Swiss ASTRA Compliant", "Scratch-Resistant Coating"],
     gridSpan: "lg:col-span-8"
   }
@@ -668,7 +682,7 @@ export default function PortfolioSection() {
 
   const projects: ProjectItem[] = PROJECTS.map((p) => ({
     ...p,
-    category: t.portfolio.categories[p.categoryKey],
+    category: t.portfolio.categories[p.categoryKey] || p.categoryKey,
   }));
 
   const filteredProjects = projects.filter((p) =>
@@ -776,7 +790,7 @@ export default function PortfolioSection() {
         {/* ============================================================ */}
         {/* PORTFOLIO GALLERY (EDITORIAL COLLAGE GRID) */}
         {/* ============================================================ */}
-        <div className="mb-8 flex items-center justify-between border-b border-border/40 pb-4">
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border/40 pb-4">
           <h3 className="text-[length:var(--text-h3)] font-light uppercase tracking-wider [font-family:var(--font-heading)] flex items-center gap-2">
             <Layers className="size-4 text-primary" />
             <span>Atelier Portfolio Galerie</span>
@@ -822,13 +836,13 @@ export default function PortfolioSection() {
                 <img
                   src={project.afterImage}
                   alt={project.title}
-                  className="size-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  className="size-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-90"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90" />
 
                 <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
-                  <div className="px-2.5 py-1 bg-background/90 backdrop-blur-md border border-border/60 text-[10px] font-mono uppercase tracking-widest text-foreground">
-                    {project.category}
+                  <div className="px-2.5 py-1 bg-background/90 backdrop-blur-md border border-border/60 text-[10px] font-mono uppercase tracking-widest text-foreground font-semibold">
+                    {project.vehicle}
                   </div>
                 </div>
 
@@ -877,7 +891,7 @@ export default function PortfolioSection() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-5xl bg-card border border-border/80 p-6 sm:p-8 lg:p-10 text-foreground overflow-hidden my-auto"
+              className="relative w-full max-w-5xl bg-card border border-border/80 p-6 sm:p-8 lg:p-10 text-foreground overflow-hidden my-auto shadow-2xl"
             >
               {/* Close Button */}
               <button
@@ -889,74 +903,72 @@ export default function PortfolioSection() {
               </button>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Left: Interactive Before/After in Modal */}
+                {/* Left: Interactive Before/After in Modal using identical 3D model */}
                 <div className="lg:col-span-7">
                   <BeforeAfterSlider
                     serviceKey={selectedProject.categoryKey as ServicePairKey}
-                    beforeImage={selectedProject.beforeImage}
-                    afterImage={selectedProject.afterImage}
                     beforeLabel={t.portfolio.modalBefore}
                     afterLabel={t.portfolio.modalAfter}
                     className="h-[300px] sm:h-[400px] w-full"
                   />
-                  <p className="text-[11px] font-mono text-foreground/50 text-center mt-2">
+                  <p className="text-[11px] font-mono text-foreground/50 mt-2 text-center">
                     {t.portfolio.modalInstruction}
                   </p>
                 </div>
 
-                {/* Right: Spec Details */}
-                <div className="lg:col-span-5 flex flex-col justify-between">
+                {/* Right: Specifications & CTA */}
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
                   <div>
-                    <span className="text-xs font-mono uppercase tracking-widest text-primary mb-2 block">
-                      {selectedProject.category} — {selectedProject.vehicle}
-                    </span>
-                    <h3 className="text-[length:var(--text-h2)] font-light uppercase tracking-tight [font-family:var(--font-heading)] mb-4">
+                    <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-primary mb-2">
+                      <Sparkles className="size-3.5" />
+                      <span>{selectedProject.vehicle}</span>
+                    </div>
+
+                    <h3 className="text-[length:var(--text-h2)] font-light uppercase tracking-tight mb-2">
                       {selectedProject.title}
                     </h3>
-                    <p className="text-[length:var(--text-body)] text-foreground/80 leading-relaxed mb-6">
+
+                    <p className="text-xs font-mono text-foreground/70 mb-4">
+                      Finish: <span className="text-foreground font-semibold">{selectedProject.finish}</span>
+                    </p>
+
+                    <p className="text-sm text-foreground/80 leading-relaxed mb-6">
                       {selectedProject.description}
                     </p>
 
-                    <div className="space-y-4 mb-6">
-                      <div className="p-3 bg-muted/50 border border-border/40 font-mono text-xs">
-                        <span className="text-foreground/50 block">Applied Finish:</span>
-                        <span className="text-foreground font-semibold">{selectedProject.finish}</span>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                        <div className="p-3 bg-muted/30 border border-border/40">
-                          <span className="text-foreground/50 block">{t.portfolio.turnaroundLabel}:</span>
-                          <span className="text-foreground">{selectedProject.turnaround}</span>
-                        </div>
-                        <div className="p-3 bg-muted/30 border border-border/40">
-                          <span className="text-foreground/50 block">{t.portfolio.studioLabel}:</span>
-                          <span className="text-foreground">{selectedProject.location}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mb-6">
-                      <h4 className="text-xs font-mono uppercase tracking-widest text-foreground/50 mb-3">
+                    {/* Spec Bullet List */}
+                    <div className="space-y-2 mb-6 p-4 bg-muted/40 border border-border/40">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/50 block mb-2">
                         {t.portfolio.specsHeader}
-                      </h4>
-                      <div className="space-y-2">
-                        {selectedProject.specs.map((spec, i) => (
-                          <div key={i} className="flex items-center gap-2 text-xs font-mono text-foreground/80">
-                            <ShieldCheck className="size-3.5 text-foreground" />
-                            <span>{spec}</span>
-                          </div>
-                        ))}
-                      </div>
+                      </span>
+                      {selectedProject.specs.map((spec, i) => (
+                        <div key={i} className="flex items-center gap-2 text-xs font-mono text-foreground/90">
+                          <Check className="size-3.5 text-emerald-400 shrink-0" />
+                          <span>{spec}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  <a
-                    href="#contact"
-                    onClick={() => setSelectedProject(null)}
-                    className="w-full py-3.5 bg-foreground text-background font-mono text-xs uppercase tracking-widest text-center hover:bg-foreground/90 transition-all font-semibold"
-                  >
-                    {t.portfolio.requestQuoteForSpec}
-                  </a>
+                  <div className="pt-4 border-t border-border/40 space-y-3">
+                    <div className="flex items-center justify-between text-xs font-mono text-foreground/60">
+                      <span>{t.portfolio.turnaroundLabel}:</span>
+                      <span className="text-foreground">{selectedProject.turnaround}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs font-mono text-foreground/60">
+                      <span>{t.portfolio.studioLabel}:</span>
+                      <span className="text-foreground">{selectedProject.location}</span>
+                    </div>
+
+                    <a
+                      href="#contact"
+                      onClick={() => setSelectedProject(null)}
+                      className="w-full mt-4 py-3.5 bg-foreground text-background font-mono text-xs uppercase tracking-widest text-center font-bold hover:bg-foreground/90 transition-all inline-flex items-center justify-center gap-2 shadow-lg"
+                    >
+                      <span>{t.portfolio.requestQuoteForSpec}</span>
+                      <ArrowRight className="size-4" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>

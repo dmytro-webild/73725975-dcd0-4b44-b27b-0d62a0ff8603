@@ -207,8 +207,8 @@ export default function ServicesSection({ className, onSelectService }: Services
             <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
 
             <div className="relative z-10 p-6 lg:p-8 backdrop-blur-md bg-background/80 border-t border-border/40">
-              <div className="flex items-center justify-between text-[length:var(--text-label)] font-mono uppercase tracking-widest text-foreground/60 mb-2">
-                <span>Atelier Spec: {selectedService.id.toUpperCase()}</span>
+              <div className="flex items-center justify-between text-[length:var(--text-label)] font-mono uppercase tracking-widest text-primary mb-2 font-semibold">
+                <span>Vehicle: {selectedService.vehicleModel || "Porsche 911 Carrera S"}</span>
                 <span>Zurich Studio</span>
               </div>
               <p className="text-[length:var(--text-h3)] [font-family:var(--font-heading)] font-light text-foreground">

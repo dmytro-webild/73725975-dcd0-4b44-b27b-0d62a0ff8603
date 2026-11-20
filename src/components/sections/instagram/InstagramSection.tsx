@@ -15,7 +15,7 @@ const INSTAGRAM_POSTS: InstagramPost[] = [
   {
     id: "ig-1",
     imageSrc: "https://images.pexels.com/photos/6969027/pexels-photo-6969027.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    imageAlt: "Porsche GT3 RS Stealth Satin Obsidian Wrap in Zurich",
+    imageAlt: "Porsche 911 GT3 RS Stealth Satin Obsidian Wrap in Zurich",
     vehicle: "Porsche 911 GT3 RS",
     finish: "Stealth Satin Black",
     likes: 1420,
@@ -33,7 +33,7 @@ const INSTAGRAM_POSTS: InstagramPost[] = [
   {
     id: "ig-3",
     imageSrc: "https://images.pexels.com/photos/18370669/pexels-photo-18370669.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    imageAlt: "Mercedes AMG GT 63 S Full Body PPF Armor",
+    imageAlt: "Mercedes-AMG GT 63 S Full Body PPF Armor",
     vehicle: "Mercedes-AMG GT 63 S",
     finish: "Matte PPF Shield",
     likes: 1850,
@@ -41,28 +41,28 @@ const INSTAGRAM_POSTS: InstagramPost[] = [
   },
   {
     id: "ig-4",
-    imageSrc: "https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg?_wi=1",
-    imageAlt: "Atelier Technician Applying Knifeless Tape Detail",
-    vehicle: "Precision Execution",
-    finish: "Door Jamb Precision",
+    imageSrc: "https://images.pexels.com/photos/8979553/pexels-photo-8979553.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    imageAlt: "Audi RS6 Avant Stealth PPF & Chrome Delete",
+    vehicle: "Audi RS6 Avant",
+    finish: "Stealth PPF & Blackout",
     likes: 2100,
     comments: 96
   },
   {
     id: "ig-5",
-    imageSrc: "https://images.pexels.com/photos/6010581/pexels-photo-6010581.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-    imageAlt: "Ferrari F8 Ceramic Window Tinting Zurich",
-    vehicle: "Ferrari F8 Tributo",
+    imageSrc: "https://images.pexels.com/photos/6872159/pexels-photo-6872159.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    imageAlt: "Porsche Cayenne Turbo GT Ceramic Window Tinting Zurich",
+    vehicle: "Porsche Cayenne Turbo GT",
     finish: "Ceramic Tint 15%",
     likes: 1240,
     comments: 54
   },
   {
     id: "ig-6",
-    imageSrc: "https://picsum.photos/seed/635309748/1200/800",
-    imageAlt: "Audi RS6 Avant Full Satin Chrome Delete",
-    vehicle: "Audi RS6 Avant",
-    finish: "Chrome Delete Blackout",
+    imageSrc: "https://images.pexels.com/photos/9864117/pexels-photo-9864117.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+    imageAlt: "BMW M3 Competition G80 Full Satin Wrap",
+    vehicle: "BMW M3 Competition",
+    finish: "Satin Anthracite Wrap",
     likes: 1670,
     comments: 78
   }

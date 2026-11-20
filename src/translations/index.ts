@@ -22,7 +22,7 @@ export const translations = {
       badge: 'Oberflächen & Materialien Showcase',
       titleLine1: 'FIND YOUR FINISH',
       titleLine2: 'Haptik & Materialproben',
-      description: 'Entdecken Sie die fünf exklusiven Oberflächen-Kategorien unseres Ateliers. Jedes Finish wird mit erstklassigen Folien verarbeitet und bietet hervorragenden UV- und Lackschutz.',
+      description: 'Entdecken Sie die fünf exklusiven Oberflächen-Kategorien unseres Ateliers an unseren Referenzfahrzeugen. Jedes Finish wird mit erstklassigen Folien verarbeitet und bietet hervorragenden UV- und Lackschutz.',
       finishCategoryLabel: 'Finish Spezifikation',
       durabilityLabel: 'Haltbarkeit',
       maintenanceLabel: 'Pflegeaufwand',
@@ -31,15 +31,16 @@ export const translations = {
         {
           id: 'satin',
           name: 'Satin Finish (Seidenmatt)',
+          vehicleLabel: 'Porsche 911 Carrera S',
           specCode: 'JD-SATIN-MATTE-01',
           swatchHex: '#5b6572',
           sheenLevel: '30% Reflexion / Seidenglanz',
           image: 'https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200',
-          description: 'Der perfekte Kompromiss zwischen Glanz und Matt. Reflektiert Licht in weichen Konturen und betont die Formensprache von Sportwagen wie dem Porsche 911.',
+          description: 'Der perfekte Kompromiss zwischen Glanz und Matt. Reflektiert Licht in weichen Konturen und betont die Formensprache von Sportwagen wie dem Porsche 911 Carrera S.',
           durability: '5 – 7 Jahre Garantie',
           maintenance: 'Standard Textilwäsche / Handwäsche',
           features: [
-            'Sanfter Seidenglanz hebt Karosserie-Lichtkanten hervor',
+            'Sanfter Seidenglanz hebt Karosserie-Lichtkanten am Porsche 911 hervor',
             'Sehr widerstandsfähig gegen Fingerabdrücke und Wasserflecken',
             'Optional mit transparenter Satin-PPF kombinierbar'
           ]
@@ -47,47 +48,50 @@ export const translations = {
         {
           id: 'gloss',
           name: 'Hochglanz Veredelung',
+          vehicleLabel: 'BMW M3 Competition (G80)',
           specCode: 'JD-GLOSS-PIANO-02',
           swatchHex: '#64748b',
           sheenLevel: '98% Tiefenglanz / Spiegeleffekt',
           image: 'https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200',
-          description: 'Maximale Farbtiefe und brillanter Spiegeleffekt. Nicht von einer hochwertigen Mehrschicht-Werkslackierung zu unterscheiden.',
+          description: 'Maximale Farbtiefe und brillanter Spiegeleffekt am BMW M3 Competition. Nicht von einer hochwertigen Mehrschicht-Werkslackierung zu unterscheiden.',
           durability: '5 – 7 Jahre Garantie',
           maintenance: 'Handwäsche empfohlen',
           features: [
-            'Tiefenbrillanz vergleichbar mit Keramik-Klarlack',
+            'Tiefenbrillanz vergleichbar mit Keramik-Klarlack am BMW M3',
             'Nahtlose Optik für Vollfolierung & Dachakzente',
             'UV-Schutzfilter verhindert Verblassen'
           ]
         },
         {
           id: 'matte',
-          name: 'Strukturfreies Matt',
+          name: 'Strukturfreies Stealth Matt',
+          vehicleLabel: 'Mercedes-AMG GT 63 S',
           specCode: 'JD-MATTE-STEALTH-03',
           swatchHex: '#121214',
           sheenLevel: '5% Reflexion / Stealth Optics',
           image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200',
-          description: 'Aggressiver, kompromissloser Stealth-Look. Licht wird schattenfrei absorbiert für ein pures, monolithisches Erscheinungsbild.',
+          description: 'Aggressiver, kompromissloser Stealth-Look für den Mercedes-AMG GT 63 S. Licht wird schattenfrei absorbiert für ein pures, monolithisches Erscheinungsbild.',
           durability: '5 – 7 Jahre Garantie',
           maintenance: 'Spezielle Matt-Folienpflege',
           features: [
-            '0% störende Lichtreflexionen',
-            'Verleiht der Karosserie eine muskulöse Silhouette',
+            '0% störende Lichtreflexionen an der AMG-GT Silhouette',
+            'Verleiht der Karosserie eine muskulöse Präsenz',
             'Perfekt für Chrome Delete & Gesamtfahrzeug'
           ]
         },
         {
           id: 'metallic',
           name: 'Metallic & Perleffekt',
+          vehicleLabel: 'Audi RS6 Avant',
           specCode: 'JD-METALLIC-QUARTZ-04',
           swatchHex: '#b45309',
           sheenLevel: 'High-Sparkle Flake Optik',
           image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200',
-          description: 'Angereichert mit feinsten Pigment- und Metallic-Flakes. Erzeugt bei Sonneneinstrahlung faszinierende Farb- und Glanzeffekte.',
+          description: 'Angereichert mit feinsten Pigment- und Metallic-Flakes am Audi RS6 Avant. Erzeugt bei Sonneneinstrahlung faszinierende Farb- und Glanzeffekte.',
           durability: '5 – 7 Jahre Garantie',
           maintenance: 'Einfache Standardpflege',
           features: [
-            'Hochverdichtete Metallic-Pigmentierung',
+            'Hochverdichtete Metallic-Pigmentierung am RS6 Power-Kombi',
             'Dreidimensionale Tiefe unter direktem Sonnenlicht',
             'Verfügbar in Satin-Metallic & Glanz-Metallic'
           ]
@@ -95,15 +99,16 @@ export const translations = {
         {
           id: 'special',
           name: 'Forged Carbon & Spezial-PPF',
+          vehicleLabel: 'Porsche Cayenne Turbo GT',
           specCode: 'JD-CARBON-SPECIAL-05',
           swatchHex: '#064e3b',
           sheenLevel: 'Echt-Struktur & Color-Shift',
           image: 'https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg',
-          description: 'Exklusive Spezialfolien von Forged Carbon Texturen über chamäleonartige Color-Shift Folien bis hin zu selbstheilender Stealth-PPF.',
+          description: 'Exklusive Spezialfolien von Forged Carbon Texturen am Porsche Cayenne Turbo GT über chamäleonartige Color-Shift Folien bis hin zu selbstheilender Stealth-PPF.',
           durability: 'Bis zu 10 Jahre Garantie',
           maintenance: 'Sehr pflegeleicht',
           features: [
-            'Fühlbare Forged Carbon- & Waben-Strukturen',
+            'Fühlbare Forged Carbon- & Waben-Strukturen für High-End Performance-SUVs',
             '200-Mikron PPF Schlagfestigkeit gegen Alpinsplit',
             'Color-Shift Effekt je nach Blickwinkel'
           ]
@@ -114,7 +119,7 @@ export const translations = {
       badge: 'Schweizer Präzision & Handwerk',
       titleLine1: 'DETAILS MAKE THE DIFFERENCE.',
       titleLine2: 'Schweizer Präzisions-Handwerk',
-      subtitle: 'Unkompromisslose Aufmerksamkeit für jede Kante, jeden Falz und jedes Detail. Staubfreie Reinraum-Montage für höchste Ansprüche im Kanton Zürich.',
+      subtitle: 'Unkompromisslose Aufmerksamkeit für jede Kante, jeden Falz und jedes Detail am Porsche 911, BMW M3, Audi RS6 und Mercedes-AMG GT.',
       pillars: {
         detail: {
           title: 'Liebe zum Detail',
@@ -139,7 +144,7 @@ export const translations = {
       },
       galleryBadge: 'Montage-Makroaufnahmen & Präzision',
       galleryTitle: 'Handwerkskunst im Detail',
-      gallerySubtitle: 'Fokus auf anspruchsvolle Detailarbeiten, Kantenführung und staubfreie Folienverklebung.',
+      gallerySubtitle: 'Fokus auf anspruchsvolle Detailarbeiten am BMW M3, Porsche 911, Mercedes-AMG GT und Audi RS6.',
       inquireCta: 'Offerte für Ihr Fahrzeug',
       bottomCtaTitle: 'Möchten Sie Höchste Präzision für Ihr Fahrzeug?',
       bottomCtaSubtitle: 'Senden Sie uns Ihre Fahrzeugdaten für ein unverbindliches Festpreisangebot.',
@@ -157,7 +162,7 @@ export const translations = {
         {
           number: '01',
           title: 'Erstberatung & Folienauswahl',
-          description: 'Gemeinsam besprechen wir Ihre Wünsche. Sie begutachten echte Folienmuster (Satin, Matt, Glanz, PPF) an Ihrem Fahrzeug und wählen Ihre Wunscheigenschaften.',
+          description: 'Gemeinsam besprechen wir Ihre Wünsche. Sie begutachten echte Folienmuster (Satin, Matt, Glanz, PPF) an Ihrem Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6 oder Cayenne.',
           highlight: 'Persönlich & Diskret'
         },
         {
@@ -186,7 +191,7 @@ export const translations = {
       subheading: 'JD CAR WRAPPING ATELIER ZÜRICH',
       slogan: 'REDEFINE YOUR DRIVE',
       tagline: 'PRECISION. PROTECTION. PERSONALIZATION.',
-      description: 'Schweizer Atelier für exklusive Autofolierung, Lackschutzfolie (PPF), Chrome Delete und Keramik-Scheibentönung. Höchste Präzision für Sportwagen und Luxusfahrzeuge im Kanton Zürich.',
+      description: 'Schweizer Atelier für exklusive Autofolierung, Lackschutzfolie (PPF), Chrome Delete und Keramik-Scheibentönung für Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne und BMW M3.',
       exploreServicesBtn: 'Dienstleistungen erkunden',
       requestQuoteBtn: 'Angebot anfragen',
       createStyleBtn: 'KREIEREN SIE IHREN STIL',
@@ -201,7 +206,7 @@ export const translations = {
       badge: 'Zürcher Atelier Leistungen',
       titleLine1: 'Präzisionshandwerk',
       titleLine2: 'Für Perfektion am Automobil',
-      description: 'Fünf spezialisierte Veredelungs- und Schutzleistungen, ausgeführt in unserem staubfreien Atelier im Kanton Zürich mit modernsten Markenfolien.',
+      description: 'Fünf spezialisierte Veredelungs- und Schutzleistungen für Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne und BMW M3 in unserem Atelier im Kanton Zürich.',
       finishesTitle: 'Verfügbare Oberflächen & Texturen',
       craftsmanshipTitle: 'Qualitäts- und Handwerksstandards',
       turnaroundLabel: 'Dauer',
@@ -212,12 +217,13 @@ export const translations = {
         {
           id: 'full-wraps',
           title: 'Vollfolierung (Full Wrap)',
-          subtitle: 'Komplette Farb- & Texturtransformation',
+          subtitle: 'Referenzmodell: Porsche 911 Carrera S',
           category: 'Vollkarosserie Veredelung',
-          description: 'Verwandeln Sie die Ästhetik Ihres Fahrzeugs mit einer nahtlosen Vollfolierung. Jede Karosseriefläche, Türgriff und Kante wird akribisch vorbereitet und ohne sichtbare Originallack-Kanten foliert.',
+          vehicleModel: 'Porsche 911 Carrera S',
+          description: 'Verwandeln Sie die Ästhetik Ihres Porsche 911 Carrera S mit einer nahtlosen Vollfolierung. Jede Karosseriefläche, Türgriff und Kante wird akribisch vorbereitet und ohne sichtbare Originallack-Kanten foliert.',
           finishes: ['Glanz', 'Matt', 'Satin', 'Metallic', 'Color-Shift', 'Carbon & Struktur'],
           keyFeatures: [
-            'Präzise Kantenumbiegung an allen Türen & Klappen',
+            'Präzise Kantenumbiegung an allen Türen & Klappen des Porsche 911',
             'Schützt den werkseitigen Originallack vollständig',
             'Jederzeit rückstandslos entfernbar',
             'Europäische Premiumfolien (3M, Avery Dennison, Inozetek)'
@@ -228,12 +234,13 @@ export const translations = {
         {
           id: 'partial-wraps',
           title: 'Teilfolierung & Akzente',
-          subtitle: 'Zielgerichtetes Styling für Dach, Haube & Aerodynamik',
+          subtitle: 'Referenzmodell: BMW M4 Competition',
           category: 'Kombinations-Styling',
-          description: 'Setzen Sie markante Akzente an Schlüsselstellen Ihres Fahrzeugs. Von Glanz-Schwarz-Dachfolierungen über Forged-Carbon-Motorhauben bis hin zu individuellen Zierstreifen.',
+          vehicleModel: 'BMW M4 Competition',
+          description: 'Setzen Sie markante Akzente an Schlüsselstellen Ihres BMW M4 Competition. Von Forged-Carbon-Dachfolierungen über Motorhauben-Akzente bis hin zu individuellen M-Zierstreifen.',
           finishes: ['Pianoseiden-Schwarz', 'Forged Carbon', 'Satin Dunkelgrau', 'Individuelle Streifen'],
           keyFeatures: [
-            'Panorama-Dachfolierung in Tiefschwarz Glanz',
+            'BMW M4 Panorama-Dachfolierung in Tiefschwarz Glanz & Carbon',
             'Motorhauben- & Spoiler-Akzente in Echt-Carbon-Optik',
             'Plottergeschneidertes Zierstreifen-Design',
             'Knifeless-Tape Technologie — 0% Klingenrisiko'
@@ -244,13 +251,14 @@ export const translations = {
         {
           id: 'chrome-delete',
           title: 'Chrome Delete',
-          subtitle: 'Edles Blackout-Package für Fensterleisten & Embleme',
+          subtitle: 'Referenzmodell: Mercedes-AMG GT 63 S',
           category: 'Detail-Styling',
-          description: 'Ersetzen Sie glänzende Chromleisten durch einen edlen Stealth-Look. Wir folieren Fenstereinfassungen, Kühlergrille, Seitenauslässe und Logos in hochwertiger dunkler Folie.',
+          vehicleModel: 'Mercedes-AMG GT 63 S',
+          description: 'Ersetzen Sie glänzende Chromleisten am Mercedes-AMG GT 63 S durch einen edlen Stealth-Look. Wir folieren Fenstereinfassungen, Panamericana-Kühlergrill, Seitenauslässe und Embleme.',
           finishes: ['Satin Obsidian Schwarz', 'Glanz Piano Schwarz', 'Matte Kohle'],
           keyFeatures: [
-            'Komplettes Fensterleisten-Blackout-Set',
-            'Frontgrill- & Nieren-Folierung',
+            'Mercedes-AMG GT Komplettes Fensterleisten-Blackout-Set',
+            'Panamericana Frontgrill- & Nieren-Folierung',
             'Embleme, Schriftzüge & Auspuffblenden-Akzente',
             'Witterungsbeständig gegen Schweizer Streusalz & Waschanlagen'
           ],
@@ -260,12 +268,13 @@ export const translations = {
         {
           id: 'ppf',
           title: 'Lackschutzfolie (PPF)',
-          subtitle: 'Unsichtbare, selbstheilende Polyurethan-Panzerung',
+          subtitle: 'Referenzmodell: Audi RS6 Avant',
           category: 'Lackschutz',
-          description: 'Schützen Sie den werkseitigen Lack vor Steinschlägen, Split, Insekten und Parkkratzern mit einer glasklaren, selbstheilenden 200-Mikron-Lackschutzfolie.',
+          vehicleModel: 'Audi RS6 Avant',
+          description: 'Schützen Sie den werkseitigen Lack Ihres Audi RS6 Avant vor Steinschlägen, Split und Parkkratzern mit einer glasklaren oder seidenmatten 200-Mikron-Lackschutzfolie.',
           finishes: ['Glasklar Glanz PPF', 'Stealth Satin Matt PPF', 'Hydrophobe Versiegelung'],
           keyFeatures: [
-            'Wärmeaktivierbare selbstheilende Oberflächenschicht',
+            'Wärmeaktivierbare selbstheilende Oberflächenschicht am Audi RS6',
             'Computergestützte CAD-Passformen für perfekte Abdeckung',
             'Front-Vollschutz-Paket oder 100% Ganzkörper-Schutz',
             '10 Jahre Garantie gegen Vergilbung & Rissbildung'
@@ -276,12 +285,13 @@ export const translations = {
         {
           id: 'window-tinting',
           title: 'Scheibentönung',
-          subtitle: 'Keramik-Hitzeschutz & Sichtschutz nach ASTRA-Norm',
+          subtitle: 'Referenzmodell: Porsche Cayenne Turbo GT',
           category: 'Glasschutz',
-          description: 'Erreicht hervorragenden Wärmeschutz und Blendschutz mit Nano-Keramik-Tönungsfolien. 100% konform mit den Schweizer Strassenverkehrsvorschriften (ASTRA).',
+          vehicleModel: 'Porsche Cayenne Turbo GT',
+          description: 'Erreicht hervorragenden Wärmeschutz und Blendschutz am Porsche Cayenne Turbo GT mit Nano-Keramik-Tönungsfolien. 100% konform mit den Schweizer ASTRA-Vorschriften.',
           finishes: ['Keramik 5% Privacy', 'Keramik 15% Dunkel', 'Keramik 35% Mittel', 'Keramik 70% Hell'],
           keyFeatures: [
-            'Bis zu 99% Schutz vor schädlicher UV-Strahlung',
+            'Bis zu 99% Schutz vor schädlicher UV-Strahlung im SUV-Innenraum',
             '92% Infrarot-Wärmeabweisung für kühlen Innenraum',
             '100% Schweizer Strassenzulassung im Kanton Zürich',
             'Metallfrei — keine Störung von Mobilfunk oder GPS'
@@ -294,7 +304,7 @@ export const translations = {
     customizer: {
       badge: 'Interaktives Atelier 3D',
       title: 'KREIEREN SIE IHREN STIL',
-      subtitle: 'Visuelle 360°-Konfiguration & Farbauswahl',
+      subtitle: '360°-Konfiguration & Farbauswahl (Porsche 911 & BMW M3)',
       instruction: 'Wählen Sie Ihre gewünschte Folienfarbe und Oberflächenstruktur aus. Übernehmen Sie die Konfiguration anschliessend direkt in Ihre unverbindliche Offertanfrage.',
       finishesLabel: 'Oberfläche / Finish',
       finishes: {
@@ -312,75 +322,85 @@ export const translations = {
       badge: 'Atelier Portfolio',
       titleLine1: 'Fahrzeug-Transformationen',
       titleLine2: 'Galerie Kanton Zürich',
-      description: 'Entdecken Sie unser Portfolio aus exklusiven Autofolierungen, PPF-Lackschutz und individuellen Veredelungen für anspruchsvolle Fahrzeughalter.',
+      description: 'Entdecken Sie unser Portfolio aus exklusiven Autofolierungen für Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne und BMW M3.',
       sliderTitle: 'Exklusive Transformation — Regler ziehen',
       sliderBefore: 'Original Werkslack',
-      sliderAfter: 'Atelier Satin Obsidian Black',
-      transformationSubtitle: 'Vergleichen Sie den Vorher/Nachher-Effekt unserer 5 Hauptleistungen an ein und demselben Fahrzeug (Porsche 911 Carrera S)',
+      sliderAfter: 'Atelier Veredelung',
+      transformationSubtitle: 'Identisches Fahrzeug, identische Perspektive & Beleuchtung — vergleichen Sie den Vorher/Nachher-Unterschied der Oberflächenveredelung',
       dragHint: 'Regler ziehen zum Vergleichen',
-      mode3D: '3D Studio Ansicht',
+      mode3D: '3D Studio Engine',
       mode2D: 'Studio HD Ansicht',
       categories: {
-        all: 'Alle',
-        fullWraps: 'Vollfolierung',
-        partialWraps: 'Teilfolierung',
-        chromeDelete: 'Chrome Delete',
-        ppf: 'Lackschutz (PPF)',
-        windowTinting: 'Scheibentönung',
+        all: 'Alle Fahrzeuge',
+        fullWraps: 'Porsche 911',
+        partialWraps: 'BMW M4',
+        chromeDelete: 'Mercedes-AMG GT',
+        ppf: 'Audi RS6',
+        cayenne: 'Porsche Cayenne',
+        windowTinting: 'BMW M3',
       },
       services: {
         fullWraps: {
-          name: 'Vollfolierung',
-          title: 'Vollfolierung: Werkslack vs. Satin Obsidian Black',
+          name: 'Full Wrap: Porsche 911',
+          title: 'Porsche 911 Carrera S: Werksweiss vs. Satin Obsidian Black',
           beforeLabel: 'Werkslack: Carrara Weiss Glanz',
           afterLabel: 'Atelier Satin Obsidian Black',
-          desc: 'Komplette Farbtransformation inkl. unsichtbarer Türeinstiege & Knifeless-Kantenverlegung.',
+          desc: 'Komplette Farbtransformation inkl. unsichtbarer Türeinstiege & Knifeless-Kantenverlegung am Porsche 911 Carrera S.',
           turnaround: '4 Tage',
           vehicle: 'Porsche 911 Carrera S (992)'
         },
         partialWraps: {
-          name: 'Teilfolierung',
-          title: 'Teilfolierung: Monoton vs. Forged Carbon & Satin Dach',
+          name: 'Partial Wrap: BMW M4',
+          title: 'BMW M4 Competition: Monoton vs. Forged Carbon Roof',
           beforeLabel: 'Monotoner Werkslack',
           afterLabel: 'Forged Carbon Dach & Akzente',
-          desc: 'Kontrastreiche Veredelung von Fahrzeugdach, Spiegelkappen und Frontspoiler ohne Karosserielackierung.',
+          desc: 'Kontrastreiche Veredelung von Fahrzeugdach, Spiegelkappen und Frontspoiler am BMW M4 Competition.',
           turnaround: '2 Tage',
-          vehicle: 'Porsche 911 Carrera S (992)'
+          vehicle: 'BMW M4 Competition'
         },
         chromeDelete: {
-          name: 'Chrome Delete',
-          title: 'Chrome Delete: Werks-Chrom vs. Gloss Piano Shadowline',
+          name: 'Chrome Delete: AMG GT',
+          title: 'Mercedes-AMG GT 63 S: Werks-Chrom vs. Piano Shadowline',
           beforeLabel: 'Werks-Chromleisten & Badges',
           afterLabel: 'Piano Black Gloss Shadowline',
-          desc: 'Vollständiges Blackout-Package für Fensterrahmen, Kühlergrill-Einfassungen und Schriftzüge.',
+          desc: 'Vollständiges Blackout-Package für Fensterrahmen, Panamericana-Grill und Schriftzüge am Mercedes-AMG GT 63 S.',
           turnaround: '1 Tag',
-          vehicle: 'Porsche 911 Carrera S (992)'
+          vehicle: 'Mercedes-AMG GT 63 S'
         },
         ppf: {
-          name: 'Lackschutz (PPF)',
-          title: 'Lackschutz (PPF): Ungeschützt vs. 200μm Stealth PPF Shield',
+          name: 'PPF Shield: Audi RS6',
+          title: 'Audi RS6 Avant: Ungeschützt vs. 200μm Stealth PPF Shield',
           beforeLabel: 'Ungeschützter Werkslack',
           afterLabel: '200μm Stealth Matte PPF',
-          desc: '200-Mikron selbstreinigende und selbstheilende Lackschutzfolie schützt effektiv vor Steinschlag.',
+          desc: '200-Mikron selbstreinigende und selbstheilende Lackschutzfolie am Audi RS6 Avant schützt effektiv vor Steinschlag.',
           turnaround: '5 Tage',
-          vehicle: 'Porsche 911 Carrera S (992)'
+          vehicle: 'Audi RS6 Avant'
+        },
+        cayenne: {
+          name: 'Full Spec: Porsche Cayenne',
+          title: 'Porsche Cayenne Turbo GT: Werkslack vs. Liquid Gold & Tint',
+          beforeLabel: 'Ungeschützter Werkslack',
+          afterLabel: 'Liquid Quartz Gold & Ceramic Shield',
+          desc: 'Exklusiv-Vollfolierung in Liquid Gold in Kombination mit Nano-Keramik Scheibentönung am Porsche Cayenne Turbo GT.',
+          turnaround: '4 Tage',
+          vehicle: 'Porsche Cayenne Turbo GT'
         },
         windowTinting: {
-          name: 'Scheibentönung',
-          title: 'Scheibentönung: Klare Werksscheiben vs. 15% Keramik-Tönung',
+          name: 'Keramik Tint: BMW M3',
+          title: 'BMW M3 Competition (G80): Klare Scheiben vs. 15% Keramik-Tint',
           beforeLabel: 'Klare Werksscheiben',
           afterLabel: '15% Nano-Keramik Hitzeschutz',
-          desc: 'ASTRA-konforme Scheibentönung mit 99% UV-Blockierung und 92% IR-Wärmereduktion.',
+          desc: 'ASTRA-konforme Scheibentönung mit 99% UV-Blockierung und 92% IR-Wärmereduktion am BMW M3 Competition.',
           turnaround: '1 Tag',
-          vehicle: 'Porsche 911 Carrera S (992)'
+          vehicle: 'BMW M3 Competition (G80)'
         }
       },
       inspectBtn: 'Details ansehen',
       modalClose: 'Schliessen',
       modalBefore: 'Vor der Folierung',
       modalAfter: 'Nach der Veredelung',
-      modalInstruction: 'Regler verschieben, um Werkslack mit Folienfinish zu vergleichen',
-      requestQuoteForSpec: 'Offerte für diese Konfiguration anfragen',
+      modalInstruction: 'Regler verschieben, um Werkslack mit Folienfinish am selben Fahrzeug zu vergleichen',
+      requestQuoteForSpec: 'Offerte für dieses Modell anfragen',
       turnaroundLabel: 'Dauer',
       studioLabel: 'Atelier',
       specsHeader: 'Highlights der Ausführung',
@@ -389,7 +409,7 @@ export const translations = {
       badge: 'Atelier Kanton Zürich',
       titleLine1: 'Präzision. Schutz.',
       titleLine2: 'Personalisierung.',
-      p1: 'JD CAR WRAPPING ATELIER wurde mit einem klaren Anspruch gegründet: Kompromisslose Fahrzeugveredelung und höchster Lackschutz für Automobil-Liebhaber und Sammler im Kanton Zürich.',
+      p1: 'JD CAR WRAPPING ATELIER wurde mit einem klaren Anspruch gegründet: Kompromisslose Fahrzeugveredelung und höchster Lackschutz für Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne und BMW M3 im Kanton Zürich.',
       p2: 'Wir arbeiten ausschliesslich nach privater Terminvereinbarung in unserem modern ausgestatteten Atelier im Kanton Zürich. Wir verbinden Schweizer Präzisionshandwerk, staubfreie Reinraum-Vorbereitung und Knifeless-Tape-Technologie für absolut klingenfreie Folierungen.',
       checklists: [
         { title: 'Klimatisierter Reinraum', desc: 'Gefilterte Luftzirkulation verhindert Mikrostaub für ein seidenweiches Folienfinish.' },
@@ -411,7 +431,7 @@ export const translations = {
     pricing: {
       counter: '03 Optionen',
       title: 'Atelier Pakete',
-      description: 'Maßgeschneiderte Veredelungs- und Lackschutzpakete für anspruchsvolle Fahrzeughalter im Kanton Zürich.',
+      description: 'Maßgeschneiderte Veredelungs- und Lackschutzpakete für Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne und BMW M3.',
       inquireBtn: 'Paket anfragen',
       items: [
         {
@@ -450,12 +470,12 @@ export const translations = {
       title: 'Kundenstimmen',
       items: [
         {
-          quote: 'Makellose Satin-Schwarz-Folierung an meinem 911 GT3 RS. Die Kanten an den Einstiegen sind von einer Werkslackierung nicht zu unterscheiden.',
+          quote: 'Makellose Satin-Schwarz-Folierung an meinem Porsche 911 GT3 RS. Die Kanten an den Einstiegen sind von einer Werkslackierung nicht zu unterscheiden.',
           name: 'Marc von Berg',
           role: 'Porsche 911 GT3 RS Besitzer — Zürich'
         },
         {
-          quote: 'Die PPF-Ganzkörperfolierung gibt mir absolutes Vertrauen auf Pässen. Nach 15.000 Kilometern kein einziger Steinschlag.',
+          quote: 'Die PPF-Ganzkörperfolierung an meinem Audi RS6 Avant gibt mir absolutes Vertrauen auf Pässen. Nach 15.000 Kilometern kein einziger Steinschlag.',
           name: 'Nathan Bennett',
           role: 'Audi RS6 Avant Besitzer — Zürich'
         },
@@ -465,9 +485,19 @@ export const translations = {
           role: 'Mercedes-AMG GT 63 S Besitzerin — Zürich'
         },
         {
-          quote: 'Akribisch saubere Arbeit im Reinraum. Die Online-Farbvorschau stimmte 1:1 mit dem realen Folienmuster überein.',
+          quote: 'Akribisch saubere Arbeit im Reinraum am BMW M4. Die Online-Farbvorschau stimmte 1:1 mit dem realen Folienmuster überein.',
           name: 'Callum Henderson',
           role: 'BMW M4 Competition Besitzer — Zürich'
+        },
+        {
+          quote: 'Messerscharfe Knifeless-Kanten und perfekter Stealth-Look für meinen BMW M3. Äusserst kompetentes Atelier-Team.',
+          name: 'Lukas Weber',
+          role: 'BMW M3 Competition Besitzer — Zürich'
+        },
+        {
+          quote: 'Hervorragende Nano-Keramik Scheibentönung an unserem Porsche Cayenne. Perfekter Hitzeschutz und makellose Optik.',
+          name: 'Sophie Miller',
+          role: 'Porsche Cayenne Turbo GT Besitzerin — Zürich'
         }
       ]
     },
@@ -477,11 +507,11 @@ export const translations = {
       script: 'Expertise & Transparenz',
       items: [
         {
-          question: 'Wie lange dauert eine Vollfolierung im Atelier Zürich?',
-          answer: 'Eine professionelle Vollfolierung (Car Wrapping Zürich / Autofolierung Zürich) dauert in der Regel zwischen 3 und 5 Arbeitstagen. Diese Zeitspanne umfasst die demontagefreie oder teildemontierte Vorbereitung, gründliche Entfettung im Reinraum, die spannungsfreie Folienverlegung und die thermische Nachbehandlung (Post-Heating).'
+          question: 'Wie lange dauert eine Vollfolierung für Porsche 911, BMW M4 or Audi RS6?',
+          answer: 'Eine professionelle Vollfolierung (Car Wrapping Zürich / Autofolierung Zürich) dauert in der Regel zwischen 3 und 5 Arbeitstagen. Diese Zeitspanne umfasst die teildemontierte Vorbereitung, gründliche Entfettung im Reinraum, die spannungsfreie Folienverlegung und die thermische Nachbehandlung.'
         },
         {
-          question: 'Wie lange hält eine hochwertige Autofolierung?',
+          question: 'Wie lange hält eine hochwertige Autofolierung am Sportwagen?',
           answer: 'Qualitätsfolien von Marken wie 3M, Avery Dennison oder Inozetek halten bei fachgerechter Pflege im Schweizer Klima zwischen 5 und 7 Jahren. Unsere Lackschutzfolien (PPF) sind zudem mit bis zu 10 Jahren Garantie gegen Vergilbung geschützt.'
         },
         {
@@ -497,7 +527,7 @@ export const translations = {
           answer: 'Autofolierung (Vollfolierung / Teilfolierung Zürich) dient primär der optischen Gestaltung (Farbwechsel in Matt, Glanz, Satin oder Carbon). Lackschutzfolie (PPF) ist eine extrem transparente, 200 Mikron dicke Polyurethan-Folie mit selbstheilender Oberfläche zum Schutz vor Steinschlag und Kratzern.'
         },
         {
-          question: 'Kann ich eine individuelle Sonderfarbe oder Design wählen?',
+          question: 'Kann ich mein Modell (Porsche 911, BMW M3/M4, Mercedes-AMG GT, Audi RS6, Cayenne) individuell konfigurieren?',
           answer: 'Ja. Wir bieten über 300 Folienfarben und Finishes an. Zudem gestalten wir individuelle Teilfolierungen, Chrome Delete Packages und Plotter-Grafiken genau nach Ihren Wünschen.'
         },
         {
@@ -520,7 +550,7 @@ export const translations = {
       submitAnother: 'Weitere Anfrage senden',
       whatsappDirect: 'WhatsApp Direkt',
       sections: {
-        vehicle: '1. Fahrzeugdaten',
+        vehicle: '1. Fahrzeugdaten (Porsche 911, BMW M4, AMG GT, Audi RS6, Cayenne, M3)',
         year: 'Baujahr',
         make: 'Marke',
         model: 'Modell / Variante',
@@ -607,7 +637,7 @@ export const translations = {
         repHeader: 'Vertretung & Betrieb',
         repText: 'JD Car Wrapping Atelier Zurich Management',
         disclaimerHeader: 'Haftungsausschluss (Disclaimer)',
-        disclaimerText: 'Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche wegen Schäden materieller oder immaterieller Art werden ausgeschlossen.',
+        disclaimerText: 'Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen.',
       },
       privacyContent: {
         heading: 'Datenschutzerklärung nach Schweizer DSG & EU-DSGVO',
@@ -615,7 +645,7 @@ export const translations = {
         collectionHeader: 'Erhebung und Speicherung personenbezogener Daten',
         collectionText: 'Wenn Sie uns per Anfrageformular oder WhatsApp kontaktieren, werden Ihre Angaben (Name, E-Mail, Telefonnummer, Fahrzeugdaten) zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.',
         rightsHeader: 'Ihre Rechte',
-        rightsText: 'Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung sowie ein Recht auf Berichtigung oder Löschung dieser Daten.',
+        rightsText: 'Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten.',
       }
     }
   },
@@ -640,7 +670,7 @@ export const translations = {
       badge: 'Finishes & Materials Showcase',
       titleLine1: 'FIND YOUR FINISH',
       titleLine2: 'Tactile Material Samples',
-      description: 'Explore our studio’s five signature finish categories. Each material option is applied using top-tier European films offering supreme UV, scratch, and gravel defense.',
+      description: 'Explore our studio’s five signature finish categories across our reference fleet: Porsche 911, BMW M3, Mercedes-AMG GT, Audi RS6, and Porsche Cayenne.',
       finishCategoryLabel: 'Finish Specification',
       durabilityLabel: 'Durability',
       maintenanceLabel: 'Maintenance',
@@ -649,15 +679,16 @@ export const translations = {
         {
           id: 'satin',
           name: 'Satin Finish (Semi-Matte)',
+          vehicleLabel: 'Porsche 911 Carrera S',
           specCode: 'JD-SATIN-MATTE-01',
           swatchHex: '#5b6572',
           sheenLevel: '30% Sheen / Silky Lustre',
           image: 'https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&w=1200',
-          description: 'The ultimate balance between gloss depth and stealth matte. Diffuses ambient light across vehicle contours, enhancing body lines on supercars like the Porsche 911.',
+          description: 'The ultimate balance between gloss depth and stealth matte. Diffuses ambient light across vehicle contours, enhancing body lines on supercars like the Porsche 911 Carrera S.',
           durability: '5 - 7 Year Warranty',
           maintenance: 'Standard Wash / Hand Wash',
           features: [
-            'Soft satin sheen highlights vehicle body contours',
+            'Soft satin sheen highlights Porsche 911 body contours',
             'Resistant to fingerprints and water spots',
             'Can be combined with clear satin PPF'
           ]
@@ -665,15 +696,16 @@ export const translations = {
         {
           id: 'gloss',
           name: 'High Gloss Finish',
+          vehicleLabel: 'BMW M3 Competition (G80)',
           specCode: 'JD-GLOSS-PIANO-02',
           swatchHex: '#64748b',
           sheenLevel: '98% Depth Gloss / Mirror Optic',
           image: 'https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200',
-          description: 'Maximum paint depth and brilliant mirror clarity. Indistinguishable from factory multi-coat paint.',
+          description: 'Maximum paint depth and brilliant mirror clarity on the BMW M3 Competition. Indistinguishable from factory multi-coat paint.',
           durability: '5 - 7 Year Warranty',
           maintenance: 'Hand Wash Recommended',
           features: [
-            'Mirror clarity matching ceramic clear coats',
+            'Mirror clarity matching ceramic clear coats on BMW M3',
             'Seamless execution for full wraps & roof contrast',
             'UV-shielding layer prevents color fading'
           ]
@@ -681,15 +713,16 @@ export const translations = {
         {
           id: 'matte',
           name: 'Stealth Matte',
+          vehicleLabel: 'Mercedes-AMG GT 63 S',
           specCode: 'JD-MATTE-STEALTH-03',
           swatchHex: '#121214',
           sheenLevel: '5% Reflection / Stealth Optics',
           image: 'https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200',
-          description: 'Uncompromising stealth aesthetic. Absorbs light without reflection for a pure, monolithic silhouette.',
+          description: 'Uncompromising stealth aesthetic for the Mercedes-AMG GT 63 S. Absorbs light without reflection for a pure, monolithic silhouette.',
           durability: '5 - 7 Year Warranty',
           maintenance: 'Dedicated Matte Film Cleaner',
           features: [
-            '0% harsh glare or mirror reflections',
+            '0% harsh glare or mirror reflections on AMG GT',
             'Accentuates muscular vehicle proportions',
             'Ideal for full wraps and chrome delete packages'
           ]
@@ -697,15 +730,16 @@ export const translations = {
         {
           id: 'metallic',
           name: 'Metallic & Pearl Effect',
+          vehicleLabel: 'Audi RS6 Avant',
           specCode: 'JD-METALLIC-QUARTZ-04',
           swatchHex: '#b45309',
           sheenLevel: 'High-Sparkle Flake Optics',
           image: 'https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200',
-          description: 'Infused with fine metallic pigments. Creates captivating light play and color depth under sunlight.',
+          description: 'Infused with fine metallic pigments on the Audi RS6 Avant. Creates captivating light play and color depth under sunlight.',
           durability: '5 - 7 Year Warranty',
           maintenance: 'Standard Vehicle Wash',
           features: [
-            'High-density metallic flake pigmentation',
+            'High-density metallic flake pigmentation on Audi RS6',
             'Three-dimensional depth under direct light',
             'Available in Satin Metallic and Gloss Metallic'
           ]
@@ -713,15 +747,16 @@ export const translations = {
         {
           id: 'special',
           name: 'Forged Carbon & Special PPF',
+          vehicleLabel: 'Porsche Cayenne Turbo GT',
           specCode: 'JD-CARBON-SPECIAL-05',
           swatchHex: '#064e3b',
           sheenLevel: 'Tactile Texture & Color-Shift',
           image: 'https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg',
-          description: 'Exclusive specialty films ranging from forged carbon textures to chameleon color-shift films and self-healing PPF armor.',
+          description: 'Exclusive specialty films ranging from forged carbon textures on the Porsche Cayenne Turbo GT to chameleon color-shift films and self-healing PPF armor.',
           durability: 'Up to 10 Year Warranty',
           maintenance: 'Low Maintenance',
           features: [
-            'Tactile Forged Carbon & Honeycomb textures',
+            'Tactile Forged Carbon & Honeycomb textures for performance SUVs',
             '200-micron PPF protection against gravel',
             'Angle-dependent color-shift effects'
           ]
@@ -732,7 +767,7 @@ export const translations = {
       badge: 'Swiss Precision & Craftsmanship',
       titleLine1: 'DETAILS MAKE THE DIFFERENCE.',
       titleLine2: 'Master Installation Quality',
-      subtitle: 'Uncompromising attention to every edge, contour, and seam. Dust-controlled clean room installation built for discerning automotive owners in Zurich.',
+      subtitle: 'Uncompromising attention to every edge, contour, and seam on Porsche 911, BMW M3, Audi RS6, and Mercedes-AMG GT models.',
       pillars: {
         detail: {
           title: 'Attention to Detail',
@@ -757,7 +792,7 @@ export const translations = {
       },
       galleryBadge: 'Installation Close-Ups & Detail Work',
       galleryTitle: 'Master Precision Photography',
-      gallerySubtitle: 'Close-up macro photography highlighting edge tucking, clean room fitting, and micro-precision finishing.',
+      gallerySubtitle: 'Close-up macro photography highlighting BMW M3, Porsche 911, Mercedes-AMG GT, and Audi RS6 execution.',
       inquireCta: 'Request Vehicle Quote',
       bottomCtaTitle: 'Desire Uncompromising Quality For Your Vehicle?',
       bottomCtaSubtitle: 'Submit your vehicle details to receive an individual fixed-price quote.',
@@ -767,7 +802,7 @@ export const translations = {
       badge: 'Your Customer Journey',
       titleLine1: 'HOW IT WORKS',
       titleLine2: '4-Step Atelier Process',
-      description: 'From initial design consultation to clean room delivery at our Zurich studio — precise, transparent, and personalized.',
+      description: 'From initial design consultation for your Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Cayenne, or M3 to clean room delivery.',
       ctaTitle: 'Ready for Your Vehicle Transformation?',
       ctaSubtitle: 'Schedule your private consultation appointment in the Canton of Zurich.',
       ctaButton: 'Book Consultation',
@@ -775,7 +810,7 @@ export const translations = {
         {
           number: '01',
           title: 'Consultation & Specification',
-          description: 'We discuss your styling vision. You examine physical material swatches (Satin, Matte, Gloss, PPF) directly on your vehicle.',
+          description: 'We discuss your styling vision. You examine physical material swatches (Satin, Matte, Gloss, PPF) directly on your Porsche 911, BMW M4, AMG GT, RS6 or Cayenne.',
           highlight: 'Personal & Discrete'
         },
         {
@@ -804,7 +839,7 @@ export const translations = {
       subheading: 'JD CAR WRAPPING ATELIER ZURICH',
       slogan: 'REDEFINE YOUR DRIVE',
       tagline: 'PRECISION. PROTECTION. PERSONALIZATION.',
-      description: "Switzerland’s premier automotive customization studio. Specializing in high-end full vinyl wraps, paint protection film (PPF), chrome delete, and ceramic glass tinting for luxury supercars.",
+      description: "Switzerland’s premier automotive customization studio for Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne, and BMW M3 models.",
       exploreServicesBtn: 'Explore Services',
       requestQuoteBtn: 'Request a Quote',
       createStyleBtn: 'CREATE YOUR STYLE',
@@ -819,7 +854,7 @@ export const translations = {
       badge: 'Zurich Atelier Services',
       titleLine1: 'Precision Engineering',
       titleLine2: 'For Automotive Perfection',
-      description: 'Five specialized styling and protection services executed in our dust-free Canton of Zurich studio using state-of-the-art materials.',
+      description: 'Five specialized styling and protection services tailored for Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne, and BMW M3.',
       finishesTitle: 'Available Finishes & Textures',
       craftsmanshipTitle: 'Craftsmanship Standards',
       turnaroundLabel: 'Turnaround',
@@ -830,12 +865,13 @@ export const translations = {
         {
           id: 'full-wraps',
           title: 'Full Car Wraps',
-          subtitle: 'Complete Vehicle Color & Texture Transformation',
+          subtitle: 'Reference Model: Porsche 911 Carrera S',
           category: 'Full Body Customization',
-          description: "Transform your vehicle's aesthetic with seamless full body wrapping. Every panel, handle, and edge is meticulously prepared and wrapped to ensure a factory-level finish with zero paint exposure.",
+          vehicleModel: 'Porsche 911 Carrera S',
+          description: "Transform your Porsche 911 Carrera S's aesthetic with seamless full body wrapping. Every panel, handle, and edge is meticulously prepared and wrapped.",
           finishes: ['Gloss', 'Matte', 'Satin', 'Metallic', 'Color-Shift', 'Velvet & Textured'],
           keyFeatures: [
-            'Precision door jamb & handle edge tucking',
+            'Precision door jamb & handle edge tucking on Porsche 911',
             'Protects original factory paint underneath',
             'Reversible at any time without residue',
             'Premium European vinyl (3M, Avery Dennison, Inozetek)'
@@ -846,12 +882,13 @@ export const translations = {
         {
           id: 'partial-wraps',
           title: 'Partial Wraps & Accents',
-          subtitle: 'Targeted Styling for Roofs, Hoods & Aero Accents',
+          subtitle: 'Reference Model: BMW M4 Competition',
           category: 'Panel Styling',
-          description: 'Elevate key features of your automobile with high-contrast panel wraps. From gloss black roof contrast options to forged carbon bonnets and custom racing stripes, create a distinct profile.',
+          vehicleModel: 'BMW M4 Competition',
+          description: 'Elevate key features of your BMW M4 Competition with high-contrast panel wraps, forged carbon bonnets, and custom M racing stripes.',
           finishes: ['Gloss Piano Black', 'Forged Carbon', 'Satin Dark Grey', 'Custom Striping'],
           keyFeatures: [
-            'Gloss Black panoramic roof styling',
+            'BMW M4 Gloss Black panoramic roof & carbon styling',
             'Carbon fiber bonnet & spoiler accents',
             'Custom plotter-cut stripes & graphics',
             'Knifeless tape technology — 0% blade risk'
@@ -862,13 +899,14 @@ export const translations = {
         {
           id: 'chrome-delete',
           title: 'Chrome Delete',
-          subtitle: 'Stealth Blackout Treatments for Window Trims & Badges',
+          subtitle: 'Reference Model: Mercedes-AMG GT 63 S',
           category: 'Styling Detail',
-          description: 'Replace factory brightwork with a refined stealth blackout look. We wrap window surrounds, front kidney/mesh grilles, side vents, exhaust surrounds, and badging in premium dark vinyl.',
+          vehicleModel: 'Mercedes-AMG GT 63 S',
+          description: 'Replace factory brightwork on the Mercedes-AMG GT 63 S with a refined stealth blackout look across window surrounds, Panamericana grille, and badging.',
           finishes: ['Satin Obsidian Black', 'Gloss Piano Black', 'Matte Charcoal'],
           keyFeatures: [
-            'Full window trim blackout kit',
-            'Front grille & kidney surround wrapping',
+            'Mercedes-AMG GT Full window trim blackout kit',
+            'Front grille & Panamericana surround wrapping',
             'Badges, emblems & exhaust tip accents',
             'Durable against Swiss winter salt & washing'
           ],
@@ -878,12 +916,13 @@ export const translations = {
         {
           id: 'ppf',
           title: 'Paint Protection Film (PPF)',
-          subtitle: 'Invisible Self-Healing Polyurethane Armor',
+          subtitle: 'Reference Model: Audi RS6 Avant',
           category: 'Paint Protection',
-          description: "Shield your vehicle's factory paint from stone chips, gravel, road debris, bug splatter, and parking scratches with optically clear, self-healing 200-micron polyurethane film.",
+          vehicleModel: 'Audi RS6 Avant',
+          description: "Shield your Audi RS6 Avant's factory paint from stone chips, gravel, and road debris with optically clear or stealth matte 200-micron polyurethane film.",
           finishes: ['Optically Clear Gloss PPF', 'Stealth Satin Matte PPF', 'Hydrophobic Coating'],
           keyFeatures: [
-            'Heat-activated self-healing top layer',
+            'Heat-activated self-healing top layer on Audi RS6',
             'Computer CAD pre-cut patterns for perfect fitment',
             'Full Front Track Package or 100% Full Body',
             '10-Year anti-yellowing & anti-cracking warranty'
@@ -894,12 +933,13 @@ export const translations = {
         {
           id: 'window-tinting',
           title: 'Window Tinting',
-          subtitle: 'Ceramic Solar Heat Rejection & Privacy Shield',
+          subtitle: 'Reference Model: Porsche Cayenne Turbo GT',
           category: 'Glass Protection',
-          description: 'Enhance cabin privacy and eliminate interior solar heat buildup with high-performance nano-ceramic glass tinting. Compliant with Canton of Zurich road traffic regulations.',
+          vehicleModel: 'Porsche Cayenne Turbo GT',
+          description: 'Enhance cabin privacy and eliminate interior solar heat buildup on the Porsche Cayenne Turbo GT with high-performance nano-ceramic glass tinting.',
           finishes: ['Ceramic 5% Privacy', 'Ceramic 15% Dark', 'Ceramic 35% Medium', 'Ceramic 70% Light'],
           keyFeatures: [
-            'Up to 99% UV ray radiation protection',
+            'Up to 99% UV ray radiation protection in SUV cabin',
             '92% Infrared thermal heat rejection',
             '100% Canton of Zurich road legal compliance',
             'Non-metallic — no signal interference with mobile/GPS'
@@ -912,7 +952,7 @@ export const translations = {
     customizer: {
       badge: 'Interactive Atelier 3D',
       title: 'CREATE YOUR STYLE',
-      subtitle: '360° Visual Configuration & Palette Selector',
+      subtitle: '360° Visual Configuration & Palette Selector (Porsche 911 & BMW M3)',
       instruction: 'Select your preferred vinyl shade and finish texture. Apply the spec directly to your vehicle quote inquiry.',
       finishesLabel: 'Surface Finish',
       finishes: {
@@ -930,26 +970,27 @@ export const translations = {
       badge: 'Atelier Portfolio',
       titleLine1: 'Vehicle Transformations',
       titleLine2: 'Canton of Zurich Gallery',
-      description: 'Explore our portfolio of luxury automotive wraps, PPF armor, and custom blackout styling executed for discerning Swiss vehicle owners.',
+      description: 'Explore our portfolio of luxury automotive wraps executed for Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne, and BMW M3 vehicles.',
       sliderTitle: 'Featured Transformation — Drag Slider',
-      sliderBefore: 'Factory White Paint',
-      sliderAfter: 'Atelier Satin Obsidian Black',
-      transformationSubtitle: 'Compare before and after transformations on the identical vehicle (Porsche 911 Carrera S) across all 5 key services',
+      sliderBefore: 'Factory Stock Paint',
+      sliderAfter: 'Atelier Wrapped Finish',
+      transformationSubtitle: 'Identical vehicle, identical camera angle & lighting — compare before and after finish transformations',
       dragHint: 'Drag handle to compare',
-      mode3D: '3D Studio View',
+      mode3D: '3D Studio Engine',
       mode2D: 'Studio HD View',
       categories: {
-        all: 'All',
-        fullWraps: 'Full Wraps',
-        partialWraps: 'Partial Wraps',
-        chromeDelete: 'Chrome Delete',
-        ppf: 'PPF',
-        windowTinting: 'Window Tinting',
+        all: 'All Vehicles',
+        fullWraps: 'Porsche 911',
+        partialWraps: 'BMW M4',
+        chromeDelete: 'Mercedes-AMG GT',
+        ppf: 'Audi RS6',
+        cayenne: 'Porsche Cayenne',
+        windowTinting: 'BMW M3',
       },
       services: {
         fullWraps: {
-          name: 'Full Body Wrap',
-          title: 'Full Wrap: Factory Paint vs. Satin Obsidian Black',
+          name: 'Full Wrap: Porsche 911',
+          title: 'Porsche 911 Carrera S: Factory White vs. Satin Obsidian Black',
           beforeLabel: 'Factory Paint: Carrara White Gloss',
           afterLabel: 'Wrap Finish: Satin Obsidian Black',
           desc: 'Complete color transformation including seamless door jamb execution and knifeless edge tucking.',
@@ -957,48 +998,57 @@ export const translations = {
           vehicle: 'Porsche 911 Carrera S (992)'
         },
         partialWraps: {
-          name: 'Partial Wrap',
-          title: 'Partial Wrap: Monotone vs. Forged Carbon Roof & Accents',
+          name: 'Partial Wrap: BMW M4',
+          title: 'BMW M4 Competition: Monotone vs. Forged Carbon Roof',
           beforeLabel: 'Monotone Factory Paint',
           afterLabel: 'Forged Carbon Roof & Accents',
           desc: 'High-contrast accenting of vehicle roof, mirror caps, and front splitter accents.',
           turnaround: '2 Days',
-          vehicle: 'Porsche 911 Carrera S (992)'
+          vehicle: 'BMW M4 Competition'
         },
         chromeDelete: {
-          name: 'Chrome Delete',
-          title: 'Chrome Delete: OEM Chrome vs. Gloss Piano Shadowline',
+          name: 'Chrome Delete: AMG GT',
+          title: 'Mercedes-AMG GT 63 S: OEM Chrome vs. Piano Shadowline',
           beforeLabel: 'Factory Trim: Chrome Moldings & Badging',
           afterLabel: 'Piano Black Gloss Shadowline',
           desc: 'Total blackout treatment for window surrounds, grille frames, and model designations.',
           turnaround: '1 Day',
-          vehicle: 'Porsche 911 Carrera S (992)'
+          vehicle: 'Mercedes-AMG GT 63 S'
         },
         ppf: {
-          name: 'Paint Protection (PPF)',
-          title: 'PPF Armor: Unprotected Paint vs. 200μm Stealth PPF',
+          name: 'PPF Armor: Audi RS6',
+          title: 'Audi RS6 Avant: Unprotected Paint vs. 200μm Stealth PPF',
           beforeLabel: 'Unprotected Factory Gloss Paint',
           afterLabel: '200μm Stealth Matte PPF',
           desc: '200-micron self-healing hydrophobic paint protection film shielding against gravel impact.',
           turnaround: '5 Days',
-          vehicle: 'Porsche 911 Carrera S (992)'
+          vehicle: 'Audi RS6 Avant'
+        },
+        cayenne: {
+          name: 'Full Spec: Porsche Cayenne',
+          title: 'Porsche Cayenne Turbo GT: Factory vs. Liquid Gold & Tint',
+          beforeLabel: 'Unprotected Factory Paint',
+          afterLabel: 'Liquid Quartz Gold & Ceramic Shield',
+          desc: 'Full body wrap in Liquid Gold combined with ceramic heat-rejection window tinting on Porsche Cayenne Turbo GT.',
+          turnaround: '4 Days',
+          vehicle: 'Porsche Cayenne Turbo GT'
         },
         windowTinting: {
-          name: 'Window Tinting',
-          title: 'Window Tint: Clear Factory Glass vs. 15% Ceramic Shield',
+          name: 'Ceramic Tint: BMW M3',
+          title: 'BMW M3 Competition (G80): Clear Glass vs. 15% Ceramic Shield',
           beforeLabel: 'Factory Glass: Clear Untinted',
           afterLabel: '15% Nano-Ceramic Thermal Tint',
           desc: 'ASTRA-compliant ceramic tinting delivering 99% UV rejection and 92% IR thermal shielding.',
           turnaround: '1 Day',
-          vehicle: 'Porsche 911 Carrera S (992)'
+          vehicle: 'BMW M3 Competition (G80)'
         }
       },
       inspectBtn: 'Inspect Specs',
       modalClose: 'Close',
       modalBefore: 'Before Wrap',
       modalAfter: 'After Transformation',
-      modalInstruction: 'Drag middle handle to compare factory vs wrapped atelier finish',
-      requestQuoteForSpec: 'Request Quote For This Spec',
+      modalInstruction: 'Drag middle handle to compare factory vs wrapped finish on identical vehicle',
+      requestQuoteForSpec: 'Request Quote For This Model',
       turnaroundLabel: 'Turnaround',
       studioLabel: 'Studio',
       specsHeader: 'Specification Highlights',
@@ -1007,8 +1057,8 @@ export const translations = {
       badge: 'Canton of Zurich Atelier',
       titleLine1: 'Precision. Protection.',
       titleLine2: 'Personalization.',
-      p1: 'JD CAR WRAPPING ATELIER was founded on a simple principle: to deliver uncompromising automotive customization and paint protection to Zurich’s most discerning car collectors and enthusiasts.',
-      p2: "Operating strictly by private appointment from our state-of-the-art facility in the Canton of Zurich, we combine European precision engineering, dust-free climate control, and knifeless tape technology to guarantee zero blade contact with your vehicle's original factory paint.",
+      p1: 'JD CAR WRAPPING ATELIER was founded to deliver premier automotive customization and paint protection to owners of Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne, and BMW M3 vehicles.',
+      p2: "Operating strictly by private appointment from our state-of-the-art facility in the Canton of Zurich, we combine European precision engineering, dust-free climate control, and knifeless tape technology.",
       checklists: [
         { title: 'Climate-Controlled Booth', desc: 'Filtered air circulation eliminates micro-dust for glass-smooth vinyl installation.' },
         { title: '0% Blade-to-Paint Risk', desc: 'Knifeless filament tapes guarantee perfect trim lines with zero blade touch.' },
@@ -1029,7 +1079,7 @@ export const translations = {
     pricing: {
       counter: '03 Options',
       title: 'Atelier Packages',
-      description: 'Tailored styling and paint protection packages crafted for discerning vehicle owners in Canton of Zurich.',
+      description: 'Tailored styling and paint protection packages crafted for Porsche 911, BMW M4, Mercedes-AMG GT, Audi RS6, Porsche Cayenne, and BMW M3.',
       inquireBtn: 'Inquire Package',
       items: [
         {
@@ -1073,7 +1123,7 @@ export const translations = {
           role: 'Porsche 911 GT3 RS Owner — Zurich'
         },
         {
-          quote: 'Full PPF application gave me complete confidence on high-speed alpine passes. Zero stone chip damage after 15,000 kilometers.',
+          quote: 'Full PPF application on my Audi RS6 Avant gave me complete confidence on high-speed alpine passes. Zero stone chip damage.',
           name: 'Nathan Bennett',
           role: 'Audi RS6 Avant Owner — Zurich'
         },
@@ -1083,9 +1133,19 @@ export const translations = {
           role: 'Mercedes-AMG GT 63 S Owner — Zurich'
         },
         {
-          quote: 'Meticulous dust-free clean room execution. The customizer online matched the physical vinyl sample 100%.',
+          quote: 'Meticulous dust-free clean room execution on my BMW M4. The customizer online matched the physical vinyl sample 100%.',
           name: 'Callum Henderson',
           role: 'BMW M4 Competition Owner — Zurich'
+        },
+        {
+          quote: 'Razor-sharp knifeless tape execution and flawless stealth look for my BMW M3. Outstanding team of craftsmen.',
+          name: 'Lukas Weber',
+          role: 'BMW M3 Competition Owner — Zurich'
+        },
+        {
+          quote: 'Outstanding nano-ceramic window tinting on our Porsche Cayenne. Perfect heat rejection and pristine optical clarity.',
+          name: 'Sophie Miller',
+          role: 'Porsche Cayenne Turbo GT Owner — Zurich'
         }
       ]
     },
@@ -1095,7 +1155,7 @@ export const translations = {
       script: 'Expertise & Transparency',
       items: [
         {
-          question: 'How long does a full vehicle wrap take at your Zurich studio?',
+          question: 'How long does a full vehicle wrap take for Porsche 911, BMW M4, or Audi RS6?',
           answer: 'Full car wraps (Autofolierung Zürich) typically require between 3 and 5 business days. This allows sufficient time for precision panel preparation, micro-cleaning in our climate-controlled booth, knifeless vinyl installation, and post-heating curing.'
         },
         {
@@ -1112,10 +1172,10 @@ export const translations = {
         },
         {
           question: 'What is the difference between vinyl wrapping and Paint Protection Film (PPF)?',
-          answer: 'Vinyl wrapping is designed to transform the aesthetic color, finish, and texture of your vehicle (gloss, matte, satin, metallic). Paint Protection Film (PPF) is an optically clear, self-healing 200-micron armor engineered specifically to absorb rock chip impacts.'
+          answer: 'Vinyl wrapping is designed to transform the aesthetic color, finish, and texture of your vehicle. Paint Protection Film (PPF) is an optically clear, self-healing 200-micron armor engineered specifically to absorb rock chip impacts.'
         },
         {
-          question: 'Can I choose a custom color or bespoke design?',
+          question: 'Can I choose a custom color or bespoke design for my vehicle?',
           answer: 'Yes. We offer over 300 vinyl colors and finishes, as well as custom partial accents, chrome delete blackout packages, and computer-cut racing stripes tailored to your specification.'
         },
         {
@@ -1138,7 +1198,7 @@ export const translations = {
       submitAnother: 'Submit Another Inquiry',
       whatsappDirect: 'WhatsApp Direct',
       sections: {
-        vehicle: '1. Vehicle Information',
+        vehicle: '1. Vehicle Information (Porsche 911, BMW M4, AMG GT, Audi RS6, Cayenne, M3)',
         year: 'Year',
         make: 'Make',
         model: 'Model / Trim',
@@ -1225,7 +1285,7 @@ export const translations = {
         repHeader: 'Representation & Operations',
         repText: 'JD Car Wrapping Atelier Zurich Management',
         disclaimerHeader: 'Disclaimer',
-        disclaimerText: 'The author reserves the right not to be responsible for the topicality, correctness, completeness or quality of the information provided. Liability claims regarding damage caused by the use of any information provided will be rejected.',
+        disclaimerText: 'The author reserves the right not to be responsible for the topicality, correctness, completeness or quality of the information provided.',
       },
       privacyContent: {
         heading: 'Privacy Policy according to Swiss FADP & EU GDPR',
@@ -1233,7 +1293,7 @@ export const translations = {
         collectionHeader: 'Collection and Storage of Personal Data',
         collectionText: 'When you submit an inquiry form or message via WhatsApp, your submitted details (name, email, phone, vehicle data) are stored for processing your inquiry.',
         rightsHeader: 'Your Rights',
-        rightsText: 'You have the right at any time to request information free of charge about your stored personal data, its origin and recipients, and the purpose of data processing, as well as a right to correction or deletion.',
+        rightsText: 'You have the right at any time to request information free of charge about your stored personal data.',
       }
     }
   }

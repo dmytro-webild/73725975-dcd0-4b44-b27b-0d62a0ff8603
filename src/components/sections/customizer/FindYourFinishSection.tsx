@@ -115,8 +115,9 @@ export default function FindYourFinishSection() {
             {/* Details & Material Specs */}
             <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
               <div>
-                <div className="text-xs font-mono uppercase tracking-widest text-primary mb-2">
-                  {finishDetails.finishCategoryLabel}
+                <div className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-primary mb-2 font-semibold">
+                  <span>{finishDetails.finishCategoryLabel}</span>
+                  <span>{activeFinish.vehicleLabel}</span>
                 </div>
                 <h3 className="text-[length:var(--text-h2)] font-light uppercase tracking-tight mb-4">
                   {activeFinish.name}
