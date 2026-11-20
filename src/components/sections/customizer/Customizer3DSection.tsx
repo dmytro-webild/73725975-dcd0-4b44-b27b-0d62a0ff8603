@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, PerspectiveCamera, ContactShadows } from "@react-three/drei";
-import ExampleSportsCar from "@/components/models/ExampleSportsCar";
+import { OrbitControls, PerspectiveCamera, ContactShadows, useGLTF } from "@react-three/drei";
+import * as THREE from "three";
 import { Sparkles, ArrowRight, RotateCcw, Palette, Layers, Check, Shield } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -9,25 +9,123 @@ import { useLanguage } from "@/context/useLanguage";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
+const PORSCHE_MODEL_URL = "https://storage.googleapis.com/webild/default/models/sports-car/model.fd149a09dc4d.glb";
+
+// Preload Porsche 911 model
+useGLTF.preload(PORSCHE_MODEL_URL);
+
 export interface ColorOption {
   id: string;
   name: string;
   hex: string;
-  finishType: "Matte" | "Satin" | "Gloss" | "Metallic";
+  finishType: "Matte" | "Satin" | "Gloss" | "Metallic" | "Special";
   roughness: number;
   metalness: number;
+  clearcoat: number;
 }
 
 const COLOR_PRESETS: ColorOption[] = [
-  { id: "stealth-black", name: "Stealth Obsidian", hex: "#121214", finishType: "Satin", roughness: 0.45, metalness: 0.3 },
-  { id: "nardo-grey", name: "Nardo Grey", hex: "#5b6572", finishType: "Gloss", roughness: 0.12, metalness: 0.2 },
-  { id: "frozen-blue", name: "Frozen Satin Blue", hex: "#1e3a8a", finishType: "Satin", roughness: 0.4, metalness: 0.4 },
-  { id: "liquid-gold", name: "Liquid Gold", hex: "#b45309", finishType: "Metallic", roughness: 0.22, metalness: 0.95 },
-  { id: "emerald-satin", name: "Emerald Satin", hex: "#064e3b", finishType: "Satin", roughness: 0.4, metalness: 0.5 },
-  { id: "carmine-red", name: "Carmine Red", hex: "#991b1b", finishType: "Gloss", roughness: 0.08, metalness: 0.2 },
-  { id: "champagne-metallic", name: "Champagne Quartz", hex: "#78716c", finishType: "Metallic", roughness: 0.2, metalness: 0.9 },
-  { id: "pearl-white", name: "Pearl White", hex: "#e2e8f0", finishType: "Matte", roughness: 0.85, metalness: 0.05 },
+  { id: "stealth-black", name: "Satin Obsidian Black", hex: "#121214", finishType: "Satin", roughness: 0.38, metalness: 0.45, clearcoat: 0.2 },
+  { id: "nardo-grey", name: "Satin Metallic Grey", hex: "#5b6572", finishType: "Satin", roughness: 0.35, metalness: 0.6, clearcoat: 0.3 },
+  { id: "frozen-blue", name: "Deep Satin Blue", hex: "#1e3a8a", finishType: "Satin", roughness: 0.4, metalness: 0.5, clearcoat: 0.2 },
+  { id: "gloss-nardo", name: "Gloss Nardo Grey", hex: "#64748b", finishType: "Gloss", roughness: 0.08, metalness: 0.15, clearcoat: 1.0 },
+  { id: "liquid-gold", name: "Liquid Quartz Gold", hex: "#b45309", finishType: "Metallic", roughness: 0.22, metalness: 0.9, clearcoat: 0.8 },
+  { id: "emerald-satin", name: "Matte Alpine Green", hex: "#064e3b", finishType: "Matte", roughness: 0.75, metalness: 0.05, clearcoat: 0.0 },
+  { id: "carmine-red", name: "Carmine Gloss Red", hex: "#991b1b", finishType: "Gloss", roughness: 0.06, metalness: 0.2, clearcoat: 1.0 },
+  { id: "pearl-white", name: "Pearl Satin White", hex: "#e2e8f0", finishType: "Special", roughness: 0.3, metalness: 0.7, clearcoat: 0.6 },
 ];
+
+function Porsche911Car({ colorHex, finishType }: { colorHex: string; finishType: string }) {
+  const { scene } = useGLTF(PORSCHE_MODEL_URL);
+
+  const clonedScene = useMemo(() => scene.clone(true), [scene]);
+
+  useEffect(() => {
+    let roughness = 0.35;
+    let metalness = 0.4;
+    let clearcoat = 0.3;
+    let clearcoatRoughness = 0.2;
+
+    switch (finishType) {
+      case "Gloss":
+        roughness = 0.06;
+        metalness = 0.15;
+        clearcoat = 1.0;
+        clearcoatRoughness = 0.03;
+        break;
+      case "Satin":
+        roughness = 0.36;
+        metalness = 0.5;
+        clearcoat = 0.25;
+        clearcoatRoughness = 0.3;
+        break;
+      case "Matte":
+        roughness = 0.78;
+        metalness = 0.05;
+        clearcoat = 0.0;
+        clearcoatRoughness = 0.8;
+        break;
+      case "Metallic":
+        roughness = 0.2;
+        metalness = 0.9;
+        clearcoat = 0.8;
+        clearcoatRoughness = 0.1;
+        break;
+      case "Special":
+        roughness = 0.28;
+        metalness = 0.8;
+        clearcoat = 0.6;
+        clearcoatRoughness = 0.15;
+        break;
+      default:
+        break;
+    }
+
+    const targetColor = new THREE.Color(colorHex);
+
+    clonedScene.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        if (mesh.material) {
+          const matName = (mesh.material as THREE.Material).name.toLowerCase();
+          // Check if mesh material is part of body paint
+          if (
+            matName.includes("paint") ||
+            matName.includes("body") ||
+            matName.includes("car") ||
+            matName.includes("main") ||
+            matName === "" ||
+            (!matName.includes("glass") &&
+             !matName.includes("wheel") &&
+             !matName.includes("tire") &&
+             !matName.includes("rubber") &&
+             !matName.includes("light") &&
+             !matName.includes("chrome") &&
+             !matName.includes("brake"))
+          ) {
+            const pMat = new THREE.MeshPhysicalMaterial({
+              color: targetColor,
+              roughness,
+              metalness,
+              clearcoat,
+              clearcoatRoughness,
+            });
+            mesh.material = pMat;
+          }
+        }
+      }
+    });
+  }, [clonedScene, colorHex, finishType]);
+
+  return (
+    <primitive
+      object={clonedScene}
+      scale={3.6}
+      position={[0, -0.6, 0]}
+      rotation={[0, Math.PI / 4, 0]}
+    />
+  );
+}
 
 export interface Customizer3DSectionProps {
   className?: string;
@@ -36,14 +134,14 @@ export interface Customizer3DSectionProps {
 
 export default function Customizer3DSection({ className, onApplySpec }: Customizer3DSectionProps) {
   const { t } = useLanguage();
-  const [selectedColor, setSelectedColor] = useState<ColorOption>(COLOR_PRESETS[0]);
+  const [selectedColor, setSelectedColor] = useState<ColorOption>(COLOR_PRESETS[1]);
   const [activeFinish, setActiveFinish] = useState<string>(selectedColor.finishType);
   const [appliedNotification, setAppliedNotification] = useState<boolean>(false);
 
   const finishes = [
-    { id: "Matte", label: t.customizer.finishes.matte },
     { id: "Satin", label: t.customizer.finishes.satin },
     { id: "Gloss", label: t.customizer.finishes.gloss },
+    { id: "Matte", label: t.customizer.finishes.matte },
     { id: "Metallic", label: t.customizer.finishes.metallic },
   ];
 
@@ -61,7 +159,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
       });
     }
     setAppliedNotification(true);
-    setTimeout(() => setAppliedNotification(false), 3000);
+    setTimeout(() => setAppliedNotification(false), 3500);
 
     const contactEl = document.getElementById("contact");
     if (contactEl) {
@@ -92,60 +190,59 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
         {/* Main 3D Workspace Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* 3D Canvas Container */}
-          <div className="lg:col-span-8 relative min-h-[420px] sm:min-h-[500px] lg:min-h-[560px] bg-card border border-border/60 overflow-hidden flex flex-col justify-between">
+          <div className="lg:col-span-8 relative min-h-[440px] sm:min-h-[520px] lg:min-h-[600px] bg-card border border-border/60 overflow-hidden flex flex-col justify-between">
             {/* Background Studio Lights / Grid overlay */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.06)_0%,transparent_70%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.08)_0%,transparent_75%)] pointer-events-none" />
 
             {/* 3D Canvas */}
             <div className="absolute inset-0">
               <Canvas shadows gl={{ antialias: true, alpha: true }}>
-                <PerspectiveCamera makeDefault position={[3.8, 1.4, 3.8]} fov={38} />
-                <ambientLight intensity={0.8} />
-                <directionalLight position={[10, 15, 10]} intensity={1.8} castShadow />
-                <directionalLight position={[-10, 8, -5]} intensity={0.6} color="#90b0e0" />
+                <PerspectiveCamera makeDefault position={[4.2, 1.5, 4.2]} fov={36} />
+                <ambientLight intensity={1.2} />
+                <directionalLight position={[10, 15, 10]} intensity={2.2} castShadow />
+                <directionalLight position={[-10, 8, -5]} intensity={0.9} color="#a0c0f0" />
+                <directionalLight position={[0, -5, 10]} intensity={0.4} />
 
-                {/* 3D Car Model */}
-                <group position={[0, -0.3, 0]}>
-                  <ExampleSportsCar color={selectedColor.hex} />
-                </group>
+                {/* Porsche 911 3D Model */}
+                <Porsche911Car colorHex={selectedColor.hex} finishType={activeFinish} />
 
-                <ContactShadows position={[0, -0.31, 0]} opacity={0.6} scale={10} blur={1.8} far={4} />
+                <ContactShadows position={[0, -0.61, 0]} opacity={0.7} scale={12} blur={2.0} far={5} />
 
                 <OrbitControls
                   enablePan={false}
                   enableZoom={true}
-                  minDistance={2.5}
-                  maxDistance={6.5}
+                  minDistance={3.0}
+                  maxDistance={7.5}
                   maxPolarAngle={Math.PI / 2 - 0.05}
                   autoRotate
-                  autoRotateSpeed={0.8}
+                  autoRotateSpeed={0.6}
                 />
               </Canvas>
             </div>
 
-            {/* Canvas Controls Overlay (Top Right / Bottom Left) */}
+            {/* Canvas Controls Overlay */}
             <div className="relative z-10 p-4 sm:p-6 flex items-center justify-between pointer-events-none">
-              <div className="px-3 py-1.5 bg-background/80 backdrop-blur-md border border-border/60 text-[11px] font-mono uppercase tracking-widest text-foreground pointer-events-auto flex items-center gap-2">
+              <div className="px-3 py-1.5 bg-background/85 backdrop-blur-md border border-border/60 text-[11px] font-mono uppercase tracking-widest text-foreground pointer-events-auto flex items-center gap-2">
                 <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>3D Studio Engine</span>
+                <span>3D Porsche 911 Studio Engine</span>
               </div>
 
-              <div className="px-3 py-1.5 bg-background/80 backdrop-blur-md border border-border/60 text-[11px] font-mono text-foreground/60 pointer-events-auto flex items-center gap-2">
+              <div className="px-3 py-1.5 bg-background/85 backdrop-blur-md border border-border/60 text-[11px] font-mono text-foreground/70 pointer-events-auto flex items-center gap-2">
                 <RotateCcw className="size-3" />
                 <span>Drag to rotate 360°</span>
               </div>
             </div>
 
             {/* Live Spec Bar Overlay (Bottom) */}
-            <div className="relative z-10 p-4 sm:p-6 backdrop-blur-md bg-background/80 border-t border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="relative z-10 p-4 sm:p-6 backdrop-blur-md bg-background/85 border-t border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/50 block">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/50 block mb-1">
                   {t.customizer.activeSpecLabel}
                 </span>
                 <div className="flex items-center gap-3">
                   <div className="size-4 rounded-full border border-border/80 shadow-inner" style={{ backgroundColor: selectedColor.hex }} />
                   <span className="font-mono text-sm uppercase font-semibold tracking-wider text-foreground">
-                    {selectedColor.name} — {activeFinish} Wrap
+                    Porsche 911 — {selectedColor.name} ({activeFinish})
                   </span>
                 </div>
               </div>
@@ -236,6 +333,10 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
               {/* Specifications Breakdown Box */}
               <div className="p-4 bg-muted/40 border border-border/40 space-y-2 mb-6">
                 <div className="flex items-center justify-between text-xs font-mono text-foreground/60">
+                  <span>Vehicle Base:</span>
+                  <span className="text-foreground">Porsche 911 Carrera S</span>
+                </div>
+                <div className="flex items-center justify-between text-xs font-mono text-foreground/60">
                   <span>Atelier Standard:</span>
                   <span className="text-foreground">Full Edge Wrapping</span>
                 </div>
@@ -245,7 +346,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
                 </div>
                 <div className="flex items-center justify-between text-xs font-mono text-foreground/60">
                   <span>Protection:</span>
-                  <span className="text-foreground">UV & Weather Resistant</span>
+                  <span className="text-foreground">UV & Alpine Salt Shield</span>
                 </div>
               </div>
             </div>

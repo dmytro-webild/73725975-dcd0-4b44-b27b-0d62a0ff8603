@@ -2,8 +2,10 @@ import { useState } from "react";
 import HeroAtelierSection from "@/components/sections/hero/HeroAtelierSection";
 import ServicesSection from "@/components/sections/services/ServicesSection";
 import Customizer3DSection from "@/components/sections/customizer/Customizer3DSection";
+import FindYourFinishSection from "@/components/sections/customizer/FindYourFinishSection";
 import PortfolioSection from "@/components/sections/portfolio/PortfolioSection";
 import AboutSection from "@/components/sections/about/AboutSection";
+import HowItWorksSection from "@/components/sections/about/HowItWorksSection";
 import PricingAxisColumns from "@/components/sections/pricing/PricingAxisColumns";
 import TestimonialAxisCounter from "@/components/sections/testimonial/TestimonialAxisCounter";
 import FaqTrackedRows from "@/components/sections/faq/FaqTrackedRows";
@@ -39,8 +41,9 @@ export default function HomePage() {
     <>
       <ScrollToneBackdrop />
 
+      {/* Realistic Porsche 911 3D Stage */}
       <ModelStage
-        src="https://storage.googleapis.com/webild/default/models/supercar/model.a5a995cd30bf.glb"
+        src="https://storage.googleapis.com/webild/default/models/sports-car/model.fd149a09dc4d.glb"
         scale={3.7}
       />
 
@@ -62,12 +65,17 @@ export default function HomePage() {
         <ServicesSection />
       </div>
 
-      {/* Interactive 3D Car Customizer Visualizer */}
+      {/* Interactive 3D Porsche 911 Car Customizer Visualizer */}
       <div id="customizer" data-webild-section="Customizer3DSection" data-webild-section-id="Customizer3DSection-1" data-section="customizer">
         <Customizer3DSection onApplySpec={handleApplySpec} />
       </div>
 
-      {/* Filterable Portfolio Gallery & Before/After Drag Slider */}
+      {/* Find Your Finish Material Showcase */}
+      <div id="finishes" data-webild-section="FindYourFinishSection" data-webild-section-id="FindYourFinishSection-1" data-section="finishes">
+        <FindYourFinishSection />
+      </div>
+
+      {/* Filterable Portfolio Gallery (Asymmetric Editorial Collage) */}
       <div id="portfolio" data-webild-section="PortfolioSection" data-webild-section-id="PortfolioSection-1" data-section="portfolio">
         <PortfolioSection />
       </div>
@@ -75,6 +83,11 @@ export default function HomePage() {
       {/* About The Atelier */}
       <div id="about" data-webild-section="AboutSection" data-webild-section-id="AboutSection-1" data-section="about">
         <AboutSection />
+      </div>
+
+      {/* How It Works (4-Step Customer Journey) */}
+      <div id="how-it-works" data-webild-section="HowItWorksSection" data-webild-section-id="HowItWorksSection-1" data-section="how-it-works">
+        <HowItWorksSection />
       </div>
 
       {/* Atelier Pricing Packages */}
