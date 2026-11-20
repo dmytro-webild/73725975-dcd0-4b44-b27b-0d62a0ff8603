@@ -178,26 +178,8 @@ export function BeforeAfterPhotoSlider({
 // Export BeforeAfterSlider alias for backwards compatibility
 export const BeforeAfterSlider = BeforeAfterPhotoSlider;
 
-// 5 Variations of Cars - Before & After Film Processing
+// 4 Variations of Cars - Before & After Film Processing
 const CAR_VARIATIONS: CarVariationItem[] = [
-  {
-    id: "bmw-m3-ceramic-tint",
-    title: "15% Nano-Keramik Hitzeschutz-Tönung",
-    vehicle: "BMW M3 Competition (G80)",
-    categoryKey: "windowTinting",
-    categoryLabel: "Keramik-Tönung",
-    finish: "Nano-Ceramic 15% Deep Privacy Shield",
-    turnaround: "1 Tag",
-    location: "Zürich Studio",
-    beforeImage: "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200",
-    afterImage: "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&w=1200",
-    beforeLabel: "ДО: Werksglas Klar",
-    afterLabel: "ПОСЛЕ: 15% Keramik-Tönung",
-    description: "Präzisions-Scheibentönung mit Nano-Keramik-Technologie am BMW M3 Competition. Bietet 99% UV-Schutz und 92% Infrarot-Wärmeabweisung nach Schweizer ASTRA Standard.",
-    specs: ["99% UV-Strahlen Schutz", "92% Infrarot-Hitzeschutz", "Schweizer ASTRA Zulassung", "Kratzfeste Keramikbeschichtung"],
-    gridSpan: "lg:col-span-7 lg:row-span-2",
-    isTintService: true,
-  },
   {
     id: "porsche-911-full-wrap",
     title: "Satin Obsidian Anthrazit Vollfolierung",
@@ -213,7 +195,7 @@ const CAR_VARIATIONS: CarVariationItem[] = [
     afterLabel: "ПОСЛЕ: Satin Obsidian Folie",
     description: "Vollständige Farbtransformation von Carrara-Weiss-Werkslack zu seidenmattem Obsidian-Schwarz inkl. Türeinstiegen und Knifeless-Kantenverlegung.",
     specs: ["Vollfolierung Satin Obsidian", "Präzisions-Türeinstiege", "Knifeless Tape Technologie", "Selbstheilende Schutzschicht"],
-    gridSpan: "lg:col-span-5",
+    gridSpan: "lg:col-span-6",
     isTintService: false,
   },
   {
@@ -231,7 +213,7 @@ const CAR_VARIATIONS: CarVariationItem[] = [
     afterLabel: "ПОСЛЕ: Forged Carbon Dach",
     description: "Teilfolierung mit echtem Forged-Carbon-Muster auf dem Fahrzeugdach, ergänzt durch hochglänzende Piano Black Seitenschweller.",
     specs: ["Forged Carbon Dachfolie", "Piano Black Seitenschweller", "Spiegelkappen Folierung", "Frontsplitter Blackout"],
-    gridSpan: "lg:col-span-5",
+    gridSpan: "lg:col-span-6",
     isTintService: false,
   },
   {
@@ -249,7 +231,7 @@ const CAR_VARIATIONS: CarVariationItem[] = [
     afterLabel: "ПОСЛЕ: Piano Shadowline",
     description: "Vollständige Entchromung aller Fensterleisten, des Panamericana-Grillrahmens und der Heckembleme in tiefglänzendem Piano Black.",
     specs: ["Fensterleisten Blackout", "Panamericana Grill Rahmen", "Modellschriftzug Schwarz", "Spiegelfuss Folierung"],
-    gridSpan: "lg:col-span-4",
+    gridSpan: "lg:col-span-6",
     isTintService: false,
   },
   {
@@ -267,7 +249,7 @@ const CAR_VARIATIONS: CarVariationItem[] = [
     afterLabel: "ПОСЛЕ: 200μm Stealth PPF",
     description: "Transformation des Werkslacks in ein samtiges Matt-Finish mit 200-Mikron dichter selbstheilender Steinschlagschutzfolie.",
     specs: ["200μm Selbstheilende Folie", "Hydrophober Topcoat", "Steinschlagschutz Front", "10 Jahre Schweizer Garantie"],
-    gridSpan: "lg:col-span-4",
+    gridSpan: "lg:col-span-6",
     isTintService: false,
   },
 ];
@@ -278,7 +260,7 @@ export default function PortfolioSection() {
   const [selectedCar, setSelectedCar] = useState<CarVariationItem | null>(null);
 
   const categories = [
-    { key: "all", label: "Alle 5 Fahrzeug-Variationen" },
+    { key: "all", label: "Alle 4 Fahrzeug-Variationen" },
     { key: "windowTinting", label: "Keramik-Tönung" },
     { key: "fullWraps", label: "Vollfolierung" },
     { key: "partialWraps", label: "Teilfolierung / Dach" },
@@ -298,7 +280,7 @@ export default function PortfolioSection() {
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-border/60 bg-muted/40 text-[length:var(--text-label)] font-mono uppercase tracking-[0.15em] text-foreground/70">
               <Sparkles className="size-3.5 text-primary" />
-              <span>{t.portfolio.badge} — 5 Fahrzeug-Variationen</span>
+              <span>{t.portfolio.badge} — 4 Fahrzeug-Variationen</span>
             </div>
             <h2 className="text-[length:var(--text-h1)] font-light uppercase tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] leading-[0.9]">
               Vorher & Nachher <br />
@@ -306,7 +288,7 @@ export default function PortfolioSection() {
             </h2>
           </div>
           <p className="text-[length:var(--text-body)] text-foreground/60 max-w-md">
-            Symphonie aus 5 verschiedenen Fahrzeugmodellen im direkten Vorher/Nachher-Vergleich vor und nach der Folien- & Tönungsbehandlung. Identisches Modell, identischer Blickwinkel.
+            Symphonie aus 4 verschiedenen Fahrzeugmodellen im direkten Vorher/Nachher-Vergleich vor und nach der Folien- & Tönungsbehandlung. Identisches Modell, identischer Blickwinkel.
           </p>
         </div>
 
