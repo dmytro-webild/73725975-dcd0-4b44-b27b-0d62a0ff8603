@@ -620,16 +620,16 @@ const PROJECTS: Omit<ProjectItem, "category">[] = [
     gridSpan: "lg:col-span-4"
   },
   {
-    id: "audi-rs6-stealth-ppf",
+    id: "bmw-5-stealth-ppf",
     title: "Stealth Matte 200μm PPF Shield",
-    vehicle: "Audi RS6 Avant",
+    vehicle: "BMW 5 Series Sedan",
     categoryKey: "ppf",
     finish: "200μm Stealth Matte Paint Protection Film",
     turnaround: "5 Days",
     location: "Zurich Studio",
     beforeImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
     afterImage: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
-    description: "Converted Audi RS6 factory gloss finish into a sleek matte sheen using 200-micron self-healing hydrophobic PPF, guarding against alpine gravel impact.",
+    description: "Converted BMW 5 Series factory gloss finish into a sleek matte sheen using 200-micron self-healing hydrophobic PPF, guarding against alpine gravel impact.",
     specs: ["200μm Self-Healing PPF", "Hydrophobic Topcoat", "Full Track Front Shield", "10-Year Warranty"],
     gridSpan: "lg:col-span-4"
   },
