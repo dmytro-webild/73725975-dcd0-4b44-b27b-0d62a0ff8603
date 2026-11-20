@@ -8,6 +8,7 @@ export const translations = {
       customizer: '3D Visualisierer',
       finishes: 'Oberflächen',
       portfolio: 'Portfolio',
+      details: 'Präzision',
       howItWorks: 'Ablauf',
       about: 'Über uns',
       pricing: 'Pakete',
@@ -108,6 +109,41 @@ export const translations = {
           ]
         }
       ]
+    },
+    details: {
+      badge: 'Schweizer Präzision & Handwerk',
+      titleLine1: 'DETAILS MAKE THE DIFFERENCE.',
+      titleLine2: 'Schweizer Präzisions-Handwerk',
+      subtitle: 'Unkompromisslose Aufmerksamkeit für jede Kante, jeden Falz und jedes Detail. Staubfreie Reinraum-Montage für höchste Ansprüche im Kanton Zürich.',
+      pillars: {
+        detail: {
+          title: 'Liebe zum Detail',
+          desc: 'Messerscharfe Knifeless-Tape Kanten, nahtloser Umschlag an Karosserieteilen und 0% Klingenrisiko am Werkslack.'
+        },
+        installation: {
+          title: 'Professionelle Montage',
+          desc: 'Verarbeitung im temperaturgeführten 22°C Reinraum-Atelier unter filtrierten Staubschutz-Bedingungen.'
+        },
+        customization: {
+          title: 'Individuelle Veredelung',
+          desc: 'Maßgeschneiderte Akzente, De-Badging, Satin- / Glanz-Kombinationen und exklusives Chrome Delete.'
+        },
+        materials: {
+          title: 'Erstklassige Materialien',
+          desc: 'Verwendung von Premium-Gussfolien und selbstheilenden PPF-Schutzschichten führender europäischer Hersteller.'
+        },
+        service: {
+          title: 'Kundenorientierter Service',
+          desc: 'Diskrete 1-zu-1 Erstberatung, transparente Festpreis-Offerten und persönliches Garantiezertifikat.'
+        }
+      },
+      galleryBadge: 'Montage-Makroaufnahmen & Präzision',
+      galleryTitle: 'Handwerkskunst im Detail',
+      gallerySubtitle: 'Fokus auf anspruchsvolle Detailarbeiten, Kantenführung und staubfreie Folienverklebung.',
+      inquireCta: 'Offerte für Ihr Fahrzeug',
+      bottomCtaTitle: 'Möchten Sie Höchste Präzision für Ihr Fahrzeug?',
+      bottomCtaSubtitle: 'Senden Sie uns Ihre Fahrzeugdaten für ein unverbindliches Festpreisangebot.',
+      bottomCtaBtn: 'Angebot Anfragen',
     },
     howItWorks: {
       badge: 'Der Weg zu Ihrem Wunschfahrzeug',
@@ -538,6 +574,7 @@ export const translations = {
       customizer: '3D Visualizer',
       finishes: 'Finishes',
       portfolio: 'Portfolio',
+      details: 'Precision',
       howItWorks: 'Process',
       about: 'About Atelier',
       pricing: 'Packages',
@@ -638,6 +675,41 @@ export const translations = {
           ]
         }
       ]
+    },
+    details: {
+      badge: 'Swiss Precision & Craftsmanship',
+      titleLine1: 'DETAILS MAKE THE DIFFERENCE.',
+      titleLine2: 'Master Installation Quality',
+      subtitle: 'Uncompromising attention to every edge, contour, and seam. Dust-controlled clean room installation built for discerning automotive owners in Zurich.',
+      pillars: {
+        detail: {
+          title: 'Attention to Detail',
+          desc: 'Precision knifeless tape edge trimming, seamless panel wrapping, and zero blade contact on original factory paint.'
+        },
+        installation: {
+          title: 'Professional Installation',
+          desc: 'Executed in a 22°C climate-controlled, dust-filtered clean room studio to guarantee flawless vinyl adhesion.'
+        },
+        customization: {
+          title: 'Individual Customization',
+          desc: 'Bespoke accenting, de-badging, satin/gloss contrast wraps, and precision piano black chrome delete.'
+        },
+        materials: {
+          title: 'Quality Materials',
+          desc: 'Exclusively utilizing premium multi-layer cast vinyl films and self-healing PPF topcoats from top manufacturers.'
+        },
+        service: {
+          title: 'Customer-Focused Service',
+          desc: 'Discrete 1-on-1 consultation in Zurich, transparent fixed quotes, and official Atelier warranty certificate.'
+        }
+      },
+      galleryBadge: 'Installation Close-Ups & Detail Work',
+      galleryTitle: 'Master Precision Photography',
+      gallerySubtitle: 'Close-up macro photography highlighting edge tucking, clean room fitting, and micro-precision finishing.',
+      inquireCta: 'Request Vehicle Quote',
+      bottomCtaTitle: 'Desire Uncompromising Quality For Your Vehicle?',
+      bottomCtaSubtitle: 'Submit your vehicle details to receive an individual fixed-price quote.',
+      bottomCtaBtn: 'Request Quote Now',
     },
     howItWorks: {
       badge: 'Your Customer Journey',

@@ -31,6 +31,7 @@ const NavbarHairlineRing = ({
     { label: t.nav.services, href: "#services" },
     { label: t.nav.customizer, href: "#customizer" },
     { label: t.nav.portfolio, href: "#portfolio" },
+    { label: t.nav.details, href: "#details" },
     { label: t.nav.about, href: "#about" },
     { label: t.nav.reviews, href: "#testimonials" },
     { label: t.nav.faq, href: "#faq" },

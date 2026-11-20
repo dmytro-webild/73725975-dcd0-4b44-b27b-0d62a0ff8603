@@ -4,6 +4,7 @@ import ServicesSection from "@/components/sections/services/ServicesSection";
 import Customizer3DSection from "@/components/sections/customizer/Customizer3DSection";
 import FindYourFinishSection from "@/components/sections/customizer/FindYourFinishSection";
 import PortfolioSection from "@/components/sections/portfolio/PortfolioSection";
+import DetailsSection from "@/components/sections/details/DetailsSection";
 import AboutSection from "@/components/sections/about/AboutSection";
 import HowItWorksSection from "@/components/sections/about/HowItWorksSection";
 import PricingAxisColumns from "@/components/sections/pricing/PricingAxisColumns";
@@ -78,6 +79,11 @@ export default function HomePage() {
       {/* Filterable Portfolio Gallery (Asymmetric Editorial Collage) */}
       <div id="portfolio" data-webild-section="PortfolioSection" data-webild-section-id="PortfolioSection-1" data-section="portfolio">
         <PortfolioSection />
+      </div>
+
+      {/* Details Make The Difference Section */}
+      <div id="details" data-webild-section="DetailsSection" data-webild-section-id="DetailsSection-1" data-section="details">
+        <DetailsSection />
       </div>
 
       {/* About The Atelier */}
