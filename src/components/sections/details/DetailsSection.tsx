@@ -12,30 +12,30 @@ const CLOSEUP_PHOTOS = [
   {
     id: "detail-1",
     title: "Knifeless Tape & Edge Precision",
-    category: "Attention to Detail",
+    category: "BMW M3 Competition",
     image: "https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg?_wi=2",
-    caption: "Micro-precision film tucking around fender emblems without blade contact on original paint."
+    caption: "Micro-precision knifeless tape filament trimming on BMW M3 G80 fender vents without blade contact on original factory paint."
   },
   {
     id: "detail-2",
     title: "Cleanroom Thermal Curing",
-    category: "Professional Installation",
+    category: "Porsche 911 Carrera S",
     image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&w=1200",
-    caption: "Applied under dust-filtered, climate-regulated 22°C studio conditions for optimal film bonding."
+    caption: "Applied under dust-filtered, climate-regulated 22°C studio conditions on Porsche 911 panels for seamless adhesion."
   },
   {
     id: "detail-3",
     title: "Satin Sheen & Reflection Control",
-    category: "Quality Materials",
-    image: "https://storage.googleapis.com/webild/users/user_3MMom4VmFM7e63trjauJ4SjcbJR/uploaded-1795174512849-7i3po9ed.avif",
-    caption: "Multi-layered cast vinyl diffusing ambient studio lighting seamlessly across vehicle contours."
+    category: "Audi RS6 Avant",
+    image: "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&w=1200",
+    caption: "200-micron self-healing PPF topcoat diffusing ambient lighting across Audi RS6 Avant body lines."
   },
   {
     id: "detail-4",
     title: "Blackout Trim & Emblem Refinement",
-    category: "Individual Customization",
-    image: "https://images.pexels.com/photos/257988/pexels-photo-257988.jpeg?auto=compress&w=1200",
-    caption: "De-badging, custom satin accents, and high-gloss piano black chrome delete execution."
+    category: "Mercedes-AMG GT 63 S",
+    image: "https://images.pexels.com/photos/18370669/pexels-photo-18370669.jpeg?auto=compress&w=1200",
+    caption: "De-badging, custom satin accents, and high-gloss piano black chrome delete execution on Mercedes-AMG GT 63 S."
   }
 ];
 
