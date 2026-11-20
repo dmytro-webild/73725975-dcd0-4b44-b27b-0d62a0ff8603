@@ -11,7 +11,7 @@ const ICONS_AND_MEDIA = [
   {
     id: "full-wraps",
     icon: Sparkles,
-    imageSrc: "https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg",
+    imageSrc: "https://img.b2bpic.net/free-photo/person-working-car-wrapping_23-2149342620.jpg?_wi=2",
     imageAlt: "Technician applying precision full wrap to luxury supercar body"
   },
   {
