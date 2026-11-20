@@ -2,38 +2,42 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion, AnimatePresence } from "motion/react";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle, Globe } from "lucide-react";
+import { useLanguage } from "@/context/useLanguage";
 
-type Button = { text: string; href: string };
+type ButtonProps = { text?: string; href?: string };
 
 type NavLink = { label: string; href: string };
 
 type NavbarHairlineRingProps = {
   brand?: string;
   logoSrc?: string;
-  button?: Button;
+  button?: ButtonProps;
   links?: NavLink[];
 };
-
-const DEFAULT_LINKS: NavLink[] = [
-  { label: "Services", href: "#services" },
-  { label: "3D Visualizer", href: "#customizer" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "About Atelier", href: "#about" },
-  { label: "Reviews", href: "#testimonials" },
-  { label: "FAQ", href: "#faq" },
-];
 
 const EASE = [0.19, 1, 0.22, 1] as const;
 
 const NavbarHairlineRing = ({
   brand = "JD CAR WRAPPING ATELIER",
   logoSrc,
-  button = { text: "Request Quote", href: "#contact" },
-  links = DEFAULT_LINKS,
+  button,
 }: NavbarHairlineRingProps) => {
   const reduce = useReducedMotion();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
+
+  const navLinks: NavLink[] = [
+    { label: t.nav.services, href: "#services" },
+    { label: t.nav.customizer, href: "#customizer" },
+    { label: t.nav.portfolio, href: "#portfolio" },
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.reviews, href: "#testimonials" },
+    { label: t.nav.faq, href: "#faq" },
+  ];
+
+  const buttonText = button?.text || t.nav.contact;
+  const buttonHref = button?.href || "#contact";
 
   return (
     <>
@@ -55,7 +59,7 @@ const NavbarHairlineRing = ({
                   {brand}
                 </span>
                 <span className="text-[9px] font-mono uppercase tracking-widest text-foreground/40 hidden sm:block">
-                  Zurich Studio • Appointment Only
+                  {t.nav.brandSub}
                 </span>
               </div>
             )}
@@ -63,7 +67,7 @@ const NavbarHairlineRing = ({
 
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex items-center gap-8 font-mono text-xs uppercase tracking-wider text-foreground/70">
-            {links.map((link) => (
+            {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -74,8 +78,34 @@ const NavbarHairlineRing = ({
             ))}
           </div>
 
-          {/* Actions: WhatsApp + Quote Button + Mobile Toggle */}
+          {/* Actions: Language Toggle + WhatsApp + Quote Button + Mobile Toggle */}
           <div className="flex items-center gap-3 shrink-0">
+            {/* Language Switcher Toggle */}
+            <div className="flex items-center border border-border/60 bg-muted/30 rounded-full p-0.5 font-mono text-xs">
+              <button
+                onClick={() => setLanguage("de")}
+                className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer ${
+                  language === "de"
+                    ? "bg-foreground text-background shadow-xs"
+                    : "text-foreground/60 hover:text-foreground"
+                }`}
+                title="Deutsch"
+              >
+                DE
+              </button>
+              <button
+                onClick={() => setLanguage("en")}
+                className={`px-2.5 py-1 rounded-full text-[11px] font-semibold transition-all cursor-pointer ${
+                  language === "en"
+                    ? "bg-foreground text-background shadow-xs"
+                    : "text-foreground/60 hover:text-foreground"
+                }`}
+                title="English"
+              >
+                EN
+              </button>
+            </div>
+
             <a
               href="https://wa.me/41790000000"
               target="_blank"
@@ -87,14 +117,12 @@ const NavbarHairlineRing = ({
               <span>WhatsApp</span>
             </a>
 
-            {button && (
-              <a
-                href={button.href}
-                className="px-5 py-2.5 bg-foreground text-background font-mono text-xs uppercase tracking-widest hover:bg-foreground/90 transition-all font-semibold"
-              >
-                {button.text}
-              </a>
-            )}
+            <a
+              href={buttonHref}
+              className="px-5 py-2.5 bg-foreground text-background font-mono text-xs uppercase tracking-widest hover:bg-foreground/90 transition-all font-semibold"
+            >
+              {buttonText}
+            </a>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -118,11 +146,30 @@ const NavbarHairlineRing = ({
             className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl pt-[5.5rem] px-6 pb-8 flex flex-col justify-between lg:hidden border-b border-border/60"
           >
             <div className="space-y-6 pt-4">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/40 block border-b border-border/40 pb-2">
-                Navigation Menu
-              </span>
+              <div className="flex items-center justify-between border-b border-border/40 pb-2">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/40 block">
+                  Navigation
+                </span>
+                <div className="flex items-center gap-1 font-mono text-xs">
+                  <Globe className="size-3 text-foreground/50 mr-1" />
+                  <button
+                    onClick={() => setLanguage("de")}
+                    className={`px-2 py-0.5 rounded text-xs ${language === "de" ? "bg-foreground text-background font-bold" : "text-foreground/60"}`}
+                  >
+                    DE
+                  </button>
+                  <span className="text-foreground/30">|</span>
+                  <button
+                    onClick={() => setLanguage("en")}
+                    className={`px-2 py-0.5 rounded text-xs ${language === "en" ? "bg-foreground text-background font-bold" : "text-foreground/60"}`}
+                  >
+                    EN
+                  </button>
+                </div>
+              </div>
+
               <div className="flex flex-col gap-4 font-mono text-sm uppercase tracking-wider">
-                {links.map((link) => (
+                {navLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
@@ -147,7 +194,7 @@ const NavbarHairlineRing = ({
               </a>
 
               <p className="text-[10px] text-foreground/40 text-center uppercase tracking-widest">
-                Canton of Zurich, Switzerland • Appointment Only
+                {t.nav.brandSub}
               </p>
             </div>
           </motion.div>

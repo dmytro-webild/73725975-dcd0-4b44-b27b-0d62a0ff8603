@@ -5,6 +5,7 @@ import ExampleSportsCar from "@/components/models/ExampleSportsCar";
 import { Sparkles, ArrowRight, RotateCcw, Palette, Layers, Check, Shield } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useLanguage } from "@/context/useLanguage";
 
 const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
@@ -28,22 +29,23 @@ const COLOR_PRESETS: ColorOption[] = [
   { id: "pearl-white", name: "Pearl White", hex: "#e2e8f0", finishType: "Matte", roughness: 0.85, metalness: 0.05 },
 ];
 
-const FINISHES = [
-  { id: "Matte", label: "Matte Finish", roughness: 0.85, metalness: 0.05 },
-  { id: "Satin", label: "Satin Finish", roughness: 0.42, metalness: 0.35 },
-  { id: "Gloss", label: "Gloss Finish", roughness: 0.08, metalness: 0.2 },
-  { id: "Metallic", label: "Metallic Finish", roughness: 0.22, metalness: 0.88 },
-];
-
 export interface Customizer3DSectionProps {
   className?: string;
   onApplySpec?: (spec: { colorName: string; finish: string; hex: string }) => void;
 }
 
 export default function Customizer3DSection({ className, onApplySpec }: Customizer3DSectionProps) {
+  const { t } = useLanguage();
   const [selectedColor, setSelectedColor] = useState<ColorOption>(COLOR_PRESETS[0]);
   const [activeFinish, setActiveFinish] = useState<string>(selectedColor.finishType);
   const [appliedNotification, setAppliedNotification] = useState<boolean>(false);
+
+  const finishes = [
+    { id: "Matte", label: t.customizer.finishes.matte },
+    { id: "Satin", label: t.customizer.finishes.satin },
+    { id: "Gloss", label: t.customizer.finishes.gloss },
+    { id: "Metallic", label: t.customizer.finishes.metallic },
+  ];
 
   const handleSelectColor = (color: ColorOption) => {
     setSelectedColor(color);
@@ -75,15 +77,15 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-border/60 bg-muted/40 text-[length:var(--text-label)] font-mono uppercase tracking-[0.15em] text-foreground/70">
               <Sparkles className="size-3.5 text-primary" />
-              <span>Interactive 3D Experience</span>
+              <span>{t.customizer.badge}</span>
             </div>
             <h2 className="text-[length:var(--text-h1)] font-light uppercase tracking-[var(--heading-tracking)] [font-family:var(--font-heading)] leading-[0.9]">
-              Create Your Style <br />
-              <span className="text-foreground/50">Automotive Customization Studio</span>
+              {t.customizer.title} <br />
+              <span className="text-foreground/50">{t.customizer.subtitle}</span>
             </h2>
           </div>
           <p className="text-[length:var(--text-body)] text-foreground/60 max-w-md">
-            Rotate the 3D model, test luxury vinyl finishes, and select your custom spec to send directly with your Canton of Zurich inquiry.
+            {t.customizer.instruction}
           </p>
         </div>
 
@@ -137,7 +139,9 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
             {/* Live Spec Bar Overlay (Bottom) */}
             <div className="relative z-10 p-4 sm:p-6 backdrop-blur-md bg-background/80 border-t border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/50 block">Active Specification</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-foreground/50 block">
+                  {t.customizer.activeSpecLabel}
+                </span>
                 <div className="flex items-center gap-3">
                   <div className="size-4 rounded-full border border-border/80 shadow-inner" style={{ backgroundColor: selectedColor.hex }} />
                   <span className="font-mono text-sm uppercase font-semibold tracking-wider text-foreground">
@@ -150,7 +154,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
                 onClick={handleApplyToQuote}
                 className="btn-link inline-flex items-center justify-center gap-2 px-6 py-3 bg-foreground text-background font-mono text-xs uppercase tracking-widest hover:bg-foreground/90 transition-all font-semibold cursor-pointer shadow-lg"
               >
-                <span>CREATE YOUR STYLE</span>
+                <span>{t.customizer.applyBtn}</span>
                 <ArrowRight className="size-4" />
               </button>
             </div>
@@ -161,13 +165,13 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
             <div>
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-primary mb-6">
                 <Palette className="size-4" />
-                <span>Customization Options</span>
+                <span>{t.customizer.colorsLabel}</span>
               </div>
 
               {/* Vinyl Color Palette */}
               <div className="mb-8">
                 <label className="text-xs font-mono uppercase tracking-widest text-foreground/60 mb-3 block">
-                  1. Select Vinyl Color Palette ({COLOR_PRESETS.length} Options)
+                  1. {t.customizer.colorsLabel} ({COLOR_PRESETS.length} Options)
                 </label>
                 <div className="grid grid-cols-4 gap-2.5">
                   {COLOR_PRESETS.map((color) => {
@@ -206,10 +210,10 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
               <div className="mb-8">
                 <label className="text-xs font-mono uppercase tracking-widest text-foreground/60 mb-3 block flex items-center gap-2">
                   <Layers className="size-3.5" />
-                  <span>2. Select Vinyl Finish & Texture</span>
+                  <span>2. {t.customizer.finishesLabel}</span>
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  {FINISHES.map((f) => {
+                  {finishes.map((f) => {
                     const isSelected = activeFinish === f.id;
                     return (
                       <button
@@ -250,7 +254,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
               {appliedNotification && (
                 <div className="p-3 mb-4 bg-emerald-950/80 border border-emerald-600/50 text-emerald-200 text-xs font-mono flex items-center gap-2">
                   <Shield className="size-4 shrink-0 text-emerald-400" />
-                  <span>Spec applied to inquiry form below!</span>
+                  <span>{t.customizer.appliedToast}</span>
                 </div>
               )}
 
@@ -258,7 +262,7 @@ export default function Customizer3DSection({ className, onApplySpec }: Customiz
                 onClick={handleApplyToQuote}
                 className="w-full py-4 bg-foreground text-background font-mono text-xs uppercase tracking-widest font-semibold hover:bg-foreground/90 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>CREATE YOUR STYLE</span>
+                <span>{t.customizer.applyBtn}</span>
                 <ArrowRight className="size-4" />
               </button>
             </div>

@@ -1,15 +1,27 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import NavbarHairlineRing from "@/components/navbars/NavbarHairlineRing";
 import FooterWordmark from "@/components/sections/footer/FooterWordmark";
+import LegalModal from "@/components/LegalModal";
+import { LanguageProvider } from "@/context/LanguageProvider";
+import { useLanguage } from "@/context/useLanguage";
 
-export default function Layout() {
+function LayoutContent() {
+  const { t } = useLanguage();
+  const [legalModalType, setLegalModalType] = useState<'imprint' | 'privacy' | null>(null);
+
+  const handleLegalClick = (e: React.MouseEvent, type: 'imprint' | 'privacy') => {
+    e.preventDefault();
+    setLegalModalType(type);
+  };
+
   return (
     <div className="relative isolate min-h-svh flex flex-col bg-background text-foreground" data-button="outline" data-card="hairline" data-pattern="none">
       <header data-webild-section="Header">
         <NavbarHairlineRing
           brand="JD CAR WRAPPING ATELIER"
           button={{
-            text: "Request Quote",
+            text: t.nav.contact,
             href: "#contact"
           }}
         />
@@ -24,73 +36,51 @@ export default function Layout() {
           fit
           columns={[
             {
-              title: "Services",
-              links: [
-                {
-                  text: "Full Car Wrapping",
-                  href: "#finishes"
-                },
-                {
-                  text: "Paint Protection (PPF)",
-                  href: "#finishes"
-                },
-                {
-                  text: "Chrome Delete",
-                  href: "#finishes"
-                }
-              ]
+              title: t.footer.col1Title,
+              links: t.footer.col1Links
             },
             {
-              title: "Atelier",
-              links: [
-                {
-                  text: "Transformations",
-                  href: "#profile"
-                },
-                {
-                  text: "Client Reviews",
-                  href: "#testimonials"
-                },
-                {
-                  text: "Consultation FAQ",
-                  href: "#faq"
-                }
-              ]
+              title: t.footer.col2Title,
+              links: t.footer.col2Links
             },
             {
-              title: "Contact",
-              links: [
-                {
-                  text: "info@jdcarwrapping.ch",
-                  href: "mailto:info@jdcarwrapping.ch"
-                },
-                {
-                  text: "Instagram",
-                  href: "https://instagram.com/jdcarwrappingatelier"
-                },
-                {
-                  text: "Request Quote",
-                  href: "#contact"
-                }
-              ]
+              title: t.footer.col3Title,
+              links: t.footer.col3Links
             }
           ]}
           bottomLinks={[
             {
-              text: "© 2026 JD Car Wrapping Atelier",
+              text: t.footer.copyright,
               href: "#hero"
             },
             {
-              text: "Privacy Policy",
-              href: "#"
+              text: t.footer.privacyLink,
+              href: "#privacy",
+              onClick: (e: React.MouseEvent) => handleLegalClick(e, 'privacy')
             },
             {
-              text: "Imprint",
-              href: "#"
+              text: t.footer.imprintLink,
+              href: "#imprint",
+              onClick: (e: React.MouseEvent) => handleLegalClick(e, 'imprint')
             }
           ]}
         />
       </footer>
+
+      {/* Legal Modal Popup */}
+      <LegalModal
+        isOpen={legalModalType !== null}
+        type={legalModalType}
+        onClose={() => setLegalModalType(null)}
+      />
     </div>
+  );
+}
+
+export default function Layout() {
+  return (
+    <LanguageProvider>
+      <LayoutContent />
+    </LanguageProvider>
   );
 }
